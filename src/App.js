@@ -1,15 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { StrictMode } from 'react';
-
+import store from './app/store';
+import { Provider } from 'react-redux';
+import { Budget } from './features/budget/budget';
 
 export default function App() {
   return (
     <StrictMode>
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <Text>So I guess we have redux working now</Text>
+          <Budget></Budget>
+          <StatusBar style="auto" />
+        </View>
+      </Provider>
     </StrictMode>
   );
 }
