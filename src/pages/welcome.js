@@ -1,18 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Text } from "react-native-paper";
 import { StrictMode } from 'react';
-import { Provider } from 'react-redux';
+import { Provider  as StoreProvider } from 'react-redux';
 import store from '../app/store';
 
 export default function Welcome( { navigation } ) {
     return(
         <StrictMode>
-            <Provider store={store}>
+            <StoreProvider store={store}>
                 <View>
                     <Text>welcome yall</Text>
 
 
                 </View>
-            </Provider>
+            </StoreProvider>
         </StrictMode>
     )
 }
