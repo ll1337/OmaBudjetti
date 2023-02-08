@@ -15,33 +15,31 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <StrictMode>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Landing"
-        >
-          <Stack.Screen
-            name="Home"
-            component={ Home }
-            options={{ title: "Home"}}
-            style={styles.container}
-          />
-          <Stack.Screen
-            name="Landing"
-            component={ Landing }
-            options={{ title: "Landing"}}
-            style={styles.container}
-          />
-          <Stack.Screen
-            name="Welcome"
-            component={ Welcome }
-            options={{ title: "Welcome"}}
-            style={styles.container}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Landing"
+      >
+        <Stack.Screen
+          name="Home"
+          component={ Home }
+          options={{ title: "Home"}}
+          style={styles.container}
+        />
+        <Stack.Screen
+          name="Landing"
+          component={ Landing }
+          options={{ title: "Landing"}}
+          style={styles.container}
+        />
+        <Stack.Screen
+          name="Welcome"
+          component={ Welcome }
+          options={{ title: "Welcome"}}
+          style={styles.container}
+        />
+      </Stack.Navigator>
       <StatusBar style="auto" />
-    </StrictMode>
+    </NavigationContainer>
   );
 }
 
