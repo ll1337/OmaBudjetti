@@ -22,12 +22,27 @@ export default function App() {
         <PaperProvider>
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="Landing"
+              initialRouteName="Home"
+              screenOptions={{
+                headerShown: false
+              }}
             >
               <Stack.Screen
                 name="Home"
                 component={ Home }
-                options={{ title: "Home"}}
+                options={{ 
+                  title: "Eva - OmaBudjetti",
+                  headerStyle: {
+                    backgroundColor: '#17B5AD',
+                  },
+                  headerTintColor: '#FFFFFF',
+                  headerTitleAlign: 'center',
+                  headerTitleStyle: {
+                    fontFamily: 'Roboto',
+                    fontWeight: 'bold',
+
+                  },
+                }}
                 style={styles.container}
               />
               <Stack.Screen
@@ -54,8 +69,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
+    fontFamily: 'Roboto', 
   },
 });
