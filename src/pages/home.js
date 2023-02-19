@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native';
 import { Text, IconButton } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
+import { Provider as PaperProvider } from 'react-native-paper';
 import store from '../app/store';
 import PrettyButton from '../components/prettyButton';
 
