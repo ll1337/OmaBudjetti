@@ -3,9 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { StrictMode } from 'react';
 import store from './app/store';
-import {  Provider  as StoreProvider } from 'react-redux';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { Provider as StoreProvider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Budget } from './features/budget/budget';
 import Home from './pages/home.js'
@@ -48,14 +48,14 @@ export default function App() {
               />
               <Stack.Screen
                 name="Landing"
-                component={ Landing }
-                options={{ title: "Landing"}}
+                component={Landing}
+                options={{ title: "Landing" }}
                 style={styles.container}
               />
               <Stack.Screen
                 name="Welcome"
-                component={ Welcome }
-                options={{ title: "Welcome"}}
+                component={Welcome}
+                options={{ title: "Welcome" }}
                 style={styles.container}
               />
               <Stack.Screen
