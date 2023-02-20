@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, TouchableOpacity } from 'react-native';
 import { Text, IconButton, Avatar } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
@@ -5,32 +6,43 @@ import { LinearGradient } from 'expo-linear-gradient';
 import store from '../app/store';
 
 export default function Home( { navigation } ) {
+
+    const [hasBudget, setHasBudget] = useState(false);
+    
     return(
 
         <StoreProvider store={store}>
-            <View style={styles.container}>
+            <View style={styles.container}>               
                 <View style={styles.rectangle}>
                     <Text style={styles.welcomeText}>Etusivu</Text>
                     <View style={styles.divider} />
-                    <Text style={styles.infoText}>
-                        Aloita luomalla itsellesi budjetti.{'\n'} 
-                        Voit halutessasi luoda enemmän kuin yhden budjetin.
-                    </Text>
+
+                    {hasBudget ? (
+                        <View>
+                            <Text style={styles.newText}>Tarve uudelle budjetille?</Text>
+                            <View style={styles.divider} />    
+                        </View>
+                    ) : (
+                        <View>
+                            <Text style={styles.infoText}>
+                                Aloita luomalla itsellesi budjetti.{'\n'} 
+                                Voit halutessasi luoda enemmän kuin yhden budjetin.
+                            </Text>
+                        </View>
+                    )}
+
                     <TouchableOpacity
                         onPress={() => console.log('Pressed')}
                         style={styles.button}>
                             <LinearGradient
                                 colors={['rgba(23, 181, 173, 0.81)', 'rgba(77, 182, 241, 0.85)']}
                                 style={styles.gradient}
-                            />
-                            
+                            />                            
                             <Avatar.Icon size={50} color='#000000' icon="pulse" style={styles.buttonIcon}/>
                             <Text style={styles.buttonText}>Siirry budjetoimaan</Text>
                             <Avatar.Icon size={50} color='#000000' icon="play" style={styles.buttonIcon}/>
                     </TouchableOpacity>
-
-                </View>
-                
+                </View>               
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
@@ -40,31 +52,31 @@ export default function Home( { navigation } ) {
                         icon="home"
                         iconColor={'#fff'}
                         size={30}
-                        onPress={() => console.log('Pressed Home')}
+                        onPress={() => navigation.navigate('Home')}
                 />
                 <IconButton
                         icon="image-frame"
                         iconColor={'#fff'}
                         size={30}
-                        onPress={() => console.log('Pressed Home')}
+                        onPress={() => console.log('Pressed item1')}
                 />
                 <IconButton
                         icon="image-frame"
                         iconColor={'#fff'}
                         size={30}
-                        onPress={() => console.log('Pressed Home')}
+                        onPress={() => console.log('Pressed item2')}
                 />
                 <IconButton
                         icon="image-frame"
                         iconColor={'#fff'}
                         size={30}
-                        onPress={() => console.log('Pressed Home')}
+                        onPress={() => console.log('Pressed item3')}
                 />
                 <IconButton
                         icon="format-list-bulleted"
                         iconColor={'#fff'}
                         size={30}
-                        onPress={() => console.log('Pressed Home')}
+                        onPress={() => console.log('Pressed menu')}
                 />
             </View>
         </StoreProvider>
@@ -105,7 +117,16 @@ const styles = StyleSheet.create({
         marginLeft: 25,
         marginRight: 25,
         borderColor: 'black',
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
+    },
+    newText: {
+        marginTop: 40,
+        marginLeft: 30,
+        marginRight: 0,
+        color: '#000000',
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+        fontSize: 25,
     },
     infoText: {
         textAlign: 'center',
