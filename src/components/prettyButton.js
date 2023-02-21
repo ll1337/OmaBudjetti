@@ -4,13 +4,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Avatar } from "react-native-paper";
 
 const PrettyButton = (props) => {
+
     return (
         <View style={styles.container}>
             <LinearGradient
                 colors={['rgba(23, 181, 173, 0.81)', 'rgba(77, 182, 241, 0.85)']}
                 style={styles.gradient}
             /> 
-            <TouchableOpacity {...props} style={styles.button}>   
+            <TouchableOpacity {...props} style={props.disabled ? styles.disabled : styles.button}>   
                 <Avatar.Icon size={50} color='#000000' icon={props.iconLeft} style={styles.buttonIcon}/>
                 <Text style={styles.buttonText}>{props.title}</Text>
                 <Avatar.Icon size={50} color='#000000' icon={props.iconRight} style={styles.buttonIcon}/>
@@ -47,6 +48,21 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: 'space-between',
         overFlow: 'hidden',
+        
+    },
+    disabled: {
+        marginTop: 2,
+        marginBottom: 2,
+        marginLeft: 2,
+        marginRight: 2,
+        borderWidth: 0,
+        borderRadius: 60,
+        backgroundColor: '#F8F9F9', 
+        flexDirection: 'row',
+        alignItems: 'center', 
+        justifyContent: 'space-between',
+        overFlow: 'hidden',
+        opacity: 0.1
         
     },
     gradient: {
