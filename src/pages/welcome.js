@@ -63,13 +63,14 @@ export default function Welcome( { navigation } ) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#F8F9F9"
+        backgroundColor: "#F8F9F9",
+        alignItems: 'center'
     },
     welcomeText: {
         textAlign: 'center',
         marginLeft: '5%',
         marginRight: '5%',
-        marginTop: '25%',
+        marginTop: '30%',
         fontSize: 60,
         fontFamily: 'Roboto',
         color: '#17B5AD'
@@ -95,10 +96,8 @@ const styles = StyleSheet.create({
         lineHeight: 20
     },
     checkbox: {
-        flex: 1,
         alignContent: 'center',
-        position: 'absolute',
-        marginTop: '150%',
+        marginTop: '10%',
         marginLeft: '6%',
 
     },
@@ -108,12 +107,12 @@ const styles = StyleSheet.create({
         lineHeight: 20,
         fontWeight: "700",
         marginLeft: '11%',
-        marginRight: '9%',
+        marginRight: '6%',
         marginTop: '-9%'
     },
     button: {
         alignSelf: 'center',
-        marginTop: '30%',
+        marginTop: '10%',
         marginLeft: '5%',
         marginRight:'5%',
     }
