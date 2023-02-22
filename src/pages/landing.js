@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, View, Linking, Image, TouchableOpacity } from 'react-native';
-import { Text, Button} from "react-native-paper";
+import { StyleSheet, View, Image} from 'react-native';
+import { Text, IconButton} from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
+import PrettyButton from '../components/prettyButtonTextOnly';
 
 export default function Landing( { navigation } ) {
 
@@ -12,7 +13,7 @@ export default function Landing( { navigation } ) {
                         position: 'absolute',
                         left: '12.22%',
                         right: '12.22%',
-                        top: '19.38%',
+                        top: '18.5%',
                         bottom: '75.31%'}}>
                 <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
             </View>
@@ -39,17 +40,19 @@ export default function Landing( { navigation } ) {
             </View>
 
             <View style={{flex: 1, alignItems: 'center',
+                        justifyContent: 'center',
                         position: 'absolute',
                         left: '31.67%',
                         right: '31.67%',
                         top: '78.28%',
                         bottom: '16.09%'}}>
-                    <Button mode='outlined'
-                            buttonColor= '#17B5AD'
+                    <PrettyButton mode='outlined'
                             onPress={() => navigation.navigate('Welcome')}
+                            title='Aloitetaan!'
+                            iconRight=''
+                            iconLeft=''
                             style={styles.button}>
-                        <Text> Aloitetaan! </Text>
-                    </Button>
+                    </PrettyButton>
             </View>
         </StoreProvider>
     );
@@ -63,11 +66,16 @@ const styles = StyleSheet.create({
     },
     normalText: {
         fontSize: 20,
-        fontWeight: 400 
+        fontWeight: '400' 
     },
     img: {
         flex: 1,
-        width: 200,
+        width: 230,
         height: 217,
     },
+    button: {
+    flex: 1,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    }
 })
