@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Modal } from 'react-native';
+import { StyleSheet, View, Modal, Text, TouchableOpacity } from 'react-native';
 import DatePicker from 'react-native-modern-datepicker'
 import { IconButton } from "react-native-paper";
 
-export default function PrettyDate() {
+export default function PrettyDate({ onDateConfirm }) {
 
     const [selectedDate, setSelectedDate] = useState('');
+    const [confirmedDate, setConfirmedDate] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [isConfirmable, setIsConfirmable] = useState(false);
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
-        setModalVisible(false);
+        setIsConfirmable(true);
     };
-
-    const currentDate = selectedDate === '' ? new Date() : selectedDate;
+    
     const closeModal = () => {
         setModalVisible(false);
+        setIsConfirmable(false);
+    };
+
+    const confirmDate = () => {
+        setConfirmedDate(selectedDate);
+        onDateConfirm(selectedDate);
+        closeModal();
     };
 
     return (
@@ -25,21 +33,38 @@ export default function PrettyDate() {
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
-                onBackdropPress={closeModal}
+                onBackdropPress={() => console.log('backdrop pressed!!')} /* not workink */
                 onRequestClose={closeModal}>
                 <View style={styles.modalView}>
 
                     <DatePicker
                         onSelectedChange={handleDateChange}
+                        current={selectedDate}
+                        selected={selectedDate}
                         options={{
                             defaultFont: 'Roboto',
                             headerFont: 'Roboto',
                             mainColor: '#17B5AD',
-                            selectedTextColor: '#17B5AD',
+                            selectedTextColor: '#fff',
                         }}
                         mode="calendar"
-                        style={{}}
                     />
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity 
+                            style={styles.backButton}
+                            onPress={closeModal}>
+                            <Text style={styles.backButtonText}>Peruuta</Text>
+                        </TouchableOpacity>
+                        { isConfirmable ? ( 
+                            <TouchableOpacity 
+                            style={styles.acceptButton}
+                            onPress={confirmDate}>
+                                <Text style={styles.acceptButtonText}>Hyväksy</Text>
+                            </TouchableOpacity>
+                            ) : (
+                            <Text style={styles.acceptButtonTextGreyed}>Hyväksy</Text>
+                        )}
+                    </View>
                 </View>
 
             </Modal>
@@ -57,27 +82,12 @@ export default function PrettyDate() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    datePicker: {
-        flexDirection: 'column',
-        margin: 10,
-        borderRadius: 10, 
-        overflow: 'hidden',         
-        shadowColor: 'rgba(0, 0, 0, 0.5)',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 1,
-        shadowRadius: 4,
-        elevation: 4,
     },
     modalView: {
         margin: 10,
         backgroundColor: 'white',
         borderRadius: 10,
         padding: 3,
-        alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -86,5 +96,35 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
+    },
+    buttonContainer: {
+        flexDirection: 'row', 
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+    },
+    backButton: {
+        margin: 20,
+    },
+    acceptButton: {
+        margin: 20,
+    },
+    backButtonText: {
+        textAlign: 'center',
+        fontFamily: 'Roboto',
+        fontSize: 18,
+    },
+    acceptButtonText: {
+        textAlign: 'center',
+        fontFamily: 'Roboto',
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
+    acceptButtonTextGreyed: {
+        margin: 20,
+        color: '#A9A9A9',
+        textAlign: 'center',
+        fontFamily: 'Roboto',
+        fontWeight: 'bold',
+        fontSize: 18,
     },
 });
