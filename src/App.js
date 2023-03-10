@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { StrictMode } from 'react';
 import store from './app/store';
-import {  Provider  as StoreProvider } from 'react-redux';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { Provider as StoreProvider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { Budget } from './features/budget/budget';
 import Home from './pages/home.js'
 import Landing from './pages/landing.js'
 import Welcome from './pages/welcome'
@@ -30,8 +29,8 @@ export default function App() {
             >
               <Stack.Screen
                 name="Home"
-                component={ Home }
-                options={{ 
+                component={Home}
+                options={{
                   title: "Eva - OmaBudjetti",
                   headerStyle: {
                     backgroundColor: '#17B5AD',
@@ -39,7 +38,7 @@ export default function App() {
                   headerTintColor: '#FFFFFF',
                   headerTitleAlign: 'center',
                   headerTitleStyle: {
-                    fontFamily: 'Roboto',
+                    fontFamily: 'Roboto',
                     fontWeight: 'bold',
 
                   },
@@ -48,22 +47,22 @@ export default function App() {
               />
               <Stack.Screen
                 name="Landing"
-                component={ Landing }
-                options={{ title: "Landing"}}
+                component={Landing}
+                options={{ title: "Landing" }}
                 style={styles.container}
               />
               <Stack.Screen
                 name="Welcome"
-                component={ Welcome }
-                options={{ title: "Welcome"}}
+                component={Welcome}
+                options={{ title: "Welcome" }}
                 style={styles.container}
               />
               <Stack.Screen
                 name="DateTest"
-                component={ DateTest }
-                options={{ title: "Datepicker Test Area"}}
+                component={DateTest}
+                options={{ title: "Datepicker Test Area" }}
                 style={styles.container}
-                />
+              />
             </Stack.Navigator>
             <StatusBar style="auto" />
           </NavigationContainer>
@@ -79,6 +78,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    fontFamily: 'Roboto', 
+    fontFamily: 'Roboto',
   },
 });

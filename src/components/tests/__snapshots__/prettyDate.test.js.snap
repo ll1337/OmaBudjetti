@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`prettyDate renders correctly 1`] = `
+<View
+  style={{}}
+>
+  <Modal
+    animationType="slide"
+    hardwareAccelerated={false}
+    onBackdropPress={[Function]}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
+  />
+  <View
+    style={
+      {
+        "overflow": "hidden",
+      }
+    }
+    testID="RNE__ICON__CONTAINER"
+  >
+    <View
+      accessibilityLabel="Choose Date"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "disabled": false,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      iconColor="#000000"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      testID="RNE__ICON__CONTAINER_ACTION"
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "justifyContent": "center",
+          }
+        }
+        testID="RNE__ICON"
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+</View>
+`;
