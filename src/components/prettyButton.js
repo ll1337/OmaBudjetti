@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',         
         marginLeft: 30,
         marginRight: 30,
-        shadowColor: 'rgba(0, 0, 0, 0.3)',
+        shadowColor: 'rgba(0, 0, 0, 1)',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 1,
         shadowRadius: 4,

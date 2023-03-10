@@ -11,6 +11,7 @@ import { Budget } from './features/budget/budget';
 import Home from './pages/home.js'
 import Landing from './pages/landing.js'
 import Welcome from './pages/welcome'
+import DateTest from './pages/dateTest';
 
 export default function App() {
 
@@ -22,7 +23,7 @@ export default function App() {
         <PaperProvider>
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="Welcome"
+              initialRouteName="Home"
               screenOptions={{
                 headerShown: false
               }}
@@ -57,6 +58,12 @@ export default function App() {
                 options={{ title: "Welcome"}}
                 style={styles.container}
               />
+              <Stack.Screen
+                name="DateTest"
+                component={ DateTest }
+                options={{ title: "Datepicker Test Area"}}
+                style={styles.container}
+                />
             </Stack.Navigator>
             <StatusBar style="auto" />
           </NavigationContainer>
