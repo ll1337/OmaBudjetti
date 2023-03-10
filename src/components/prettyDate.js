@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Modal, Text, TouchableOpacity } from 'react-native';
 import DatePicker from 'react-native-modern-datepicker'
-import { IconButton } from "react-native-paper";
+import { Icon } from '@rneui/themed';
 
 export default function PrettyDate({ onDateConfirm }) {
 
@@ -14,7 +14,7 @@ export default function PrettyDate({ onDateConfirm }) {
         setSelectedDate(date);
         setIsConfirmable(true);
     };
-    
+
     const closeModal = () => {
         setModalVisible(false);
         setIsConfirmable(false);
@@ -50,31 +50,33 @@ export default function PrettyDate({ onDateConfirm }) {
                         mode="calendar"
                     />
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             style={styles.backButton}
                             onPress={closeModal}>
                             <Text style={styles.backButtonText}>Peruuta</Text>
                         </TouchableOpacity>
-                        { isConfirmable ? ( 
-                            <TouchableOpacity 
-                            style={styles.acceptButton}
-                            onPress={confirmDate}>
+                        {isConfirmable ? (
+                            <TouchableOpacity
+                                style={styles.acceptButton}
+                                onPress={confirmDate}>
                                 <Text style={styles.acceptButtonText}>Hyväksy</Text>
                             </TouchableOpacity>
-                            ) : (
+                        ) : (
                             <Text style={styles.acceptButtonTextGreyed}>Hyväksy</Text>
                         )}
                     </View>
                 </View>
 
             </Modal>
-            <IconButton
-                icon="calendar-blank"
+            <Icon
+                accessibilityLabel='Choose Date'
+                name='calendar'
+                type="font-awesome"
                 iconColor={'#000000'}
                 size={30}
                 onPress={() => setModalVisible(true)}
             />
-                
+
 
         </View>
     );
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     buttonContainer: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
     },
