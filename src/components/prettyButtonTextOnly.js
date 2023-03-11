@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',         
         marginLeft: 30,
         marginRight: 30,
-        shadowColor: 'rgba(0, 0, 0, 1)',
+        shadowColor: 'rgba(0, 0, 0, 0.3)',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 1,
         shadowRadius: 4,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F8F9F9', 
         flexDirection: 'row',
         alignItems: 'center', 
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         overFlow: 'hidden',
         
     },
@@ -80,6 +80,6 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         fontFamily: 'Roboto',
-        fontSize: 22,
+        fontSize: 16,
     },
 });

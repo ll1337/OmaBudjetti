@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar, TouchableOpacity } from 'react-native';
-import { Text, IconButton, Avatar } from "react-native-paper";
+import { StyleSheet, View, StatusBar } from 'react-native';
+import { Text, IconButton } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Provider as PaperProvider } from 'react-native-paper';
 import store from '../app/store';
 import PrettyButton from '../components/prettyButton';
 
@@ -32,7 +32,7 @@ export default function Home( { navigation } ) {
                         </View>
                     )}
 
-                    <PrettyButton onPress={() => console.log('Button pressed')} 
+                    <PrettyButton onPress={() => navigation.navigate('DateTest')} 
                     title="Siirry budjetoimaan"
                     iconLeft="pulse"
                     iconRight="play" />
