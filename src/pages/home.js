@@ -1,15 +1,31 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
 import { Text, IconButton } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
-import { Provider as PaperProvider } from 'react-native-paper';
 import store from '../app/store';
 import PrettyButton from '../components/prettyButton';
+
+// max length of budget name
+const MAX_LENGTH = 20;
 
 export default function Home( { navigation } ) {
 
     const [hasBudget, setHasBudget] = useState(false);
+    const [showBudgetCreation, setShowBudgetCreation] = useState(false);
+
+    const [budgetName, setBudgetName] = useState('');
     
+    // user wants to create a budget: show components related to budget creation, hide others.
+    const onPressHandler = () => {
+        setShowBudgetCreation(true);
+    };
+
+    const handleTextChange = (inputText) => {
+        if (inputText.length <= MAX_LENGTH) {
+            setBudgetName(inputText);
+        }
+    };
+
     return(
 
         <StoreProvider store={store}>
@@ -18,25 +34,41 @@ export default function Home( { navigation } ) {
                     <Text style={styles.welcomeText}>Etusivu</Text>
                     <View style={styles.divider} />
 
-                    {hasBudget ? (
+                    {!showBudgetCreation ? (
                         <View>
-                            <Text style={styles.newText}>Tarve uudelle budjetille?</Text>
-                            <View style={styles.divider} />    
+                            {hasBudget ? (
+                                <View>
+                                    <Text style={styles.newText}>Tarve uudelle budjetille?</Text>
+                                    <View style={styles.divider} />    
+                                </View>
+                            ) : (
+                                <View>
+                                    <Text style={styles.infoText}>
+                                        Aloita luomalla itsellesi budjetti.{'\n'} 
+                                        Voit halutessasi luoda enemmän kuin yhden budjetin.
+                                    </Text>
+                                </View>
+                            )}                        
+                            <PrettyButton onPress={onPressHandler} 
+                            title="Siirry budjetoimaan"
+                            iconLeft="pulse"
+                            iconRight="play" />
                         </View>
                     ) : (
-                        <View>
+                        <View style={styles.budgetContainer}>
                             <Text style={styles.infoText}>
-                                Aloita luomalla itsellesi budjetti.{'\n'} 
-                                Voit halutessasi luoda enemmän kuin yhden budjetin.
+                                Anna budjetillesi nimi:
                             </Text>
-                        </View>
+                            <View style={styles.inputText}>
+                            </View>
+                                <TextInput
+                                    value={budgetName}
+                                    onChangeText={handleTextChange}
+                                    maxLength={MAX_LENGTH}
+                                />
+                        </View>      
                     )}
-
-                    <PrettyButton onPress={() => navigation.navigate('DateTest')} 
-                    title="Siirry budjetoimaan"
-                    iconLeft="pulse"
-                    iconRight="play" />
-                </View>               
+                    </View>   
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
@@ -131,6 +163,24 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontFamily: 'Roboto',
         fontSize: 22,
+    },
+    budgetContainer: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        marginTop: 100,
+        color: '#000000',
+        fontFamily: 'Roboto',
+        fontSize: 22,
+    },
+    inputBox: {
+        backgroundColor: '#F8F9F9',
+        borderStyle: 'dashed',
+        borderWidth: 2,
+        borderColor: '#17B5AD',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        borderRadius: 5,
     },
     bottomNavbar: {
         positon: 'absolute',
