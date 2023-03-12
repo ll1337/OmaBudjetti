@@ -9,7 +9,7 @@ import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
 import PrettyDate from '../components/prettyDate';
 
-export default function Living( { navigation } ) {
+export default function OtherExpenses( { navigation } ) {
     const [visible, setVisible] = useState(false);
 
     const [confirmedDate, setConfirmedDate] = useState(null);
@@ -28,15 +28,15 @@ export default function Living( { navigation } ) {
                 </View>        
 
                 <View style={styles.rectangle}>
-                    <Text style={styles.welcomeText}>Asuminen</Text>
+                    <Text style={styles.welcomeText}>Muut toistuvat kulut</Text>
                     <View style={styles.divider} />
                     <Text style={styles.infoText}>
-                        Lisää tähän kaikki asuinkustannuksesi{'\n'} 
+                        Lisää tähän kaikki muut toistuvat kulusi{'\n'} 
                     </Text>
 
                 <View>
                     <View style={styles.listElem}>
-                        <Text style={styles.listText}>Vuokra / vastike</Text>
+                        <Text style={styles.listText}>Päivittäistavarat</Text>
                         <View style={styles.listContainer}>
                             <Icon 
                             name='trash'
@@ -50,21 +50,7 @@ export default function Living( { navigation } ) {
                         </View>
                     </View>  
                     <View style={styles.listElem}>
-                        <Text style={styles.listText}>Vesi</Text>
-                        <View style={styles.listContainer}>
-                            <Icon 
-                            name='trash'
-                            type="font-awesome"
-                            iconColor={'#000000'}
-                            size={30}
-                            onPress={() => console.log('Pressed delete')}/>
-                            <Text style={styles.otherText}>/kk</Text>
-                            <TextInput style={styles.input} placeholder='000,00' />
-                            <PrettyDate onDateConfirm={handleDateConfirm}/>
-                        </View>  
-                    </View>
-                    <View style={styles.listElem}>
-                        <Text style={styles.listText}>Sähkö</Text>
+                        <Text style={styles.listText}>Lemmikki</Text>
                         <View style={styles.listContainer}>
                             <Icon 
                             name='trash'
@@ -78,7 +64,49 @@ export default function Living( { navigation } ) {
                         </View>
                     </View>  
                     <View style={styles.listElem}>
-                        <Text style={styles.listText}>Netti</Text>
+                        <Text style={styles.listText}>Suoratoistot</Text>
+                        <View style={styles.listContainer}>
+                            <Icon 
+                            name='trash'
+                            type="font-awesome"
+                            iconColor={'#000000'}
+                            size={30}
+                            onPress={() => console.log('Pressed delete')}/>
+                            <Text style={styles.otherText}>/kk</Text>
+                            <TextInput style={styles.input} placeholder='000,00' />
+                            <PrettyDate onDateConfirm={handleDateConfirm}/>
+                        </View>
+                    </View>  
+                    <View style={styles.listElem}>
+                        <Text style={styles.listText}>Harrastus</Text>
+                        <View style={styles.listContainer}>
+                            <Icon 
+                            name='trash'
+                            type="font-awesome"
+                            iconColor={'#000000'}
+                            size={30}
+                            onPress={() => console.log('Pressed delete')}/>
+                            <Text style={styles.otherText}>/kk</Text>
+                            <TextInput style={styles.input} placeholder='000,00' />
+                            <PrettyDate onDateConfirm={handleDateConfirm}/>
+                        </View>
+                    </View>  
+                    <View style={styles.listElem}>
+                        <Text style={styles.listText}>Hupiraha</Text>
+                        <View style={styles.listContainer}>
+                            <Icon 
+                            name='trash'
+                            type="font-awesome"
+                            iconColor={'#000000'}
+                            size={30}
+                            onPress={() => console.log('Pressed delete')}/>
+                            <Text style={styles.otherText}>/kk</Text>
+                            <TextInput style={styles.input} placeholder='000,00' />
+                            <PrettyDate onDateConfirm={handleDateConfirm}/>
+                        </View>
+                    </View>  
+                    <View style={styles.listElem}>
+                        <Text style={styles.listText}>Säästöön</Text>
                         <View style={styles.listContainer}>
                             <Icon 
                             name='trash'
@@ -107,7 +135,7 @@ export default function Living( { navigation } ) {
 
             <View style={styles.buttonView}>
                         <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => console.log('Pressed button')} 
+                            <PrettyNavigationButton  onPress={() => navigation.navigate('Insurance')} 
                             title="Edellinen"
                             disabledRight
                             iconLeft="chevron-left"
@@ -115,7 +143,7 @@ export default function Living( { navigation } ) {
                             />
                         </View>
                         <View style={styles.buttonRight}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('Travel')} 
+                            <PrettyNavigationButton  onPress={() => navigation.navigate('RandomExpenses')} 
                             title="Seuraava"
                             disabledLeft
                             iconRight="chevron-right" />
@@ -135,31 +163,31 @@ export default function Living( { navigation } ) {
                         <Icon size={30}
                             name="card"
                             type="material-community"
-                            color='#696969'/>
+                            color='#17B5AD'/>
                     </View>
                     <View style={styles.progressBlock}>
                         <Icon size={30}
                             name="card"
                             type="material-community"
-                            color='#696969'/>
+                            color='#17B5AD'/>
                     </View>
                     <View style={styles.progressBlock}>
                         <Icon size={30}
                             name="card"
                             type="material-community"
-                            color='#696969'/>
+                            color='#17B5AD'/>
                     </View>
                     <View style={styles.progressBlock}>
                         <Icon size={30}
                             name="card"
                             type="material-community"
-                            color='#696969'/>
+                            color='#17B5AD'/>
                     </View>
                     <View style={styles.progressBlock}>
                         <Icon size={30}
                             name="card"
                             type="material-community"
-                            color='#696969'/>
+                            color='#17B5AD'/>
                     </View>
                     <View style={styles.progressBlock}>
                         <Icon size={30}

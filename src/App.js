@@ -11,7 +11,13 @@ import Home from './pages/home.js'
 import Landing from './pages/landing.js'
 import Welcome from './pages/welcome'
 import DateTest from './pages/dateTest';
-
+import Living from './pages/living.js';
+import Travel from './pages/travel.js';
+import Loans from './pages/loans.js';
+import Health from './pages/health.js';
+import Insurance from './pages/insurance.js';
+import OtherExpenses from './pages/otherexpenses.js';
+import RandomExpenses from './pages/randomexpenses.js';
 export default function App() {
 
   const Stack = createNativeStackNavigator();
@@ -61,6 +67,48 @@ export default function App() {
                 name="DateTest"
                 component={DateTest}
                 options={{ title: "Datepicker Test Area" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Living"
+                component={Living}
+                options={{ title: "Living" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Travel"
+                component={Travel}
+                options={{ title: "Travel" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Loans"
+                component={Loans}
+                options={{ title: "Loans" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Health"
+                component={Health}
+                options={{ title: "Health" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Insurance"
+                component={Insurance}
+                options={{ title: "Insurance" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="OtherExpenses"
+                component={OtherExpenses}
+                options={{ title: "OtherExpenses" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="RandomExpenses"
+                component={RandomExpenses}
+                options={{ title: "RandomExpenses" }}
                 style={styles.container}
               />
             </Stack.Navigator>
