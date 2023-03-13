@@ -56,16 +56,24 @@ export default function Home( { navigation } ) {
                         </View>
                     ) : (
                         <View style={styles.budgetContainer}>
-                            <Text style={styles.infoText}>
+                            <Text style={styles.namingText}>
                                 Anna budjetillesi nimi:
                             </Text>
-                            <View style={styles.inputText}>
-                            </View>
+                            <View style={styles.inputBox}>
                                 <TextInput
                                     value={budgetName}
                                     onChangeText={handleTextChange}
                                     maxLength={MAX_LENGTH}
+                                    style={styles.input}
                                 />
+                            </View>
+                            <PrettyButton 
+                                onPress={() => console.log('go on')} 
+                                title="valmis"
+                                noIcons={true}
+                                disabled={budgetName == ''} />
+                            
+
                         </View>      
                     )}
                     </View>   
@@ -168,19 +176,33 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        marginTop: 100,
+        marginTop: 160,
         color: '#000000',
         fontFamily: 'Roboto',
         fontSize: 22,
     },
+    namingText: {
+        marginLeft: 30,
+        marginRight: 30,
+        color: '#000000',
+        fontFamily: 'Roboto',
+        fontSize: 18,
+    },
     inputBox: {
+        flexDirection: 'row',
+        marginLeft: 30,
+        marginRight: 30,
         backgroundColor: '#F8F9F9',
         borderStyle: 'dashed',
         borderWidth: 2,
         borderColor: '#17B5AD',
         paddingHorizontal: 10,
         paddingVertical: 5,
-        borderRadius: 5,
+        marginBottom: 5,
+    },
+    input: {
+
+        flex: 1,
     },
     bottomNavbar: {
         positon: 'absolute',
