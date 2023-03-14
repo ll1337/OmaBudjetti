@@ -12,9 +12,9 @@ const PrettyButton = (props) => {
                 style={styles.gradient}
             /> 
             <TouchableOpacity {...props} style={props.disabled ? styles.disabled : styles.button}>   
-                <Avatar.Icon size={50} color='#000000' icon={props.iconLeft} style={styles.buttonIcon}/>
+                {!props.noIcons && <Avatar.Icon size={50} color='#000000' icon={props.iconLeft} style={styles.buttonIcon}/> }
                 <Text style={styles.buttonText}>{props.title}</Text>
-                <Avatar.Icon size={50} color='#000000' icon={props.iconRight} style={styles.buttonIcon}/>
+                {!props.noIcons && <Avatar.Icon size={50} color='#000000' icon={props.iconRight} style={styles.buttonIcon}/> }
             {/*  */}
             </TouchableOpacity>
 
@@ -27,6 +27,17 @@ export default PrettyButton;
 const styles = StyleSheet.create({
     container: {
         borderRadius: 60, 
+        overflow: 'hidden',         
+        marginLeft: 30,
+        marginRight: 30,
+        shadowColor: 'rgba(0, 0, 0, 1)',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        elevation: 4,
+    },
+    smallContainer: {
+        borderRadius: 10, 
         overflow: 'hidden',         
         marginLeft: 30,
         marginRight: 30,
