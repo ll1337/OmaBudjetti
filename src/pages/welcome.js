@@ -48,7 +48,7 @@ export default function Welcome( { navigation } ) {
                     
                     <View style={styles.button}>
                     <PrettyButton
-                        onPress={() => console.log('Button pressed')} 
+                        onPress={() => navigation.navigate('Home')} 
                         title="Eteenpäin"
                         disabled={!checked}
                         />
