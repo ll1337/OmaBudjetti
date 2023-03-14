@@ -4,15 +4,17 @@ import { Text, IconButton } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
 import PrettyButton from '../components/prettyButton';
+import PrettyNavigationButton from '../components/prettyNavigationButton';
 
 // max length of budget name
-const MAX_LENGTH = 20;
+const MAX_LENGTH = 25;
 
 export default function Home( { navigation } ) {
 
     const [hasBudget, setHasBudget] = useState(false);
     const [showBudgetCreation, setShowBudgetCreation] = useState(false);
 
+    const [budgetNames, setBudgetNames] = useState([]);
     const [budgetName, setBudgetName] = useState('');
     
     // user wants to create a budget: show components related to budget creation, hide others.
@@ -24,6 +26,12 @@ export default function Home( { navigation } ) {
         if (inputText.length <= MAX_LENGTH) {
             setBudgetName(inputText);
         }
+    };
+
+    const handleConfirmName = () => {
+        setBudgetNames([...budgetNames, budgetName]);
+        setShowBudgetCreation(false);
+        setHasBudget(true);
     };
 
     return(
@@ -38,8 +46,25 @@ export default function Home( { navigation } ) {
                         <View>
                             {hasBudget ? (
                                 <View>
+                                    <View style={{marginBottom: 30}}/>
+                                    <View>
+                                        {budgetNames.map((name, index) => (
+                                            <View style={{marginBottom: 15}}>
+                                                <PrettyButton 
+                                                    key={index} 
+                                                    onPress={() => console.log({name})}                                                
+                                                    title={name}
+                                                    iconLeft="piggy-bank-outline"
+                                                    iconRight="play"
+                                                    style={{marginBottom: 20}}
+                                                />
+                                            </View>
+                                            
+                                        ))}
+                                    </View>
                                     <Text style={styles.newText}>Tarve uudelle budjetille?</Text>
                                     <View style={styles.divider} />    
+                                    <View style={{marginBottom: 30}}/>
                                 </View>
                             ) : (
                                 <View>
@@ -67,13 +92,14 @@ export default function Home( { navigation } ) {
                                     style={styles.input}
                                 />
                             </View>
-                            <PrettyButton 
-                                onPress={() => console.log('go on')} 
-                                title="valmis"
-                                noIcons={true}
-                                disabled={budgetName == ''} />
-                            
-
+                            <View style={{alignSelf: 'flex-end'}}>
+                                <PrettyNavigationButton 
+                                    onPress={handleConfirmName} 
+                                    title="Valmis"
+                                    disabledLeft
+                                    disabledRight
+                                    disabled={budgetName == ''} />
+                            </View>                            
                         </View>      
                     )}
                     </View>   
