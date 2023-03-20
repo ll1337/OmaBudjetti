@@ -1,75 +1,105 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, StatusBar, Image, Modal } from 'react-native';
 import { IconButton, Avatar } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
-import { Text, Dialog, Icon } from '@rneui/themed';
+import { Text, Icon } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
-import PrettyDropdownButton from '../components/prettyDropdownButton';
-import PrettyDate from '../components/prettyDate';
 
-export default function RandomExpenses( { navigation } ) {
-    const [visible, setVisible] = useState(false);
+export default function Break( { route, navigation } ) {
 
-    const [confirmedDate, setConfirmedDate] = useState(null);
-
-    const handleDateConfirm = (date) => {
-        console.log(confirmedDate);
-        setConfirmedDate(date);
-    };
-
+    const [visible, setVisible] = useState(true);
+    const previousScreen = route.params;
+    
     return(
         <StoreProvider store={store}>
             <View style={styles.container}>   
-
+                
                 <View style={styles.header}>
-                    <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
+                    <Text style={styles.headerText}> Eva - OmaBudjetti </Text>
                 </View>        
-
                 <View style={styles.rectangle}>
-                    <Text style={styles.welcomeText}>Satunnaiset kulut</Text>
+
+                <Modal
+                    animationType='fade'
+                    transparent={true}
+                    visible={visible}
+                    onShow={() => {setTimeout(() => {setVisible(!visible) 
+                    }, 1000);}}>
+                        <View style={styles.modalView}>
+                            <Icon 
+                            name='check-circle-outline'
+                            type='material-community'
+                            size={40}
+                            color='#fff'
+                            />
+                            <Text style={styles.modalText}>Tallennus onnistui!</Text>
+                        </View>
+                </Modal>
+
+                {previousScreen == "RandomExpenses" && <View>
+                    <Text style={styles.topText}>Menosi on nyt lisätty...</Text>
                     <View style={styles.divider} />
-                    <Text style={styles.infoText}>
-                        Lisää tähän satunnaisia kuluja{'\n'} 
-                    </Text>
+                    <Image
+                    style={styles.img}
+                    source={require('../assets/Icon_budgetpig2.png')}
+                    />
+                    <View style={styles.divider} />
+                    <Text style={styles.bottomText}> ... seuraavaksi{'\n'}lisäämme tulosi!</Text>
+                </View> }
 
-                <View>
+                {previousScreen == "Home" && <View>
+
+                    <Text style={styles.topText}></Text>
+                    <Image
+                    style={styles.img}
+                    source={require('../assets/Icon_budgetpig2.png')}
+                    />
+                    <View style={styles.divider} />
+                    <Text style={styles.bottomText}>Seuraavaksi lisäämme </Text>
+                    <Text style={styles.bottomText}>menosi!</Text>
                     
-
-                    <View style={styles.dropdown}>
-                    <PrettyDropdownButton  onPress={() => console.log('Pressed dropdown')} 
-                            title="Lisää kulu"
-                            disabledLeft
-                            iconLeft=""
-                            iconRight="chevron-down"
-                            />
-                    </View>
-
+                </View> }
+                
                 </View>
+            
+            </View>   
 
-            </View>
-
-            <View style={styles.buttonView}>
+            {previousScreen == "RandomExpenses" && <View style={styles.buttonView}>
                         <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('OtherExpenses')} 
-                            title="Edellinen"
-                            disabledRight
-                            iconLeft="chevron-left"
-                            iconRight=""
-                            />
+                            <PrettyNavigationButton  onPress={() => navigation.navigate('RandomExpenses')} 
+                                title="Edellinen"
+                                disabledRight
+                                iconLeft="chevron-left"
+                                iconRight=""
+                                />
                         </View>
                         <View style={styles.buttonRight}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('Break', 'RandomExpenses')} 
-                            title="Seuraava"
-                            disabledLeft
-                            iconRight="chevron-right" />
+                                <PrettyNavigationButton  onPress={() => console.log('Pressed button')} 
+                                title="Seuraava"
+                                disabledLeft
+                                iconRight="chevron-right" />
                         </View>
-                    </View>
+                </View>}
+            {previousScreen == "Home" && <View style={styles.buttonView}>
+                        <View style={styles.buttonLeft}>
+                            <PrettyNavigationButton  onPress={() => navigation.navigate('Home')} 
+                                title="Edellinen"
+                                disabledRight
+                                iconLeft="chevron-left"
+                                iconRight=""
+                                />
+                        </View>
+                        <View style={styles.buttonRight}>
+                                <PrettyNavigationButton  onPress={() => navigation.navigate('Living')} 
+                                title="Seuraava"
+                                disabledLeft
+                                iconRight="chevron-right" />
+                        </View>
+                </View>}
 
-                </View>   
-
-                <View style={styles.progress}>
+                {previousScreen == "RandomExpenses" && <View style={styles.progress}>
                     <View style={styles.progressBlock}>
                         <Icon size={30}
                             name="card"
@@ -118,8 +148,9 @@ export default function RandomExpenses( { navigation } ) {
                             type="material-community"
                             color='#696969'/>
                     </View>
-                </View>
-
+                </View>}
+            
+            
             <View style={styles.bottomNavbar}>
                 <IconButton
                         icon="home"
@@ -178,10 +209,26 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 25,
     },
-    welcomeText: {
+    modalText: {
+        color: '#fff',
+        fontFamily: 'Roboto',
+        fontSize: 25,
+    },
+    topText: {
+        alignSelf: 'center',
         marginTop: 40,
-        marginLeft: 30,
-        marginRight: 0,
+        marginLeft: 20,
+        marginRight: 20,
+        color: '#000000',
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+        fontSize: 30,
+    },
+    bottomText: {
+        alignSelf: 'center',
+        marginTop: 1,
+        marginLeft: 20,
+        marginRight: 20,
         color: '#000000',
         fontWeight: 'bold',
         fontFamily: 'Roboto',
@@ -193,6 +240,30 @@ const styles = StyleSheet.create({
         marginRight: 25,
         borderColor: 'black',
         borderBottomWidth: 1,
+    },
+    modalView: {
+        marginTop: 255,
+        margin: 50,
+        backgroundColor: '#17B5AD',
+        borderRadius: 20,
+        padding: 15,
+        alignItems: 'center',
+        alignSelf: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+    img: {
+        width: 230,
+        height: 250,
+        alignSelf: 'center',
+        marginTop: 25,
+        marginBottom: 25
     },
     newText: {
         marginTop: 40,
@@ -210,48 +281,11 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontFamily: 'Roboto',
         fontSize: 16,
-    },
-    dropdown: {
-        marginTop: 20,
-        width: 175
-    },
-    listElem: {
-        marginRight: 23,
-    },
-    listText: {
-        marginTop: 15,
-        marginLeft: 30,
-        marginRight: 10,
-        color: '#000000',
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
-    otherText: {
-        marginTop: 15,
-        marginRight: 10,
-        color: '#000000',
-        fontFamily: 'Roboto',
-        fontSize: 16,
-    },
-    input: {
-        textAlign: 'center',
-        borderWidth: 1, 
-        width: 60,
-        opacity: 0.5,
-        marginLeft: 10,
-        marginRight: 10,
-        borderStyle: 'dashed',
-    },
-    listContainer: {
-        marginTop: -32,
-        flexDirection: 'row-reverse',
-        alignItems: 'flex-end',
-        
     }, 
     buttonView: {
+        alignSelf: 'center',
         position: 'absolute',
-        top: '83%',
+        top: '80%',
         flexDirection: 'row',
 
     },

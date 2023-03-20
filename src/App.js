@@ -18,6 +18,7 @@ import Health from './pages/health.js';
 import Insurance from './pages/insurance.js';
 import OtherExpenses from './pages/otherexpenses.js';
 import RandomExpenses from './pages/randomexpenses.js';
+import Break from './pages/break';
 export default function App() {
 
   const Stack = createNativeStackNavigator();
@@ -28,7 +29,7 @@ export default function App() {
         <PaperProvider>
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="Welcome"
+              initialRouteName="Landing"
               screenOptions={{
                 headerShown: false
               }}
@@ -109,6 +110,12 @@ export default function App() {
                 name="RandomExpenses"
                 component={RandomExpenses}
                 options={{ title: "RandomExpenses" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Break"
+                component={Break}
+                options={{ title: "Break" }}
                 style={styles.container}
               />
             </Stack.Navigator>
