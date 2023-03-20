@@ -70,8 +70,8 @@ export default function PrettyDate({ onDateConfirm }) {
             </Modal>
             <Icon
                 accessibilityLabel='Choose Date'
-                name='calendar'
-                type="font-awesome"
+                name='calendar-blank-outline'
+                type="material-community"
                 iconColor={'#000000'}
                 size={30}
                 onPress={() => setModalVisible(true)}

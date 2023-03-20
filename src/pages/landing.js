@@ -10,19 +10,15 @@ export default function Landing( { navigation } ) {
 
     return(
         <StoreProvider store={store}>
-            <View style={{flex: 1, alignItems: 'center',
+            <View numberOfLines={1}
+            style={{alignSelf: 'center',
                         position: 'absolute',
-                        left: '12.22%',
-                        right: '12.22%',
-                        top: '18.5%',
-                        bottom: '75.31%'}}>
+                        top: '18.5%',}}>
                 <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
             </View>
 
-            <View style={{flex: 1, alignItems: 'center',
+            <View style={{flex: 1, alignSelf: 'center',
                         position: 'absolute',
-                        left: '14.44%',
-                        right: '14.44%',
                         top: '24.53%',
                         bottom: '71.88%'}}>
                     <Text numberOfLines={1} style={styles.normalText}>taloudenhallinta taskussasi!</Text>
@@ -71,8 +67,8 @@ const styles = StyleSheet.create({
     },
     img: {
         flex: 1,
-        width: 230,
-        height: 217,
+        width: 250,
+        height: 250,
     },
     button: {
     flex: 1,

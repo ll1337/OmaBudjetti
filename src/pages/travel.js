@@ -39,8 +39,8 @@ export default function Travel( { navigation } ) {
                         <Text style={styles.listText}>Julkinen liikenne</Text>
                         <View style={styles.listContainer}>
                             <Icon 
-                            name='trash'
-                            type="font-awesome"
+                            name='trash-can-outline'
+                            type="material-community"
                             iconColor={'#000000'}
                             size={30}
                             onPress={() => console.log('Pressed delete')}/>
@@ -53,8 +53,8 @@ export default function Travel( { navigation } ) {
                         <Text style={styles.listText}>Polttoaine</Text>
                         <View style={styles.listContainer}>
                             <Icon 
-                            name='trash'
-                            type="font-awesome"
+                            name='trash-can-outline'
+                            type="material-community"
                             iconColor={'#000000'}
                             size={30}
                             onPress={() => console.log('Pressed delete')}/>
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
         width: 175
     },
     listElem: {
-        marginRight: 30,
+        marginRight: 23,
     },
     listText: {
         marginTop: 15,
@@ -267,7 +267,8 @@ const styles = StyleSheet.create({
         width: 60,
         opacity: 0.5,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        borderStyle: 'dashed',
     },
     listContainer: {
         marginTop: -32,

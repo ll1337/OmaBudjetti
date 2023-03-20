@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
         width: 175
     },
     listElem: {
-        marginRight: 30,
+        marginRight: 23,
     },
     listText: {
         marginTop: 15,
@@ -240,7 +240,8 @@ const styles = StyleSheet.create({
         width: 60,
         opacity: 0.5,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        borderStyle: 'dashed',
     },
     listContainer: {
         marginTop: -32,

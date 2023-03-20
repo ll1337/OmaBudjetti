@@ -32,6 +32,7 @@ export default function Home( { navigation } ) {
         setBudgetNames([...budgetNames, budgetName]);
         setShowBudgetCreation(false);
         setHasBudget(true);
+        navigation.navigate('Break', 'Home')
     };
 
     return(

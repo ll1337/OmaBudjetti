@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     welcomeText: {
+        fontWeight: 'bold',
         textAlign: 'center',
         marginLeft: '5%',
         marginRight: '5%',
@@ -96,19 +97,16 @@ const styles = StyleSheet.create({
         lineHeight: 20
     },
     checkbox: {
+        flexDirection: 'row',
         alignContent: 'center',
         marginTop: '10%',
-        marginLeft: '6%',
 
     },
     linkText: {
         color: '#17B5AD',
         textDecorationLine: 'underline',
-        lineHeight: 20,
         fontWeight: "700",
-        marginLeft: '11%',
-        marginRight: '6%',
-        marginTop: '-9%'
+        paddingTop: 7
     },
     button: {
         alignSelf: 'center',

@@ -39,8 +39,8 @@ export default function Living( { navigation } ) {
                         <Text style={styles.listText}>Vuokra / vastike</Text>
                         <View style={styles.listContainer}>
                             <Icon 
-                            name='trash'
-                            type="font-awesome"
+                            name='trash-can-outline'
+                            type="material-community"
                             iconColor={'#000000'}
                             size={30}
                             onPress={() => console.log('Pressed delete')}/>
@@ -53,8 +53,8 @@ export default function Living( { navigation } ) {
                         <Text style={styles.listText}>Vesi</Text>
                         <View style={styles.listContainer}>
                             <Icon 
-                            name='trash'
-                            type="font-awesome"
+                            name='trash-can-outline'
+                            type="material-community"
                             iconColor={'#000000'}
                             size={30}
                             onPress={() => console.log('Pressed delete')}/>
@@ -63,26 +63,13 @@ export default function Living( { navigation } ) {
                             <PrettyDate onDateConfirm={handleDateConfirm}/>
                         </View>  
                     </View>
-                    <View style={styles.listElem}>
-                        <Text style={styles.listText}>Sähkö</Text>
-                        <View style={styles.listContainer}>
-                            <Icon 
-                            name='trash'
-                            type="font-awesome"
-                            iconColor={'#000000'}
-                            size={30}
-                            onPress={() => console.log('Pressed delete')}/>
-                            <Text style={styles.otherText}>/kk</Text>
-                            <TextInput style={styles.input} placeholder='000,00' />
-                            <PrettyDate onDateConfirm={handleDateConfirm}/>
-                        </View>
-                    </View>  
+
                     <View style={styles.listElem}>
                         <Text style={styles.listText}>Netti</Text>
                         <View style={styles.listContainer}>
                             <Icon 
-                            name='trash'
-                            type="font-awesome"
+                            name='trash-can-outline'
+                            type="material-community"
                             iconColor={'#000000'}
                             size={30}
                             onPress={() => console.log('Pressed delete')}/>
@@ -107,7 +94,7 @@ export default function Living( { navigation } ) {
 
             <View style={styles.buttonView}>
                         <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => console.log('Pressed button')} 
+                            <PrettyNavigationButton  onPress={() => navigation.navigate('Break', 'Home')} 
                             title="Edellinen"
                             disabledRight
                             iconLeft="chevron-left"
@@ -271,7 +258,7 @@ const styles = StyleSheet.create({
         width: 175
     },
     listElem: {
-        marginRight: 30,
+        marginRight: 23,
     },
     listText: {
         marginTop: 15,
@@ -295,7 +282,8 @@ const styles = StyleSheet.create({
         width: 60,
         opacity: 0.5,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        borderStyle: 'dashed',
     },
     listContainer: {
         marginTop: -32,
@@ -326,7 +314,7 @@ const styles = StyleSheet.create({
     },
     progressBlock: {
         marginLeft: '2.25%',
-        marginRight: '2.25%'
+        marginRight: '2.25%',
     },
     bottomNavbar: {
         position: 'absolute',
