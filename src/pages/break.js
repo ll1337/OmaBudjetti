@@ -34,7 +34,7 @@ export default function Break( { route, navigation } ) {
                             size={40}
                             color='#fff'
                             />
-                            <Text style={styles.modalText}>Talletus onnistui!</Text>
+                            <Text style={styles.modalText}>Tallennus onnistui!</Text>
                         </View>
                 </Modal>
 
