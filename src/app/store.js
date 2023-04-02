@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import budgetReducer from '../features/budget/budgetSlice'
+import budgetsReducer from '../features/budget/budgetsSlice'
+import expensesReducer from '../features/budget/expensesSlice'
+import incomesReducer from '../features/budget/incomesSlice'
 
-export default configureStore({
+const store = configureStore({
     reducer: {
-        budget: budgetReducer
+        budgets: budgetsReducer,
     }
 });
+
+export default store;

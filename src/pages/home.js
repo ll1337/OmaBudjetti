@@ -1,9 +1,12 @@
+import 'react-native-get-random-values';
 import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
-import { Text, IconButton } from "react-native-paper";
+import { Text } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
 import { useDispatch } from 'react-redux';
+import { addBudget, currentBudget } from '../features/budget/budgetsSlice';
+import { v4 as uuidv4 } from 'uuid';
 import PrettyButton from '../components/prettyButton';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import BottomNavBar from '../components/bottomNavBar';
@@ -11,7 +14,11 @@ import BottomNavBar from '../components/bottomNavBar';
 // max length of budget name
 const MAX_LENGTH = 25;
 
-export default function Home( { navigation } ) {
+// use this to access the UUID of the current budget
+var activeBudget = store.getState('budgets')['budgets']['currentBudget'];
+
+export default function Home( { navigation, budgetId } ) {
+
 
     const dispatch = useDispatch();
 
@@ -34,6 +41,12 @@ export default function Home( { navigation } ) {
 
     const handleConfirmName = () => {
         setBudgetNames([...budgetNames, budgetName]);
+
+        let budgetId = uuidv4(); 
+        dispatch(addBudget({ budgetId, budgetName }));
+        dispatch(currentBudget({ budgetId }));
+        setBudgetName('');
+        
         setShowBudgetCreation(false);
         setHasBudget(true);
         navigation.navigate('Break', 'Home')
