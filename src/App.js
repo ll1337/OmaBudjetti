@@ -20,6 +20,7 @@ import OtherExpenses from './pages/otherexpenses.js';
 import RandomExpenses from './pages/randomexpenses.js';
 import Year from './pages/year';
 import Break from './pages/break';
+import BottomNavBar from './components/bottomNavBar';
 export default function App() {
 
   const Stack = createNativeStackNavigator();
@@ -124,6 +125,10 @@ export default function App() {
                 component={Year}
                 options={{ title: "Year" }}
                 style={styles.container}
+              />
+              <Stack.Screen
+                name="BottomNavBar"
+                component={BottomNavBar}
               />
             </Stack.Navigator>
             <StatusBar style="auto" />

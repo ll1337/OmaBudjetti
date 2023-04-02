@@ -1,45 +1,31 @@
+import 'react-native-get-random-values';
 import { createSlice } from "@reduxjs/toolkit";
-import { ADD_BUDGET, ADD_INCOME, ADD_EXPENSE, UPDATE_INCOME, UPDATE_EXPENSE } from '../constants/actionTypes.js';
+import { v4 as uuidv4 } from 'uuid';
 
 export const budgetsSlice = createSlice({
     name: 'budgets',
-    initialState: {
-        budgets: [
-            {
-                id: 1,
-                name: 'Budget 1',
-                incomes: [
-                    {
-                        id: 1,
-                        amount: 1000,
-                        date: '2023-03-31'
-                    },
-                ],
-                expenses: [
-                    {
-                        id: 1,
-                        amount: 2000,
-                        date: '2023-04-01'
-                    },
-                ],
-            },
-        ],
-    },
+    initialState: {},
     reducers: {
-        addExpense: (state) => {
-            console.log('state before', state);
-            state.expenses.push(state.number);
-            console.log('state after', state);
+        addBudget: (state, action) => {
+
+            const { budgetId, budgetName } = action.payload;
+            
+            const newBudget = {
+                budgetName: budgetName,
+                expenses: [],
+                incomes: [],
+            };
+            state[budgetId] = newBudget;
+            
+            console.log(state);
         },
-        addIncome: (state, action) => {
-            state.incomes.push(action.payload);
-        },
-        incrementNumber: (state) => {
-            state.number += 1;
+        currentBudget: (state, action) => {
+            state['currentBudget'] = action.payload.budgetId;
+            console.log(state);
         }
     }
 });
 
-export const { addExpense, addIncome, incrementNumber } = budgetsSlice.actions;
+export const { addBudget, currentBudget } = budgetsSlice.actions;
 
 export default budgetsSlice.reducer;

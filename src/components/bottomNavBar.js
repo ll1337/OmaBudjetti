@@ -3,16 +3,16 @@ import { StyleSheet, View, Text } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
 
-const BottomNavBar = (props) => {
+const BottomNavBar = ( { navigation } ) => {
     return (
         <View style={styles.bottomNavbar}>
             <View style={{alignItems: 'center'}}>
                 <IconButton
-                        style={{marginBottom: -5}}
-                        icon="home-outline"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => navigation.navigate('Home')}
+                    style={{marginBottom: -5}}
+                    icon="home-outline"
+                    iconColor={'#fff'}
+                    size={30}
+                    onPress={() => navigation.navigate('Home')}
                 />
                 <Text style={styles.text}>Koti</Text>
             </View>
@@ -22,7 +22,7 @@ const BottomNavBar = (props) => {
                     icon="calendar-month"
                     iconColor={'#fff'}
                     size={30}
-                    onPress={() => console.log('Pressed item1')}
+                    onPress={() => navigation.navigate('Year')}
                 />
                 <Text style={styles.text}>Vuosi</Text>
             </View>
