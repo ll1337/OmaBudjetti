@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`prettyDate renders correctly 1`] = `
+exports[`prettyDatePicker renders correctly 1`] = `
 <View
   style={{}}
 >

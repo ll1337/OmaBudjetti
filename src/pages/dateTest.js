@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, Text } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
-import PrettyDate from '../components/prettyDate';
+import PrettyDatePicker from '../components/prettyDatePicker';
 
-export default function DateTest( { navigation } ) {
+export default function DateTest({ navigation }) {
 
     const [confirmedDate, setConfirmedDate] = useState(null);
 
@@ -13,14 +13,14 @@ export default function DateTest( { navigation } ) {
         setConfirmedDate(date);
     };
 
-    return(
-            
+    return (
+
         <StoreProvider store={store}>
             <View style={styles.container}>
-                <Text style={{marginBottom: 40}}>Datepicker test zone</Text>
-                <View style={{margin: 20}}></View>
+                <Text style={{ marginBottom: 40 }}>Datepicker test zone</Text>
+                <View style={{ margin: 20 }}></View>
 
-                <PrettyDate onDateConfirm={handleDateConfirm}/>
+                <PrettyDatePicker onDateConfirm={handleDateConfirm} />
                 <Text>Selected date: {confirmedDate}</Text>
 
             </View>
