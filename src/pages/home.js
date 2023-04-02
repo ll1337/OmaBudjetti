@@ -3,13 +3,17 @@ import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
 import { Text, IconButton } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
+import { useDispatch } from 'react-redux';
 import PrettyButton from '../components/prettyButton';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
+import BottomNavBar from '../components/bottomNavBar';
 
 // max length of budget name
 const MAX_LENGTH = 25;
 
 export default function Home( { navigation } ) {
+
+    const dispatch = useDispatch();
 
     const [hasBudget, setHasBudget] = useState(false);
     const [showBudgetCreation, setShowBudgetCreation] = useState(false);
@@ -108,38 +112,9 @@ export default function Home( { navigation } ) {
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
             </View>
-            <View style={styles.bottomNavbar}>
-                <IconButton
-                        icon="home"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => navigation.navigate('Home')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item1')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item2')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item3')}
-                />
-                <IconButton
-                        icon="format-list-bulleted"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed menu')}
-                />
-            </View>
+            
+            <BottomNavBar>
+            </BottomNavBar>
         </StoreProvider>
     );
 }
