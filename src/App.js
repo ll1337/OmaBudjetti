@@ -18,6 +18,7 @@ import Health from './pages/health.js';
 import Insurance from './pages/insurance.js';
 import OtherExpenses from './pages/otherexpenses.js';
 import RandomExpenses from './pages/randomexpenses.js';
+import Year from './pages/year';
 import Break from './pages/break';
 export default function App() {
 
@@ -116,6 +117,12 @@ export default function App() {
                 name="Break"
                 component={Break}
                 options={{ title: "Break" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Year"
+                component={Year}
+                options={{ title: "Year" }}
                 style={styles.container}
               />
             </Stack.Navigator>
