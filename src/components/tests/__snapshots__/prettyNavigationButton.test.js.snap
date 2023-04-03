@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`prettyNavigationButton renders correctly with a title 1`] = `
+<View
+  style={
+    {
+      "borderRadius": 60,
+      "elevation": 4,
+      "marginLeft": 30,
+      "marginRight": 30,
+      "overflow": "hidden",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 4,
+        "width": 0,
+      },
+      "shadowOpacity": 1,
+      "shadowRadius": 4,
+    }
+  }
+>
+  <ViewManagerAdapter_ExpoLinearGradient
+    proxiedProperties={
+      {
+        "colors": [
+          3474437549,
+          3645748977,
+        ],
+        "endPoint": undefined,
+        "locations": undefined,
+        "startPoint": undefined,
+      }
+    }
+    style={
+      {
+        "borderRadius": 60,
+        "bottom": -2,
+        "left": -2,
+        "position": "absolute",
+        "right": -2,
+        "top": -2,
+      }
+    }
+  />
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#F8F9F9",
+        "borderRadius": 60,
+        "borderWidth": 0,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 2,
+        "marginLeft": 2,
+        "marginRight": 2,
+        "marginTop": 2,
+        "opacity": 1,
+        "overFlow": "hidden",
+      }
+    }
+  >
+    <View
+      color="#000000"
+      style={
+        [
+          {
+            "backgroundColor": "rgba(255,255,255,0)",
+            "borderRadius": 20,
+            "height": 40,
+            "width": 40,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          {
+            "color": "#000000",
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        {
+          "fontFamily": "Roboto",
+          "fontSize": 14,
+          "textAlign": "center",
+        }
+      }
+    >
+      Title
+    </Text>
+    <View
+      color="#000000"
+      style={
+        [
+          {
+            "backgroundColor": "rgba(255,255,255,0)",
+            "borderRadius": 20,
+            "height": 40,
+            "width": 40,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          {
+            "color": "#000000",
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`prettyNavigationButton renders correctly without parameters 1`] = `
+<View
+  style={
+    {
+      "borderRadius": 60,
+      "elevation": 4,
+      "marginLeft": 30,
+      "marginRight": 30,
+      "overflow": "hidden",
+      "shadowColor": "rgba(0, 0, 0, 1)",
+      "shadowOffset": {
+        "height": 4,
+        "width": 0,
+      },
+      "shadowOpacity": 1,
+      "shadowRadius": 4,
+    }
+  }
+>
+  <ViewManagerAdapter_ExpoLinearGradient
+    proxiedProperties={
+      {
+        "colors": [
+          3474437549,
+          3645748977,
+        ],
+        "endPoint": undefined,
+        "locations": undefined,
+        "startPoint": undefined,
+      }
+    }
+    style={
+      {
+        "borderRadius": 60,
+        "bottom": -2,
+        "left": -2,
+        "position": "absolute",
+        "right": -2,
+        "top": -2,
+      }
+    }
+  />
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#F8F9F9",
+        "borderRadius": 60,
+        "borderWidth": 0,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 2,
+        "marginLeft": 2,
+        "marginRight": 2,
+        "marginTop": 2,
+        "opacity": 1,
+        "overFlow": "hidden",
+      }
+    }
+  >
+    <View
+      color="#000000"
+      style={
+        [
+          {
+            "backgroundColor": "rgba(255,255,255,0)",
+            "borderRadius": 20,
+            "height": 40,
+            "width": 40,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          {
+            "color": "#000000",
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        {
+          "fontFamily": "Roboto",
+          "fontSize": 14,
+          "textAlign": "center",
+        }
+      }
+    />
+    <View
+      color="#000000"
+      style={
+        [
+          {
+            "backgroundColor": "rgba(255,255,255,0)",
+            "borderRadius": 20,
+            "height": 40,
+            "width": 40,
+          },
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          {
+            "color": "#000000",
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;

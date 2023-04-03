@@ -10,12 +10,11 @@ const PrettyDropdownButton = (props) => {
             <LinearGradient
                 colors={['rgba(23, 181, 173, 0.81)', 'rgba(77, 182, 241, 0.85)']}
                 style={styles.gradient}
-            /> 
-            <TouchableOpacity {...props} style={props.disabled ? styles.disabled : styles.button}>   
-                <Avatar.Icon size={props.disabledLeft ? 15 : 40} color='#000000' icon={props.iconLeft} style={styles.buttonIcon}/>
+            />
+            <TouchableOpacity {...props} style={props.disabled ? styles.disabled : styles.button}>
+                <Avatar.Icon size={props.disabledLeft ? 15 : 40} color='#000000' icon={props.iconLeft} style={styles.buttonIcon} />
                 <Text style={styles.buttonText}>{props.title}</Text>
-                <Avatar.Icon size={props.disabledRight ? 15 : 40} color='#000000' icon={props.iconRight} style={styles.buttonIcon}/>
-            {/*  */}
+                <Avatar.Icon size={props.disabledRight ? 15 : 40} color='#000000' icon={props.iconRight} style={styles.buttonIcon} />
             </TouchableOpacity>
 
         </View>
@@ -26,8 +25,8 @@ export default PrettyDropdownButton;
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 3, 
-        overflow: 'hidden',         
+        borderRadius: 3,
+        overflow: 'hidden',
         marginLeft: 30,
         marginRight: 30,
         shadowColor: 'rgba(0, 0, 0, 1)',
@@ -43,12 +42,12 @@ const styles = StyleSheet.create({
         marginRight: 2,
         borderWidth: 0,
         borderRadius: 3,
-        backgroundColor: '#F8F9F9', 
+        backgroundColor: '#F8F9F9',
         flexDirection: 'row',
-        alignItems: 'center', 
+        alignItems: 'center',
         justifyContent: 'space-between',
         overFlow: 'hidden',
-        
+
     },
     disabled: {
         marginTop: 2,
@@ -57,13 +56,13 @@ const styles = StyleSheet.create({
         marginRight: 2,
         borderWidth: 0,
         borderRadius: 3,
-        backgroundColor: '#F8F9F9', 
+        backgroundColor: '#F8F9F9',
         flexDirection: 'row',
-        alignItems: 'center', 
+        alignItems: 'center',
         justifyContent: 'space-between',
         overFlow: 'hidden',
         opacity: 0.1
-        
+
     },
     gradient: {
         position: 'absolute',

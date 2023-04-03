@@ -7,9 +7,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
-import PrettyDate from '../components/prettyDate';
+import PrettyDatePicker from '../components/prettyDatePicker';
 
-export default function Insurance( { navigation } ) {
+export default function Insurance({ navigation }) {
     const [visible, setVisible] = useState(false);
 
     const [confirmedDate, setConfirmedDate] = useState(null);
@@ -19,138 +19,138 @@ export default function Insurance( { navigation } ) {
         setConfirmedDate(date);
     };
 
-    return(
+    return (
         <StoreProvider store={store}>
-            <View style={styles.container}>   
+            <View style={styles.container}>
 
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
-                </View>        
+                </View>
 
                 <View style={styles.rectangle}>
                     <Text style={styles.welcomeText}>Vakuutukset</Text>
                     <View style={styles.divider} />
                     <Text style={styles.infoText}>
-                        Lisää tähän kaikki vakuutusmaksusi{'\n'} 
+                        Lisää tähän kaikki vakuutusmaksusi{'\n'}
                     </Text>
 
-                <View>
-                    
+                    <View>
 
-                    <View style={styles.dropdown}>
-                    <PrettyDropdownButton  onPress={() => console.log('Pressed dropdown')} 
-                            title="Lisää kulu"
-                            disabledLeft
-                            iconLeft=""
-                            iconRight="chevron-down"
+
+                        <View style={styles.dropdown}>
+                            <PrettyDropdownButton onPress={() => console.log('Pressed dropdown')}
+                                title="Lisää kulu"
+                                disabledLeft
+                                iconLeft=""
+                                iconRight="chevron-down"
                             />
+                        </View>
+
                     </View>
 
                 </View>
 
-            </View>
-
-            <View style={styles.buttonView}>
-                        <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('Health')} 
+                <View style={styles.buttonView}>
+                    <View style={styles.buttonLeft}>
+                        <PrettyNavigationButton onPress={() => navigation.navigate('Health')}
                             title="Edellinen"
                             disabledRight
                             iconLeft="chevron-left"
                             iconRight=""
-                            />
-                        </View>
-                        <View style={styles.buttonRight}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('OtherExpenses')} 
+                        />
+                    </View>
+                    <View style={styles.buttonRight}>
+                        <PrettyNavigationButton onPress={() => navigation.navigate('OtherExpenses')}
                             title="Seuraava"
                             disabledLeft
                             iconRight="chevron-right" />
-                        </View>
-                    </View>
-
-                </View>   
-
-                <View style={styles.progress}>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#696969'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#696969'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#696969'/>
                     </View>
                 </View>
 
+            </View>
+
+            <View style={styles.progress}>
+                <View style={styles.progressBlock}>
+                    <Icon size={30}
+                        name="card"
+                        type="material-community"
+                        color='#17B5AD' />
+                </View>
+                <View style={styles.progressBlock}>
+                    <Icon size={30}
+                        name="card"
+                        type="material-community"
+                        color='#17B5AD' />
+                </View>
+                <View style={styles.progressBlock}>
+                    <Icon size={30}
+                        name="card"
+                        type="material-community"
+                        color='#17B5AD' />
+                </View>
+                <View style={styles.progressBlock}>
+                    <Icon size={30}
+                        name="card"
+                        type="material-community"
+                        color='#17B5AD' />
+                </View>
+                <View style={styles.progressBlock}>
+                    <Icon size={30}
+                        name="card"
+                        type="material-community"
+                        color='#17B5AD' />
+                </View>
+                <View style={styles.progressBlock}>
+                    <Icon size={30}
+                        name="card"
+                        type="material-community"
+                        color='#696969' />
+                </View>
+                <View style={styles.progressBlock}>
+                    <Icon size={30}
+                        name="card"
+                        type="material-community"
+                        color='#696969' />
+                </View>
+                <View style={styles.progressBlock}>
+                    <Icon size={30}
+                        name="card"
+                        type="material-community"
+                        color='#696969' />
+                </View>
+            </View>
+
             <View style={styles.bottomNavbar}>
                 <IconButton
-                        icon="home"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => navigation.navigate('Home')
+                    icon="home"
+                    iconColor={'#fff'}
+                    size={30}
+                    onPress={() => navigation.navigate('Home')
                     }
                 />
                 <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item1')}
+                    icon="image-frame"
+                    iconColor={'#fff'}
+                    size={30}
+                    onPress={() => console.log('Pressed item1')}
                 />
                 <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item2')}
+                    icon="image-frame"
+                    iconColor={'#fff'}
+                    size={30}
+                    onPress={() => console.log('Pressed item2')}
                 />
                 <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item3')}
+                    icon="image-frame"
+                    iconColor={'#fff'}
+                    size={30}
+                    onPress={() => console.log('Pressed item3')}
                 />
                 <IconButton
-                        icon="format-list-bulleted"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed menu')}
+                    icon="format-list-bulleted"
+                    iconColor={'#fff'}
+                    size={30}
+                    onPress={() => console.log('Pressed menu')}
                 />
             </View>
 
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     },
     input: {
         textAlign: 'center',
-        borderWidth: 1, 
+        borderWidth: 1,
         width: 60,
         opacity: 0.5,
         marginLeft: 10,
@@ -247,8 +247,8 @@ const styles = StyleSheet.create({
         marginTop: -32,
         flexDirection: 'row-reverse',
         alignItems: 'flex-end',
-        
-    }, 
+
+    },
     buttonView: {
         position: 'absolute',
         top: '83%',
@@ -291,6 +291,6 @@ const styles = StyleSheet.create({
         height: 800,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,        
+        borderTopRightRadius: 20,
     },
 });
