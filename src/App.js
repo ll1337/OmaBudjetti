@@ -21,6 +21,8 @@ import RandomExpenses from './pages/randomexpenses.js';
 import Year from './pages/year';
 import Break from './pages/break';
 import BottomNavBar from './components/bottomNavBar';
+
+
 export default function App() {
 
   const Stack = createNativeStackNavigator();

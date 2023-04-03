@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 
-const BottomNavBar = ( { navigation } ) => {
+const BottomNavBar = ( props ) => {
+    const navigation = useNavigation();
     return (
         <View style={styles.bottomNavbar}>
             <View style={{alignItems: 'center'}}>
                 <IconButton
-                    style={{marginBottom: -5}}
+                    style={{marginBottom: -5, marginTop: -2}}
                     icon="home-outline"
                     iconColor={'#fff'}
                     size={30}
@@ -18,7 +20,7 @@ const BottomNavBar = ( { navigation } ) => {
             </View>
             <View style={{alignItems: 'center'}}>
                 <IconButton
-                    style={{marginBottom: -5}}
+                    style={{marginBottom: -5, marginTop: -2}}
                     icon="calendar-month"
                     iconColor={'#fff'}
                     size={30}
@@ -28,7 +30,7 @@ const BottomNavBar = ( { navigation } ) => {
             </View>
             <View style={{alignItems: 'center'}}>
                 <IconButton
-                    style={{marginBottom: -5}}
+                    style={{marginBottom: -5, marginTop: -2}}
                     icon="calendar"
                     iconColor={'#fff'}
                     size={30}
@@ -38,7 +40,7 @@ const BottomNavBar = ( { navigation } ) => {
             </View>
             <View style={{alignItems: 'center'}}>
                 <IconButton
-                    style={{marginBottom: -5}}
+                    style={{marginBottom: -5, marginTop: -2}}
                     icon="file-edit-outline"
                     iconColor={'#fff'}
                     size={30}
@@ -48,7 +50,7 @@ const BottomNavBar = ( { navigation } ) => {
             </View>
             <View style={{alignItems: 'center'}}>
                 <IconButton
-                    style={{marginBottom: -5}}
+                    style={{marginBottom: -5, marginTop: -2}}
                     icon="menu"
                     iconColor={'#fff'}
                     size={30}
