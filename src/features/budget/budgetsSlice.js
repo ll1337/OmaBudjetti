@@ -16,8 +16,6 @@ export const budgetsSlice = createSlice({
                 incomes: [],
             };
             state[budgetId] = newBudget;
-            
-            console.log(state);
         },
         currentBudget: (state, action) => {
             state['currentBudget'] = action.payload.budgetId;

@@ -11,6 +11,10 @@ import MonthRectangle from '../components/monthRectangle';
 
 
 export default function Year( { navigation } ) {
+
+    
+
+
     return(
         <StoreProvider store={store}>
             <View style={styles.container}>    
