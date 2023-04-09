@@ -14,6 +14,7 @@ export default function Year( { navigation } ) {
 
     
 
+    
 
     return(
         <StoreProvider store={store}>
@@ -23,9 +24,7 @@ export default function Year( { navigation } ) {
                 </View>           
                 <View style={styles.rectangle}>
                     <Text style={styles.budgetNameText}>Budjetin nimi</Text>
-                <MonthRectangle positive='false'>
 
-                </MonthRectangle>
                 <MonthRectangle>
 
                 </MonthRectangle>

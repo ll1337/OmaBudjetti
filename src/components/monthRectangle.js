@@ -1,48 +1,67 @@
 import React, {useState} from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Avatar } from "react-native-paper";
+import store from '../app/store';
 
 const MonthRectangle = (props) => {
 
     const [monthExpanded, setMonthExpanded] = useState(false);
+    const [totalExpenses, setTotalExpenses] = useState(0);
+    const [totalIncomes, setTotalIncomes] = useState(0);
+    const [cumulative, setCumulative] = useState(props.cumulative);
+    
+    var monthTotal = 0;
 
     const openDropdownHandler = () => {
         setMonthExpanded(prevState => !prevState);
     };
 
-    const icon = props.positive ? 'currency-usd' : 'alert-outline';
+    // ota kuukaudesta kaikki menot & tulot
+    const setMonth = () => {
+	    // props.uuid.incomes.date == props.yearMonth*
+	    // 
+	    // setTotalIncomes( (totalIncomes) => totalIncomes+income)
+	    // setCumulative( (cumulative) => cumulative+income)
+	    // setCumulative( (cumulative) => cumulative-expense)
+	    // monthTotal = monthTotal+income
+	    // monthTotal = monthTotal-expense
+    }
+    
+
+    const icon = monthTotal > 0 ? 'currency-usd' : 'alert-outline';
 
     return(
         <View style={styles.container}>
             <TouchableOpacity {...props} 
-                style={props.positive ? styles.negative : styles.positive}
+	        style={!props.pastTwo && {opacity: 0.5}}
+                style={cumulative < 0 ? styles.negative : styles.positive}
                 onPress={openDropdownHandler}>
 
                 <View style={styles.topContainer}>                
                     <View style={styles.leftContainer}>
                         <Avatar.Icon size={50} color='#000000' icon={icon} style={styles.buttonIcon}/>
                         <View>
-                            <Text style={styles.monthText}>Tammikuu</Text>
-                            <Text style={styles.grayText}>+24e</Text>
+                            <Text style={styles.monthText}>props.yearMonth</Text>
+                            <Text style={styles.grayText}>monthTotal</Text>
                         </View>
                     </View>
                     <View style={styles.rightContainer}>
                         <View>
-                            <Text style={styles.monthText}>2023</Text>
-                            <Text style={styles.cumulativeText}>Kumul. +200,00</Text>
+                            <Text style={styles.monthText}>props.yearMonth</Text>
+                            <Text style={styles.cumulativeText}>Kumul. {cumulative}</Text>
                         </View>
                         <Avatar.Icon size={50} color='#000000' icon='chevron-down' style={styles.buttonIcon}/>
                     </View>
                 </View>
                 {monthExpanded && (
                     <View style={styles.expandedContainer}>
-                        <View style={styles.expandedTextContainer}>
+                        <View style={styles.expandedTextContainerLeft}>
                             <Text style={styles.incomeText}>Tulot:</Text>
                             <Text style={styles.incomeText}>Menot:</Text>
                         </View>
-                        <View style={styles.expandedTextContainer}>
-                            <Text style={styles.amountText}>50e</Text>
-                            <Text style={styles.amountText}>20e</Text>
+                        <View style={styles.expandedTextContainerRight}>
+                            <Text style={styles.amountText}>{totalIncomes}</Text>
+                            <Text style={styles.amountText}>{totalExpenses}</Text>
                         </View>
 
                     </View>
@@ -80,6 +99,9 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 5,
         padding: 5,
+    },
+    pastTwoMonths: {
+	opacity: 0.5,
     },
     button: {
         alignItems: 'center', 
@@ -133,7 +155,10 @@ const styles = StyleSheet.create({
     amountText: {
         fontSize: 20,
     },
-    expandedTextContainer: {
+    expandedTextContainerLeft: {
+        alignItems: 'flex-start',
+    },
+    expandedTextContainerRight: {
         alignItems: 'center',
     },
 });
