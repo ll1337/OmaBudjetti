@@ -17,7 +17,6 @@ const MonthRectangle = (props) => {
     };
 
     // ota kuukaudesta kaikki menot & tulot
-    const setMonth = () => {
 	    // props.uuid.incomes.date == props.yearMonth*
 	    // 
 	    // setTotalIncomes( (totalIncomes) => totalIncomes+income)
@@ -25,7 +24,8 @@ const MonthRectangle = (props) => {
 	    // setCumulative( (cumulative) => cumulative-expense)
 	    // monthTotal = monthTotal+income
 	    // monthTotal = monthTotal-expense
-    }
+    
+    // !props.pastTwo && {opacity: 0.5}
     
 
     const icon = monthTotal > 0 ? 'currency-usd' : 'alert-outline';
@@ -33,16 +33,18 @@ const MonthRectangle = (props) => {
     return(
         <View style={styles.container}>
             <TouchableOpacity {...props} 
-	        style={!props.pastTwo && {opacity: 0.5}}
-                style={cumulative < 0 ? styles.negative : styles.positive}
+                style={[
+                    cumulative < 0 ? styles.negative : styles.positive,
+                    props.pastTwo && { opacity: 0.5 } 
+                ]}
                 onPress={openDropdownHandler}>
 
                 <View style={styles.topContainer}>                
                     <View style={styles.leftContainer}>
                         <Avatar.Icon size={50} color='#000000' icon={icon} style={styles.buttonIcon}/>
                         <View>
-                            <Text style={styles.monthText}>props.yearMonth</Text>
-                            <Text style={styles.grayText}>monthTotal</Text>
+                            <Text style={styles.monthText}>{props.yearMonth}</Text>
+                            <Text style={styles.grayText}>{monthTotal}</Text>
                         </View>
                     </View>
                     <View style={styles.rightContainer}>
