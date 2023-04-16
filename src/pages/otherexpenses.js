@@ -1,70 +1,51 @@
-import { StyleSheet, View, StatusBar } from 'react-native';
-import { Provider as StoreProvider } from 'react-redux';
-import { Text } from '@rneui/themed';
-import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
+import { Provider as StoreProvider, useSelector } from 'react-redux';
+import { Text, Icon } from '@rneui/themed';
+import _ from 'lodash';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
 import BottomNavBar from '../components/bottomNavBar';
-import ListComponent from '../components/listComponent';
-import ProgressBar from '../components/progressBar';
+import ExpenseRow from '../components/expenseRow';
+import expenseCategories from '../constants/expenseCategories.json';
+import { getExpenseIdsByCategory } from '../features/expenses/expenseFilters';
 
 export default function OtherExpenses({ navigation }) {
+
+    const expenses = useSelector(state => state.expenses.byId);
+    const miscellaneousExpenseIds = getExpenseIdsByCategory(expenses, expenseCategories.TOISTUVAT);
 
     return (
         <StoreProvider store={store}>
             <View style={styles.container}>
-
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
-
                 <View style={styles.rectangle}>
                     <Text style={styles.welcomeText}>Muut toistuvat kulut</Text>
                     <View style={styles.divider} />
                     <Text style={styles.infoText}>
                         Lisää tähän kaikki muut toistuvat kulusi{'\n'}
                     </Text>
-
-                    <View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Päivittäistavarat</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Lemmikki</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Suoratoistot</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Harrastus</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Hupiraha</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Säästöön</Text>
-                            <ListComponent />
-                        </View>
-
-                        <View style={styles.dropdown}>
-                            <PrettyDropdownButton onPress={() => console.log('Pressed dropdown')}
-                                title="Lisää kulu"
-                                disabledLeft
-                                iconLeft=""
-                                iconRight="chevron-down"
-                            />
-                        </View>
-
+                    <View style={styles.rowContainer}>
+                        <ScrollView>
+                            {
+                                _.map(miscellaneousExpenseIds, id => {
+                                    return <ExpenseRow expenseId={id} key={id} />
+                                })
+                            }
+                            <View style={styles.dropdown}>
+                                <PrettyDropdownButton onPress={() => console.log('Pressed dropdown')}
+                                    title="Lisää kulu"
+                                    disabledLeft
+                                    iconLeft=""
+                                    iconRight="chevron-down"
+                                />
+                            </View>
+                        </ScrollView>
                     </View>
-
                 </View>
-
                 <View style={styles.buttonView}>
                     <View style={styles.buttonLeft}>
                         <PrettyNavigationButton onPress={() => navigation.navigate('Insurance')}
@@ -81,7 +62,6 @@ export default function OtherExpenses({ navigation }) {
                             iconRight="chevron-right" />
                     </View>
                 </View>
-
             </View>
 
             <ProgressBar check={6}/>
@@ -89,8 +69,8 @@ export default function OtherExpenses({ navigation }) {
             <BottomNavBar></BottomNavBar>
 
         </StoreProvider>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -128,15 +108,6 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderBottomWidth: 1,
     },
-    newText: {
-        marginTop: 40,
-        marginLeft: 30,
-        marginRight: 0,
-        color: '#000000',
-        fontWeight: 'bold',
-        fontFamily: 'Roboto',
-        fontSize: 25,
-    },
     infoText: {
         marginTop: 5,
         marginLeft: 30,
@@ -149,32 +120,21 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: 175
     },
-    listElem: {
-        marginRight: 23,
-    },
-    listText: {
-        marginTop: 15,
-        marginLeft: 30,
-        marginRight: 10,
-        color: '#000000',
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
     buttonView: {
         position: 'absolute',
         top: '89%',
         flexDirection: 'row',
-
+        marginBottom: 0
     },
     buttonLeft: {
         marginRight: 50,
-        width: 175
-
+        width: 175,
+        marginBottom: 0
     },
     buttonRight: {
         width: 175,
         alignContent: 'flex-end',
+        marginBottom: 0
     },
     rectangle: {
         position: 'absolute',
@@ -185,5 +145,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+    },
+    rowContainer: {
+        maxHeight: '34%'
     },
 });

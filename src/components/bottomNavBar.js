@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Icon } from '@rneui/themed';
 
-
 const BottomNavBar = ({ navigation }) => {
     return (
         <View style={styles.bottomNavbar}>

@@ -34,7 +34,7 @@ const expensesSlice = createSlice({
         deleteExpense: (state, action) => {
             const expenseId = action.payload;
             if (_.includes(state.allIds, expenseId)) {
-                state.allIds = _.filter(state.allIds, id !== expenseId);
+                state.allIds = _.filter(state.allIds, id => id !== expenseId);
                 delete state.byId[expenseId];
             }
         },
