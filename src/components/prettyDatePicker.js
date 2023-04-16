@@ -20,7 +20,12 @@ export default function PrettyDatePicker({ onDateConfirm }) {
         setIsConfirmable(false);
     };
 
-    const confirmDate = () => {
+    const handleCloseClick = () => {
+        setSelectedDate(confirmedDate);
+        closeModal();
+    };
+
+    const handleConfirmClick = () => {
         setConfirmedDate(selectedDate);
         onDateConfirm(selectedDate);
         closeModal();
@@ -51,13 +56,13 @@ export default function PrettyDatePicker({ onDateConfirm }) {
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
                             style={styles.backButton}
-                            onPress={closeModal}>
+                            onPress={handleCloseClick}>
                             <Text style={styles.backButtonText}>Peruuta</Text>
                         </TouchableOpacity>
                         {isConfirmable ? (
                             <TouchableOpacity
                                 style={styles.acceptButton}
-                                onPress={confirmDate}>
+                                onPress={handleConfirmClick}>
                                 <Text style={styles.acceptButtonText}>Hyväksy</Text>
                             </TouchableOpacity>
                         ) : (
@@ -79,8 +84,7 @@ export default function PrettyDatePicker({ onDateConfirm }) {
 };
 
 const styles = StyleSheet.create({
-    container: {
-    },
+    container: {},
     modalView: {
         margin: 10,
         backgroundColor: 'white',

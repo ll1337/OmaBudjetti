@@ -10,7 +10,6 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import Home from './pages/home.js'
 import Landing from './pages/landing.js'
 import Welcome from './pages/welcome'
-import DateTest from './pages/dateTest';
 import Living from './pages/living.js';
 import Travel from './pages/travel.js';
 import Loans from './pages/loans.js';
@@ -67,12 +66,6 @@ export default function App() {
                 name="Welcome"
                 component={Welcome}
                 options={{ title: "Welcome" }}
-                style={styles.container}
-              />
-              <Stack.Screen
-                name="DateTest"
-                component={DateTest}
-                options={{ title: "Datepicker Test Area" }}
                 style={styles.container}
               />
               <Stack.Screen

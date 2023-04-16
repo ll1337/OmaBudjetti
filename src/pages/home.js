@@ -5,7 +5,7 @@ import { Text } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
 import { useDispatch } from 'react-redux';
-import { addBudget, currentBudget } from '../features/budget/budgetsSlice';
+import { addBudget, setCurrentBudget } from '../features/budget/budgetsSlice';
 import { v4 as uuidv4 } from 'uuid';
 import PrettyButton from '../components/prettyButton';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
@@ -15,9 +15,9 @@ import BottomNavBar from '../components/bottomNavBar';
 const MAX_LENGTH = 25;
 
 // use this to access the UUID of the current budget
-var activeBudget = store.getState('budgets')['budgets']['currentBudget'];
+let activeBudget = store.getState('budgets')['budgets']['currentBudgetId'];
 
-export default function Home( { navigation, budgetId } ) {
+export default function Home({ navigation, budgetId }) {
 
 
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function Home( { navigation, budgetId } ) {
 
     const [budgetNames, setBudgetNames] = useState([]);
     const [budgetName, setBudgetName] = useState('');
-    
+
     // user wants to create a budget: show components related to budget creation, hide others.
     const onPressHandler = () => {
         setShowBudgetCreation(true);
@@ -42,20 +42,20 @@ export default function Home( { navigation, budgetId } ) {
     const handleConfirmName = () => {
         setBudgetNames([...budgetNames, budgetName]);
 
-        let budgetId = uuidv4(); 
+        let budgetId = uuidv4();
         dispatch(addBudget({ budgetId, budgetName }));
-        dispatch(currentBudget({ budgetId }));
+        dispatch(setCurrentBudget({ budgetId }));
         setBudgetName('');
-        
+
         setShowBudgetCreation(false);
         setHasBudget(true);
         navigation.navigate('Break', 'Home')
     };
 
-    return(
+    return (
 
         <StoreProvider store={store}>
-            <View style={styles.container}>               
+            <View style={styles.container}>
                 <View style={styles.rectangle}>
                     <Text style={styles.welcomeText}>Etusivu</Text>
                     <View style={styles.divider} />
@@ -64,38 +64,38 @@ export default function Home( { navigation, budgetId } ) {
                         <View>
                             {hasBudget ? (
                                 <View>
-                                    <View style={{marginBottom: 30}}/>
+                                    <View style={{ marginBottom: 30 }} />
                                     <View>
                                         {budgetNames.map((name, index) => (
-                                            <View style={{marginBottom: 15}}>
-                                                <PrettyButton 
-                                                    key={index} 
-                                                    onPress={() => console.log({name})}                                                
+                                            <View style={{ marginBottom: 15 }} key={index}>
+                                                <PrettyButton
+                                                    key={index}
+                                                    onPress={() => console.log({ name })}
                                                     title={name}
                                                     iconLeft="piggy-bank-outline"
                                                     iconRight="play"
-                                                    style={{marginBottom: 20}}
+                                                    style={{ marginBottom: 20 }}
                                                 />
                                             </View>
-                                            
+
                                         ))}
                                     </View>
                                     <Text style={styles.newText}>Tarve uudelle budjetille?</Text>
-                                    <View style={styles.divider} />    
-                                    <View style={{marginBottom: 30}}/>
+                                    <View style={styles.divider} />
+                                    <View style={{ marginBottom: 30 }} />
                                 </View>
                             ) : (
                                 <View>
                                     <Text style={styles.infoText}>
-                                        Aloita luomalla itsellesi budjetti.{'\n'} 
+                                        Aloita luomalla itsellesi budjetti.{'\n'}
                                         Voit halutessasi luoda enemmän kuin yhden budjetin.
                                     </Text>
                                 </View>
-                            )}                        
-                            <PrettyButton onPress={onPressHandler} 
-                            title="Siirry budjetoimaan"
-                            iconLeft="pulse"
-                            iconRight="play" />
+                            )}
+                            <PrettyButton onPress={onPressHandler}
+                                title="Siirry budjetoimaan"
+                                iconLeft="pulse"
+                                iconRight="play" />
                         </View>
                     ) : (
                         <View style={styles.budgetContainer}>
@@ -110,22 +110,22 @@ export default function Home( { navigation, budgetId } ) {
                                     style={styles.input}
                                 />
                             </View>
-                            <View style={{alignSelf: 'flex-end'}}>
-                                <PrettyNavigationButton 
-                                    onPress={handleConfirmName} 
+                            <View style={{ alignSelf: 'flex-end' }}>
+                                <PrettyNavigationButton
+                                    onPress={handleConfirmName}
                                     title="Valmis"
                                     disabledLeft
                                     disabledRight
                                     disabled={budgetName == ''} />
-                            </View>                            
-                        </View>      
+                            </View>
+                        </View>
                     )}
-                    </View>   
+                </View>
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
             </View>
-            
+
             <BottomNavBar>
             </BottomNavBar>
         </StoreProvider>
@@ -236,6 +236,6 @@ const styles = StyleSheet.create({
         height: 800,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,        
+        borderTopRightRadius: 20,
     },
 });

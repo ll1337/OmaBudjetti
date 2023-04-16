@@ -1,48 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native';
-import { Provider as StoreProvider } from 'react-redux';
+import { Provider as StoreProvider, useSelector } from 'react-redux';
 import { Text, Icon } from '@rneui/themed';
-import { LinearGradient } from 'expo-linear-gradient';
+import _ from 'lodash';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
 import BottomNavBar from '../components/bottomNavBar';
+import ExpenseRow from '../components/expenseRow';
+import expenseCategories from '../constants/expenseCategories.json';
 import ListComponent from '../components/listComponent';
 import ProgressBar from '../components/progressBar';
 
 export default function Living({ navigation }) {
-    const [visible, setVisible] = useState(false);
+
+    const expenses = useSelector(state => state.expenses.byId);
+    const livingExpenses = _.filter(expenses, expense => expense.category === expenseCategories.ASUMINEN);
+    const livingExpenseIds = _.map(livingExpenses, expense => expense.id);
 
     return (
         <StoreProvider store={store}>
             <View style={styles.container}>
-
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
-
                 <View style={styles.rectangle}>
                     <Text style={styles.welcomeText}>Asuminen</Text>
                     <View style={styles.divider} />
                     <Text style={styles.infoText}>
                         Lisää tähän kaikki asuinkustannuksesi{'\n'}
                     </Text>
-
                     <View>
                         <View style={styles.listElem}>
-                            <Text style={styles.listText}>Vuokra / vastike</Text>
-                            <ListComponent />
+                            {
+                                _.map(livingExpenseIds, id => {
+                                    return <ExpenseRow expenseId={id} key={id} />
+                                })
+                            }
                         </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Vesi</Text>
-                            <ListComponent />
-                        </View>
-
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Netti</Text>
-                            <ListComponent />
-                        </View>
-
                         <View style={styles.dropdown}>
                             <PrettyDropdownButton onPress={() => console.log('Pressed dropdown')}
                                 title="Lisää kulu"
@@ -51,11 +46,8 @@ export default function Living({ navigation }) {
                                 iconRight="chevron-down"
                             />
                         </View>
-
                     </View>
-
                 </View>
-
                 <View style={styles.buttonView}>
                     <View style={styles.buttonLeft}>
                         <PrettyNavigationButton onPress={() => navigation.navigate('Break', 'Home')}
@@ -72,7 +64,6 @@ export default function Living({ navigation }) {
                             iconRight="chevron-right" />
                     </View>
                 </View>
-
             </View>
 
             <ProgressBar check={1} />
@@ -80,8 +71,8 @@ export default function Living({ navigation }) {
             <BottomNavBar />
 
         </StoreProvider>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

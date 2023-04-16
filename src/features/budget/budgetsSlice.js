@@ -32,11 +32,11 @@ export const budgetsSlice = createSlice({
             }
         },
         setCurrentBudget: (state, action) => {
-            state['currentBudgetId'] = action.payload.budgetId;
+            state['currentBudgetId'] = action.payload;
         }
     }
 });
 
-export const { addBudget, currentBudget } = budgetsSlice.actions;
+export const { addBudget, deleteBudget, setCurrentBudget } = budgetsSlice.actions;
 
 export default budgetsSlice.reducer;

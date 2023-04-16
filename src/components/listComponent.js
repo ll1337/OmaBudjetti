@@ -5,28 +5,49 @@ import React, { useState } from 'react';
 import { Text } from '@rneui/themed';
 import PrettyDatePicker from "./prettyDatePicker";
 
-const ListComponent = () => {
+const ListComponent = ({ expenseId }) => {
     const [confirmedDate, setConfirmedDate] = useState(null);
 
-    const handleDateConfirm = (date) => {
-        console.log(confirmedDate);
-        setConfirmedDate(date);
-    };
+    const expense = useSelector(state => state.expenses.byId[expenseId]);
+    const dispatch = useDispatch();
 
-    return(
+    const expenseType = expenseNamesByType[expense.type];
+
+    const handleAmountChange = (changedAmount) => {
+        const changedExpense = {
+            ...expense,
+            amount: changedAmount
+        };
+        dispatch(editExpense(changedExpense));
+    }
+
+    const handleDateConfirm = (changedDate) => {
+        const changedExpense = {
+            ...expense,
+            date: changedDate
+        };
+        dispatch(editExpense(changedExpense));
+    }
+
+    const handleDeleteExpense = () => {
+        dispatch(deleteExpense(expenseId));
+    }
+
+    return (
         <View style={styles.listContainer}>
-            <TrashIcon />
+            <Text style={styles.listText}>{expenseType}</Text>
+            <TrashIcon handlePress={handleDeleteExpense} />
             <Text style={styles.otherText}>/kk</Text>
-            <DecimalInput />    
+            <DecimalInput handleAmountChange={handleAmountChange} />
             <PrettyDatePicker onDateConfirm={handleDateConfirm} />
         </View>
 
-    )
-}
+    );
+};
 
 export default ListComponent;
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
     listContainer: {
         marginTop: -38,
         flexDirection: 'row-reverse',
@@ -40,4 +61,4 @@ const styles = StyleSheet.create ({
         fontFamily: 'Roboto',
         fontSize: 16,
     },
-})
+});
