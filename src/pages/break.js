@@ -5,7 +5,7 @@ import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import BottomNavBar from '../components/bottomNavBar';
 import ProgressBar from '../components/progressBar';
-import SuccessfullNotification from '../components/successfullNotification';
+import SuccessfulNotification from '../components/successfulNotification';
 
 export default function Break( { route, navigation } ) {
 
@@ -33,7 +33,7 @@ export default function Break( { route, navigation } ) {
 
                 {previousScreen == "Home" && <View>
 
-                    <SuccessfullNotification saved={true}/>
+                    <SuccessfulNotification saved={true}/>
 
                     <Text style={styles.topText}></Text>
                     <Image

@@ -20,7 +20,10 @@ import OtherExpenses from './pages/otherexpenses.js';
 import RandomExpenses from './pages/randomexpenses.js';
 import Year from './pages/year';
 import Break from './pages/break';
+import Incomes from './pages/incomes';
 import BottomNavBar from './components/bottomNavBar';
+import EditMonth from './pages/editMonth';
+
 export default function App() {
 
   const Stack = createNativeStackNavigator();
@@ -31,7 +34,7 @@ export default function App() {
         <PaperProvider>
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="Landing"
+              initialRouteName="Home"
               screenOptions={{
                 headerShown: false
               }}
@@ -121,9 +124,21 @@ export default function App() {
                 style={styles.container}
               />
               <Stack.Screen
+                name="Incomes"
+                component={Incomes}
+                options={{ title: "Incomes" }}
+                style={styles.container}
+              />
+              <Stack.Screen
                 name="Year"
                 component={Year}
                 options={{ title: "Year" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="EditMonth"
+                component={EditMonth}
+                options={{ title: "EditMonth" }}
                 style={styles.container}
               />
               <Stack.Screen
