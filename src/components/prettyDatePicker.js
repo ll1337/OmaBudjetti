@@ -71,7 +71,7 @@ export default function PrettyDatePicker({ onDateConfirm }) {
                 name='calendar-blank-outline'
                 type="material-community"
                 iconColor={'#000000'}
-                size={30}
+                size={25}
                 onPress={() => setModalVisible(true)}
             />
         </View>

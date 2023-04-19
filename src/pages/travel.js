@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
-import { IconButton, Avatar } from "react-native-paper";
+import { StyleSheet, View, StatusBar} from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
-import { Text, Dialog, Icon } from '@rneui/themed';
+import { Text } from '@rneui/themed';
 import { LinearGradient } from 'expo-linear-gradient';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
-import PrettyDatePicker from '../components/prettyDatePicker';
+import BottomNavBar from '../components/bottomNavBar';
+import ListComponent from '../components/listComponent';
+import ProgressBar from '../components/progressBar';
 
 export default function Travel({ navigation }) {
-    const [visible, setVisible] = useState(false);
-
-    const [confirmedDate, setConfirmedDate] = useState(null);
-
-    const handleDateConfirm = (date) => {
-        console.log(confirmedDate);
-        setConfirmedDate(date);
-    };
 
     return (
         <StoreProvider store={store}>
@@ -37,31 +29,11 @@ export default function Travel({ navigation }) {
                     <View>
                         <View style={styles.listElem}>
                             <Text style={styles.listText}>Julkinen liikenne</Text>
-                            <View style={styles.listContainer}>
-                                <Icon
-                                    name='trash-can-outline'
-                                    type="material-community"
-                                    iconColor={'#000000'}
-                                    size={30}
-                                    onPress={() => console.log('Pressed delete')} />
-                                <Text style={styles.otherText}>/kk</Text>
-                                <TextInput style={styles.input} placeholder='000,00' />
-                                <PrettyDatePicker onDateConfirm={handleDateConfirm} />
-                            </View>
+                            <ListComponent />
                         </View>
                         <View style={styles.listElem}>
                             <Text style={styles.listText}>Polttoaine</Text>
-                            <View style={styles.listContainer}>
-                                <Icon
-                                    name='trash-can-outline'
-                                    type="material-community"
-                                    iconColor={'#000000'}
-                                    size={30}
-                                    onPress={() => console.log('Pressed delete')} />
-                                <Text style={styles.otherText}>/kk</Text>
-                                <TextInput style={styles.input} placeholder='000,00' />
-                                <PrettyDatePicker onDateConfirm={handleDateConfirm} />
-                            </View>
+                            <ListComponent />
                         </View>
 
                         <View style={styles.dropdown}>
@@ -96,90 +68,9 @@ export default function Travel({ navigation }) {
 
             </View>
 
-            <View style={styles.progress}>
-                <View style={styles.progressBlock}>
-                    <Icon size={30}
-                        name="card"
-                        type="material-community"
-                        color='#17B5AD' />
-                </View>
-                <View style={styles.progressBlock}>
-                    <Icon size={30}
-                        name="card"
-                        type="material-community"
-                        color='#17B5AD' />
-                </View>
-                <View style={styles.progressBlock}>
-                    <Icon size={30}
-                        name="card"
-                        type="material-community"
-                        color='#696969' />
-                </View>
-                <View style={styles.progressBlock}>
-                    <Icon size={30}
-                        name="card"
-                        type="material-community"
-                        color='#696969' />
-                </View>
-                <View style={styles.progressBlock}>
-                    <Icon size={30}
-                        name="card"
-                        type="material-community"
-                        color='#696969' />
-                </View>
-                <View style={styles.progressBlock}>
-                    <Icon size={30}
-                        name="card"
-                        type="material-community"
-                        color='#696969' />
-                </View>
-                <View style={styles.progressBlock}>
-                    <Icon size={30}
-                        name="card"
-                        type="material-community"
-                        color='#696969' />
-                </View>
-                <View style={styles.progressBlock}>
-                    <Icon size={30}
-                        name="card"
-                        type="material-community"
-                        color='#696969' />
-                </View>
-            </View>
+            <ProgressBar check={2}/>
 
-            <View style={styles.bottomNavbar}>
-                <IconButton
-                    icon="home"
-                    iconColor={'#fff'}
-                    size={30}
-                    onPress={() => navigation.navigate('Home')
-                    }
-                />
-                <IconButton
-                    icon="image-frame"
-                    iconColor={'#fff'}
-                    size={30}
-                    onPress={() => console.log('Pressed item1')}
-                />
-                <IconButton
-                    icon="image-frame"
-                    iconColor={'#fff'}
-                    size={30}
-                    onPress={() => console.log('Pressed item2')}
-                />
-                <IconButton
-                    icon="image-frame"
-                    iconColor={'#fff'}
-                    size={30}
-                    onPress={() => console.log('Pressed item3')}
-                />
-                <IconButton
-                    icon="format-list-bulleted"
-                    iconColor={'#fff'}
-                    size={30}
-                    onPress={() => console.log('Pressed menu')}
-                />
-            </View>
+            <BottomNavBar></BottomNavBar>
 
         </StoreProvider>
     )
@@ -254,31 +145,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
     },
-    otherText: {
-        marginTop: 15,
-        marginRight: 10,
-        color: '#000000',
-        fontFamily: 'Roboto',
-        fontSize: 16,
-    },
-    input: {
-        textAlign: 'center',
-        borderWidth: 1,
-        width: 60,
-        opacity: 0.5,
-        marginLeft: 10,
-        marginRight: 10,
-        borderStyle: 'dashed',
-    },
-    listContainer: {
-        marginTop: -32,
-        flexDirection: 'row-reverse',
-        alignItems: 'flex-end',
-
-    },
     buttonView: {
         position: 'absolute',
-        top: '83%',
+        top: '89%',
         flexDirection: 'row',
 
     },
@@ -290,25 +159,6 @@ const styles = StyleSheet.create({
     buttonRight: {
         width: 175,
         alignContent: 'flex-end',
-    },
-    progress: {
-        position: 'absolute',
-        flexDirection: 'row',
-        alignSelf: 'center',
-        top: '88%'
-    },
-    progressBlock: {
-        marginLeft: '2.25%',
-        marginRight: '2.25%'
-    },
-    bottomNavbar: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        backgroundColor: '#17B5AD',
     },
     rectangle: {
         position: 'absolute',
