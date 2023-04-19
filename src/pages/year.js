@@ -10,34 +10,26 @@ import BottomNavBar from '../components/bottomNavBar';
 import MonthRectangle from '../components/monthRectangle';
 
 
-const monthsInFinnish = [
-    "Tammikuu",
-    "Helmikuu",
-    "Maaliskuu",
-    "Huhtikuu",
-    "Toukokuu",
-    "Kesäkuu",
-    "Heinäkuu",
-    "Elokuu",
-    "Syyskuu",
-    "Lokakuu",
-    "Marraskuu",
-    "Joulukuu"
-];
-
 // Total amount of months to render
 const rectanglesAmt = 24;
 
-const startDate = '01-01-2023';
+// Should be pulled from the store i.e where the budgeting begins
+// m/y
+const startDate = '01-2023';
 
 export default function Year( { navigation } ) {
 
     // Array containing all the needed month rectangles
     const monthRectangles = [];
 
-    for (let i = 0; i<monthsInFinnish.length; i++) {
-        const month = monthsInFinnish[i];
-        const pastTwo = i < 2; // first 2 months should be greyed
+    var cumulativeAmt = 0;
+
+    for (let i = 0; i < rectanglesAmt; i++) {
+
+        // passed months are greyed
+        const pastTwo = i < 2;
+
+        monthRectangles.push(< MonthRectangle />)
 
     }
 
@@ -51,12 +43,7 @@ export default function Year( { navigation } ) {
                 <View style={styles.rectangle}>
                     <Text style={styles.budgetNameText}>Budjetin nimi</Text>
 
-                <MonthRectangle>
-
-                </MonthRectangle>
-                <MonthRectangle pastTwo yearMonth='Tammikuu'>
-
-                </MonthRectangle>
+                    {monthRectangles}
 
                 </View>
 

@@ -3,7 +3,24 @@ import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Avatar } from "react-native-paper";
 import store from '../app/store';
 
+const monthsInFinnish = [
+    "Tammikuu",
+    "Helmikuu",
+    "Maaliskuu",
+    "Huhtikuu",
+    "Toukokuu",
+    "Kesäkuu",
+    "Heinäkuu",
+    "Elokuu",
+    "Syyskuu",
+    "Lokakuu",
+    "Marraskuu",
+    "Joulukuu"
+];
+
 const MonthRectangle = (props) => {
+    
+    console.log(props);
 
     const [monthExpanded, setMonthExpanded] = useState(false);
     const [totalExpenses, setTotalExpenses] = useState(0);
