@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, StatusBar, Image, Modal } from 'react-native';
-import { IconButton, Avatar } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
-import { Text, Icon } from '@rneui/themed';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Text } from '@rneui/themed';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
+import BottomNavBar from '../components/bottomNavBar';
+import ProgressBar from '../components/progressBar';
+import SuccessfullNotification from '../components/successfullNotification';
 
 export default function Break( { route, navigation } ) {
 
-    const [visible, setVisible] = useState(true);
     const previousScreen = route.params;
     
     return(
@@ -20,23 +19,6 @@ export default function Break( { route, navigation } ) {
                     <Text style={styles.headerText}> Eva - OmaBudjetti </Text>
                 </View>        
                 <View style={styles.rectangle}>
-
-                <Modal
-                    animationType='fade'
-                    transparent={true}
-                    visible={visible}
-                    onShow={() => {setTimeout(() => {setVisible(!visible) 
-                    }, 1000);}}>
-                        <View style={styles.modalView}>
-                            <Icon 
-                            name='check-circle-outline'
-                            type='material-community'
-                            size={40}
-                            color='#fff'
-                            />
-                            <Text style={styles.modalText}>Tallennus onnistui!</Text>
-                        </View>
-                </Modal>
 
                 {previousScreen == "RandomExpenses" && <View>
                     <Text style={styles.topText}>Menosi on nyt lisätty...</Text>
@@ -50,6 +32,8 @@ export default function Break( { route, navigation } ) {
                 </View> }
 
                 {previousScreen == "Home" && <View>
+
+                    <SuccessfullNotification saved={true}/>
 
                     <Text style={styles.topText}></Text>
                     <Image
@@ -76,7 +60,7 @@ export default function Break( { route, navigation } ) {
                                 />
                         </View>
                         <View style={styles.buttonRight}>
-                                <PrettyNavigationButton  onPress={() => console.log('Pressed button')} 
+                                <PrettyNavigationButton  onPress={() => navigation.navigate('Incomes')} 
                                 title="Seuraava"
                                 disabledLeft
                                 iconRight="chevron-right" />
@@ -98,92 +82,8 @@ export default function Break( { route, navigation } ) {
                                 iconRight="chevron-right" />
                         </View>
                 </View>}
-
-                {previousScreen == "RandomExpenses" && <View style={styles.progress}>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#696969'/>
-                    </View>
-                </View>}
             
-            
-            <View style={styles.bottomNavbar}>
-                <IconButton
-                        icon="home"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => navigation.navigate('Home')
-                    }
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item1')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item2')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item3')}
-                />
-                <IconButton
-                        icon="format-list-bulleted"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed menu')}
-                />
-            </View>
+                <BottomNavBar></BottomNavBar>
 
         </StoreProvider>
     )
@@ -285,7 +185,7 @@ const styles = StyleSheet.create({
     buttonView: {
         alignSelf: 'center',
         position: 'absolute',
-        top: '80%',
+        top: '78%',
         flexDirection: 'row',
 
     },
