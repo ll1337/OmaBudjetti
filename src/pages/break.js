@@ -7,83 +7,83 @@ import BottomNavBar from '../components/bottomNavBar';
 import ProgressBar from '../components/progressBar';
 import SuccessfulNotification from '../components/successfulNotification';
 
-export default function Break( { route, navigation } ) {
+export default function Break({ route, navigation }) {
 
     const previousScreen = route.params;
-    
-    return(
+
+    return (
         <StoreProvider store={store}>
-            <View style={styles.container}>   
-                
+            <View style={styles.container}>
+
                 <View style={styles.header}>
                     <Text style={styles.headerText}> Eva - OmaBudjetti </Text>
-                </View>        
+                </View>
                 <View style={styles.rectangle}>
 
-                {previousScreen == "RandomExpenses" && <View>
-                    <Text style={styles.topText}>Menosi on nyt lisätty...</Text>
-                    <View style={styles.divider} />
-                    <Image
-                    style={styles.img}
-                    source={require('../assets/Icon_budgetpig2.png')}
-                    />
-                    <View style={styles.divider} />
-                    <Text style={styles.bottomText}> ... seuraavaksi{'\n'}lisäämme tulosi!</Text>
-                </View> }
+                    {previousScreen == "RandomExpenses" && <View>
+                        <Text style={styles.topText}>Menosi on nyt lisätty...</Text>
+                        <View style={styles.divider} />
+                        <Image
+                            style={styles.img}
+                            source={require('../assets/Icon_budgetpig_3.png')}
+                        />
+                        <View style={styles.divider} />
+                        <Text style={styles.bottomText}> ... seuraavaksi{'\n'}lisäämme tulosi!</Text>
+                    </View>}
 
-                {previousScreen == "Home" && <View>
+                    {previousScreen == "Home" && <View>
 
-                    <SuccessfulNotification saved={true}/>
+                        <SuccessfulNotification saved={true} />
 
-                    <Text style={styles.topText}></Text>
-                    <Image
-                    style={styles.img}
-                    source={require('../assets/Icon_budgetpig2.png')}
-                    />
-                    <View style={styles.divider} />
-                    <Text style={styles.bottomText}>Seuraavaksi lisäämme </Text>
-                    <Text style={styles.bottomText}>menosi!</Text>
-                    
-                </View> }
-                
+                        <Text style={styles.topText}></Text>
+                        <Image
+                            style={styles.img}
+                            source={require('../assets/Icon_budgetpig_3.png')}
+                        />
+                        <View style={styles.divider} />
+                        <Text style={styles.bottomText}>Seuraavaksi lisäämme </Text>
+                        <Text style={styles.bottomText}>menosi!</Text>
+
+                    </View>}
+
                 </View>
-            
-            </View>   
+
+            </View>
 
             {previousScreen == "RandomExpenses" && <View style={styles.buttonView}>
-                        <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('RandomExpenses')} 
-                                title="Edellinen"
-                                disabledRight
-                                iconLeft="chevron-left"
-                                iconRight=""
-                                />
-                        </View>
-                        <View style={styles.buttonRight}>
-                                <PrettyNavigationButton  onPress={() => navigation.navigate('Incomes')} 
-                                title="Seuraava"
-                                disabledLeft
-                                iconRight="chevron-right" />
-                        </View>
-                </View>}
+                <View style={styles.buttonLeft}>
+                    <PrettyNavigationButton onPress={() => navigation.navigate('RandomExpenses')}
+                        title="Edellinen"
+                        disabledRight
+                        iconLeft="chevron-left"
+                        iconRight=""
+                    />
+                </View>
+                <View style={styles.buttonRight}>
+                    <PrettyNavigationButton onPress={() => navigation.navigate('Incomes')}
+                        title="Seuraava"
+                        disabledLeft
+                        iconRight="chevron-right" />
+                </View>
+            </View>}
             {previousScreen == "Home" && <View style={styles.buttonView}>
-                        <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('Home')} 
-                                title="Edellinen"
-                                disabledRight
-                                iconLeft="chevron-left"
-                                iconRight=""
-                                />
-                        </View>
-                        <View style={styles.buttonRight}>
-                                <PrettyNavigationButton  onPress={() => navigation.navigate('Living')} 
-                                title="Seuraava"
-                                disabledLeft
-                                iconRight="chevron-right" />
-                        </View>
-                </View>}
-            
-                <BottomNavBar></BottomNavBar>
+                <View style={styles.buttonLeft}>
+                    <PrettyNavigationButton onPress={() => navigation.navigate('Home')}
+                        title="Edellinen"
+                        disabledRight
+                        iconLeft="chevron-left"
+                        iconRight=""
+                    />
+                </View>
+                <View style={styles.buttonRight}>
+                    <PrettyNavigationButton onPress={() => navigation.navigate('Living')}
+                        title="Seuraava"
+                        disabledLeft
+                        iconRight="chevron-right" />
+                </View>
+            </View>}
+
+            <BottomNavBar></BottomNavBar>
 
         </StoreProvider>
     )
@@ -151,13 +151,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         shadowColor: '#000',
         shadowOffset: {
-          width: 0,
-          height: 2,
+            width: 0,
+            height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-      },
+    },
     img: {
         width: 230,
         height: 250,
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontFamily: 'Roboto',
         fontSize: 16,
-    }, 
+    },
     buttonView: {
         alignSelf: 'center',
         position: 'absolute',
@@ -225,6 +225,6 @@ const styles = StyleSheet.create({
         height: 800,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,        
+        borderTopRightRadius: 20,
     },
 });

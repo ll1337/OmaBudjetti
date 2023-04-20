@@ -32,7 +32,7 @@ export default function App() {
         <PaperProvider>
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="Home"
+              initialRouteName="Landing"
               screenOptions={{
                 headerShown: false
               }}
