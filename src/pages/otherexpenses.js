@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
 import { Provider as StoreProvider, useSelector } from 'react-redux';
-import { Text, Icon } from '@rneui/themed';
+import { Text } from '@rneui/themed';
 import _ from 'lodash';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
 import BottomNavBar from '../components/bottomNavBar';
 import ExpenseRow from '../components/expenseRow';
+import ProgressBar from '../components/progressBar';
 import expenseCategories from '../constants/expenseCategories.json';
 import { getExpenseIdsByCategory } from '../features/expenses/expenseFilters';
 
@@ -63,11 +64,8 @@ export default function OtherExpenses({ navigation }) {
                     </View>
                 </View>
             </View>
-
-            <ProgressBar check={6}/>
-
-            <BottomNavBar></BottomNavBar>
-
+            <ProgressBar check={6} />
+            <BottomNavBar />
         </StoreProvider>
     );
 };

@@ -1,17 +1,19 @@
 import React from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
-import { Text, Icon } from '@rneui/themed';
+import { View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExpense, deleteExpense, editExpense } from '../features/expenses/expensesSlice';
-import PrettyDatePicker from '../components/prettyDatePicker';
-import expenseNamesByType from '../constants/expenseScreenNamesByType.json'
+import TrashIcon from './trashIcon';
+import DecimalInput from './decimalInput';
+import { Text } from '@rneui/themed';
+import PrettyDatePicker from './prettyDatePicker';
+import eventNamesByType from '../constants/eventScreenNamesByType.json';
+import { deleteExpense, editExpense } from '../features/expenses/expensesSlice';
 
-export default function ExpenseRow({ expenseId }) {
+const ExpenseRow = ({ expenseId }) => {
 
     const expense = useSelector(state => state.expenses.byId[expenseId]);
     const dispatch = useDispatch();
 
-    const expenseType = expenseNamesByType[expense.type];
+    const expenseType = eventNamesByType[expense.type];
 
     const handleAmountChange = (changedAmount) => {
         const changedExpense = {
@@ -21,7 +23,7 @@ export default function ExpenseRow({ expenseId }) {
         dispatch(editExpense(changedExpense));
     }
 
-    const handleDateChange = (changedDate) => {
+    const handleDateConfirm = (changedDate) => {
         const changedExpense = {
             ...expense,
             date: changedDate
@@ -34,27 +36,39 @@ export default function ExpenseRow({ expenseId }) {
     }
 
     return (
-        <View style={styles.listElem}>
+        <View style={styles.row}>
             <Text style={styles.listText}>{expenseType}</Text>
             <View style={styles.listContainer}>
-                <Icon
-                    name='trash-can-outline'
-                    type="material-community"
-                    iconColor={'#000000'}
-                    size={30}
-                    onPress={handleDeleteExpense} />
+                <PrettyDatePicker onDateConfirm={handleDateConfirm} date={expense.date} />
+                <DecimalInput handleAmountChange={handleAmountChange} expenseId={expenseId} />
                 <Text style={styles.otherText}>/kk</Text>
-                <TextInput style={styles.input} placeholder='000,00' onChangeText={handleAmountChange} />
-                <PrettyDatePicker onDateConfirm={handleDateChange} date={expense.date} />
+                <TrashIcon handlePress={handleDeleteExpense} />
             </View>
         </View>
+
     );
-}
+};
+
+export default ExpenseRow;
 
 const styles = StyleSheet.create({
-
-    listElem: {
-        marginRight: 23,
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    listContainer: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        marginRight: 20
+    },
+    otherText: {
+        height: 25,
+        marginTop: 15,
+        marginRight: 10,
+        color: '#000000',
+        fontFamily: 'Roboto',
+        fontSize: 16,
     },
     listText: {
         marginTop: 15,
@@ -65,26 +79,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
     },
-    otherText: {
-        marginTop: 15,
-        marginRight: 10,
-        color: '#000000',
-        fontFamily: 'Roboto',
-        fontSize: 16,
-    },
-    input: {
-        textAlign: 'center',
-        borderWidth: 1,
-        width: 60,
-        opacity: 0.5,
-        marginLeft: 10,
-        marginRight: 10,
-        borderStyle: 'dashed',
-    },
-    listContainer: {
-        marginTop: -32,
-        flexDirection: 'row-reverse',
-        alignItems: 'flex-end',
-
-    }
 });

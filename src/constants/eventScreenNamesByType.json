@@ -43,5 +43,15 @@
     "vaatteet": "Vaatteet",
     "juhla": "Juhla-aika",
     "kodinHankinnat": "Kodin hankinnat",
-    "muuSatunnainen": "Muu satunnainen kulu"
+    "muuSatunnainen": "Muu satunnainen kulu",
+    "palkka": "Palkka",
+    "asumistuki": "Asumistuki",
+    "tyottomyyskorvaus": "Työttömyyskorvaus",
+    "opintoraha": "Opintoraha",
+    "toimeentulotuki": "Toimeentulotuki",
+    "elake": "Eläke",
+    "lapsilisa": "Lapsilisä",
+    "vanhempainraha": "Vanhempainraha",
+    "sairauspaivaraha": "Sairauspäiväraha",
+    "muuTulo": "Muu tulo"
 }

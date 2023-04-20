@@ -3,10 +3,10 @@ import { StyleSheet, View, Modal, Text, TouchableOpacity } from 'react-native';
 import DatePicker from 'react-native-modern-datepicker'
 import { Icon } from '@rneui/themed';
 
-export default function PrettyDatePicker({ onDateConfirm }) {
+export default function PrettyDatePicker({ onDateConfirm, date }) {
 
-    const [selectedDate, setSelectedDate] = useState('');
-    const [confirmedDate, setConfirmedDate] = useState('');
+    const [selectedDate, setSelectedDate] = useState(date || '');
+    const [confirmedDate, setConfirmedDate] = useState(date || '');
     const [modalVisible, setModalVisible] = useState(false);
     const [isConfirmable, setIsConfirmable] = useState(false);
 

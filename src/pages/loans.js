@@ -1,18 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
 import { Provider as StoreProvider, useSelector } from 'react-redux';
-import { Text, Icon } from '@rneui/themed';
+import { Text } from '@rneui/themed';
 import _ from 'lodash';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
 import BottomNavBar from '../components/bottomNavBar';
 import ExpenseRow from '../components/expenseRow';
+import ProgressBar from '../components/progressBar';
 import expenseCategories from '../constants/expenseCategories.json';
 import { getExpenseIdsByCategory } from '../features/expenses/expenseFilters';
-
-import ListComponent from '../components/listComponent';
-import ProgressBar from '../components/progressBar';
 
 export default function Loans({ navigation }) {
 
@@ -22,18 +20,15 @@ export default function Loans({ navigation }) {
     return (
         <StoreProvider store={store}>
             <View style={styles.container}>
-
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
-
                 <View style={styles.rectangle}>
                     <Text style={styles.welcomeText}>Lainat ja osamaksut</Text>
                     <View style={styles.divider} />
                     <Text style={styles.infoText}>
                         Lisää tähän kaikki lainojesi kuukausierät{'\n'}
                     </Text>
-
                     <View style={styles.rowContainer}>
                         <ScrollView>
                             {
@@ -69,11 +64,8 @@ export default function Loans({ navigation }) {
                     </View>
                 </View>
             </View>
-
-            <ProgressBar check={3}/>
-
-            <BottomNavBar></BottomNavBar>
-
+            <ProgressBar check={3} />
+            <BottomNavBar />
         </StoreProvider>
     );
 };
