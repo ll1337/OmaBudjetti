@@ -20,7 +20,6 @@ const monthsInFinnish = [
 
 const MonthRectangle = (props) => {
     
-    console.log(props);
 
     const [monthExpanded, setMonthExpanded] = useState(false);
     const [totalExpenses, setTotalExpenses] = useState(0);
@@ -28,6 +27,9 @@ const MonthRectangle = (props) => {
     const [cumulative, setCumulative] = useState(props.cumulative);
     
     var monthTotal = 0;
+
+    var month = props.month;
+    var year = props.year;
 
     const openDropdownHandler = () => {
         setMonthExpanded(prevState => !prevState);
@@ -60,13 +62,13 @@ const MonthRectangle = (props) => {
                     <View style={styles.leftContainer}>
                         <Avatar.Icon size={50} color='#000000' icon={icon} style={styles.buttonIcon}/>
                         <View>
-                            <Text style={styles.monthText}>{props.yearMonth}</Text>
+                            <Text style={styles.monthText}>{monthsInFinnish[props.month-1]}</Text>
                             <Text style={styles.grayText}>{monthTotal}</Text>
                         </View>
                     </View>
                     <View style={styles.rightContainer}>
                         <View>
-                            <Text style={styles.monthText}>props.yearMonth</Text>
+                            <Text style={styles.monthText}>{props.year}</Text>
                             <Text style={styles.cumulativeText}>Kumul. {cumulative}</Text>
                         </View>
                         <Avatar.Icon size={50} color='#000000' icon='chevron-down' style={styles.buttonIcon}/>
@@ -94,7 +96,6 @@ export default MonthRectangle;
 
 const styles = StyleSheet.create({
     container: {
-        overflow: 'hidden',         
         marginLeft: 20,
         marginRight: 20,
         marginTop: 5,
@@ -104,19 +105,20 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 4,
         elevation: 4,
+        borderRadius: 8,
     },
     negative: {
         borderColor: '#FF7575',
         backgroundColor: '#FEEAE6',
         borderWidth: 2,
-        borderRadius: 5,
+        borderRadius: 8,
         padding: 5,
     },
     positive: {
         borderColor: '#17B5AD',
         backgroundColor: '#EFFFFE',
         borderWidth: 2,
-        borderRadius: 5,
+        borderRadius: 8,
         padding: 5,
     },
     pastTwoMonths: {

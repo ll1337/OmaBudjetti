@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
-import { Text, IconButton } from "react-native-paper";
+import { StyleSheet, View, StatusBar, Text, ScrollView } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
 import { useDispatch } from 'react-redux';
-import PrettyButton from '../components/prettyButton';
-import PrettyNavigationButton from '../components/prettyNavigationButton';
 import BottomNavBar from '../components/bottomNavBar';
 import MonthRectangle from '../components/monthRectangle';
+import { RefreshControl } from 'react-native-web';
 
 
 // Total amount of months to render
@@ -15,7 +13,7 @@ const rectanglesAmt = 24;
 
 // Should be pulled from the store i.e where the budgeting begins
 // m/y
-const startDate = '01-2023';
+const startDate = '2023-01';
 
 export default function Year( { navigation } ) {
 
@@ -24,12 +22,33 @@ export default function Year( { navigation } ) {
 
     var cumulativeAmt = 0;
 
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+
+    var [year, month] = startDate.split('-');
+
     for (let i = 0; i < rectanglesAmt; i++) {
+
+        console.log(currentYear == year && currentMonth > month);
 
         // passed months are greyed
         const pastTwo = i < 2;
 
-        monthRectangles.push(< MonthRectangle />)
+        monthRectangles.push(< MonthRectangle 
+            month={month}
+            year={year} 
+            pastTwo={currentYear > year || (currentYear == year && currentMonth > month)}
+                />)
+
+        
+        if (month === 12) {
+            year++;
+            month=1;
+        }
+        else {
+            month++;
+        }
 
     }
 
@@ -43,7 +62,10 @@ export default function Year( { navigation } ) {
                 <View style={styles.rectangle}>
                     <Text style={styles.budgetNameText}>Budjetin nimi</Text>
 
-                    {monthRectangles}
+                    <ScrollView>
+                        {monthRectangles}
+                    </ScrollView>
+
 
                 </View>
 

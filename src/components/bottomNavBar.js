@@ -46,7 +46,7 @@ const BottomNavBar = ( props ) => {
                     size={30}
                     onPress={() => console.log('Pressed item3')}
                 />
-                <Text style={styles.text}>Muuta</Text>
+                <Text style={styles.text}>Muokkaa</Text>
             </View>
             <View style={{alignItems: 'center'}}>
                 <IconButton
@@ -78,5 +78,5 @@ const styles = StyleSheet.create ({
         marginBottom: 5,
         fontSize: 12,
         color: '#fff'
-    }
+    },
 })
