@@ -1,15 +1,17 @@
-import { StyleSheet, View, StatusBar} from 'react-native';
-import { Provider as StoreProvider } from 'react-redux';
+import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
+import { Provider as StoreProvider, useSelector } from 'react-redux';
 import { Text } from '@rneui/themed';
-import { LinearGradient } from 'expo-linear-gradient';
+import _ from 'lodash';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
 import BottomNavBar from '../components/bottomNavBar';
-import ListComponent from '../components/listComponent';
+import IncomeRow from '../components/incomeRow';
 import ProgressBar from '../components/progressBar';
 
 export default function Incomes({ navigation }) {
+
+    const incomeIds = useSelector(state => state.incomes.allIds);
 
     return (
         <StoreProvider store={store}>
@@ -25,46 +27,24 @@ export default function Incomes({ navigation }) {
                     <Text style={styles.infoText}>
                         Lisää tähän kaikki tulosi{'\n'}
                     </Text>
-
-                    <View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Palkka</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Asumistuki</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Työttömyyskorvaus</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Toimeentulotuki</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Opintotuki</Text>
-                            <ListComponent />
-                        </View>
-                        <View style={styles.listElem}>
-                            <Text style={styles.listText}>Eläke</Text>
-                            <ListComponent />
-                        </View>
-
-                        <View style={styles.dropdown}>
-                            <PrettyDropdownButton onPress={() => console.log('Pressed dropdown')}
-                                title="Lisää tulo"
-                                disabledLeft
-                                iconLeft=""
-                                iconRight="chevron-down"
-                            />
-                        </View>
-
+                    <View style={styles.rowContainer}>
+                        <ScrollView>
+                            {
+                                _.map(incomeIds, id => {
+                                    return <IncomeRow incomeId={id} key={id} />
+                                })
+                            }
+                            <View style={styles.dropdown}>
+                                <PrettyDropdownButton onPress={() => console.log('Pressed dropdown')}
+                                    title="Lisää kulu"
+                                    disabledLeft
+                                    iconLeft=""
+                                    iconRight="chevron-down"
+                                />
+                            </View>
+                        </ScrollView>
                     </View>
-
                 </View>
-
                 <View style={styles.buttonView}>
                     <View style={styles.buttonLeft}>
                         <PrettyNavigationButton onPress={() => navigation.navigate('Break', 'RandomExpenses')}
@@ -81,13 +61,9 @@ export default function Incomes({ navigation }) {
                             iconRight="chevron-right" />
                     </View>
                 </View>
-
             </View>
-
-            <ProgressBar check={8}/>
-
-            <BottomNavBar></BottomNavBar>
-
+            <ProgressBar check={8} />
+            <BottomNavBar />
         </StoreProvider>
     )
 }
@@ -149,18 +125,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: 175
     },
-    listElem: {
-        marginRight: 23,
-    },
-    listText: {
-        marginTop: 15,
-        marginLeft: 30,
-        marginRight: 10,
-        color: '#000000',
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
     buttonView: {
         position: 'absolute',
         top: '89%',
@@ -185,5 +149,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+    },
+    rowContainer: {
+        maxHeight: '34%'
     },
 });

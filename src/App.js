@@ -10,7 +10,6 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import Home from './pages/home.js'
 import Landing from './pages/landing.js'
 import Welcome from './pages/welcome'
-import DateTest from './pages/dateTest';
 import Living from './pages/living.js';
 import Travel from './pages/travel.js';
 import Loans from './pages/loans.js';
@@ -22,7 +21,6 @@ import Year from './pages/year';
 import Break from './pages/break';
 import Incomes from './pages/incomes';
 import BottomNavBar from './components/bottomNavBar';
-import EditMonth from './pages/editMonth';
 
 export default function App() {
 
@@ -67,12 +65,6 @@ export default function App() {
                 name="Welcome"
                 component={Welcome}
                 options={{ title: "Welcome" }}
-                style={styles.container}
-              />
-              <Stack.Screen
-                name="DateTest"
-                component={DateTest}
-                options={{ title: "Datepicker Test Area" }}
                 style={styles.container}
               />
               <Stack.Screen
@@ -133,12 +125,6 @@ export default function App() {
                 name="Year"
                 component={Year}
                 options={{ title: "Year" }}
-                style={styles.container}
-              />
-              <Stack.Screen
-                name="EditMonth"
-                component={EditMonth}
-                options={{ title: "EditMonth" }}
                 style={styles.container}
               />
               <Stack.Screen

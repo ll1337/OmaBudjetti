@@ -1,13 +1,13 @@
 import { Icon } from '@rneui/themed';
 
-const TrashIcon = () => {
+const TrashIcon = ({ handlePress }) => {
     return (
         <Icon
             name='trash-can-outline'
             type="material-community"
             iconColor={'#000000'}
             size={25}
-            onPress={() => console.log('Pressed delete')} />
+            onPress={handlePress} />
     )
 }
 

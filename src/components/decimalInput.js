@@ -1,55 +1,68 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { TouchableWithoutFeedback } from 'react-native';
 import { StyleSheet, Text, View, TextInput, Modal, TouchableOpacity } from 'react-native';
 
-const validateInput = (input) => {
-    var re = new RegExp(/^\d{0,5}\.?\d{0,2}$/);
-    return re.test(input);
-  };
 
-const DecimalInput = (props) => {
-    const [state, setState] = useState("");
+
+const DecimalInput = ({ handleAmountChange, expenseId }) => {
     const [valid, setValid] = useState(true);
     const [visible, setVisible] = useState(false)
 
-    return(
+    const expense = useSelector(state => state.expenses.byId[expenseId]);
+
+    const validateInput = (input) => {
+        var re = new RegExp(/^\d{0,5}\.?\d{0,2}$/);
+        return re.test(input);
+    };
+
+    const handleChangeText = (changedAmount) => {
+        const inputIsValid = validateInput(changedAmount);
+        setValid(inputIsValid);
+        if (inputIsValid) {
+            handleAmountChange(changedAmount);
+        }
+    };
+
+    return (
         <View style={styles.container}>
             <Modal
-            visible={visible}
-            transparent={true}
-            onRequestClose={() => {setVisible(false)}}
+                visible={visible}
+                transparent={true}
+                onRequestClose={() => { setVisible(false) }}
             >
-            <TouchableOpacity
-                style={styles.modalContainer}
-                onPress={() => {setVisible(false)}}>
-                <TouchableWithoutFeedback
-                onPress={() => {setVisible(false)}}>
-                    <View style={styles.modal}>
-                        <Text style={styles.modalText}>Voit syöttää vain positiivisia numeroita</Text>
+                <TouchableOpacity
+                    style={styles.modalContainer}
+                    onPress={() => { setVisible(false) }}>
+                    <TouchableWithoutFeedback
+                        onPress={() => { setVisible(false) }}>
+                        <View style={styles.modal}>
+                            <Text style={styles.modalText}>Voit syöttää vain positiivisia numeroita</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <View style={styles.triangleContainer}>
+                        <View style={styles.triangle} />
+                        <View style={styles.triangle2} />
                     </View>
-                </TouchableWithoutFeedback>
-                <View style={styles.triangleContainer}>
-                    <View style={styles.triangle} />
-                    <View style={styles.triangle2} />
-                </View>
-            </TouchableOpacity>
+                </TouchableOpacity>
             </Modal>
 
-            <TextInput {...props} 
-            style={valid ? styles.input : styles.inputfalse} 
-            keyboardType="phone-pad"
-            placeholder='000.00'  
-            value={state}    
-            maxLength={7}
-            onChangeText={text => {setValid(validateInput(text)); setState(text)}}
-            onEndEditing={() => {setVisible(!valid)}}/>
+            <TextInput
+                style={valid ? styles.input : styles.inputfalse}
+                keyboardType="phone-pad"
+                placeholder='000.00'
+                value={expense.amount}
+                maxLength={7}
+                onChangeText={changedAmount => handleChangeText(changedAmount)}
+                onEndEditing={() => { setVisible(!valid) }}
+            />
         </View>
-    )
-}
+    );
+};
 
 export default DecimalInput;
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
     input: {
         textAlign: 'center',
         borderWidth: 1,
@@ -67,31 +80,31 @@ const styles = StyleSheet.create ({
         marginLeft: 10,
         marginRight: 10,
         borderStyle: 'dashed',
-        
+
     },
     modalContainer: {
         flex: 1
     },
     modal: {
-            alignContent: 'flex-end',
-            marginTop: 110,
-            marginLeft: "35%",
-            marginRight: "15%",
-            backgroundColor: '#fff',
-            borderRadius: 5,
-            borderWidth: 1.5,
-            borderColor: '#FF7575',
-            padding: 15,
-            alignItems: 'center',
-            alignSelf: 'center',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 4,
-            elevation: 5,
+        alignContent: 'flex-end',
+        marginTop: 110,
+        marginLeft: "35%",
+        marginRight: "15%",
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        borderWidth: 1.5,
+        borderColor: '#FF7575',
+        padding: 15,
+        alignItems: 'center',
+        alignSelf: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
     },
     modalText: {
         textAlign: 'center'
@@ -104,7 +117,7 @@ const styles = StyleSheet.create ({
         width: 10,
         height: 10,
         marginTop: -0.75,
-        
+
         borderLeftWidth: 15,
         borderLeftColor: "transparent",
         borderRightWidth: 15,
@@ -128,4 +141,4 @@ const styles = StyleSheet.create ({
         transform: [{ rotate: "180deg" }],
     }
 
-})
+});
