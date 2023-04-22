@@ -18,58 +18,42 @@ const monthsInFinnish = [
     "Joulukuu"
 ];
 
-const MonthRectangle = (props) => {
+const MonthRectangle = ( { month, year, pastMonth } ) => {
     
 
     const [monthExpanded, setMonthExpanded] = useState(false);
     const [totalExpenses, setTotalExpenses] = useState(0);
     const [totalIncomes, setTotalIncomes] = useState(0);
-    const [cumulative, setCumulative] = useState(props.cumulative);
     
-    var monthTotal = 0;
-
-    var month = props.month;
-    var year = props.year;
 
     const openDropdownHandler = () => {
         setMonthExpanded(prevState => !prevState);
     };
 
-    // ota kuukaudesta kaikki menot & tulot
-	    // props.uuid.incomes.date == props.yearMonth*
-	    // 
-	    // setTotalIncomes( (totalIncomes) => totalIncomes+income)
-	    // setCumulative( (cumulative) => cumulative+income)
-	    // setCumulative( (cumulative) => cumulative-expense)
-	    // monthTotal = monthTotal+income
-	    // monthTotal = monthTotal-expense
-    
-    // !props.pastTwo && {opacity: 0.5}
-    
+    const monthTotal = 0; // placeholder
 
     const icon = monthTotal > 0 ? 'currency-usd' : 'alert-outline';
 
     return(
-        <View style={styles.container}>
-            <TouchableOpacity {...props} 
-                style={[
-                    cumulative < 0 ? styles.negative : styles.positive,
-                    props.pastTwo && { opacity: 0.5 } 
-                ]}
+        <View style={[styles.container, pastMonth && {opacity: 0.5}]}>
+            <TouchableOpacity 
+                style={
+                    monthTotal < 0 ? styles.negative : styles.positive
+                }
                 onPress={openDropdownHandler}>
 
                 <View style={styles.topContainer}>                
                     <View style={styles.leftContainer}>
                         <Avatar.Icon size={50} color='#000000' icon={icon} style={styles.buttonIcon}/>
                         <View>
-                            <Text style={styles.monthText}>{monthsInFinnish[props.month-1]}</Text>
+                            <Text style={styles.monthText}>{monthsInFinnish[month-1]}</Text>
                             <Text style={styles.grayText}>{monthTotal}</Text>
                         </View>
                     </View>
                     <View style={styles.rightContainer}>
                         <View>
-                            <Text style={styles.monthText}>{props.year}</Text>
-                            <Text style={styles.cumulativeText}>Kumul. {cumulative}</Text>
+                            <Text style={styles.monthText}>{year}</Text>
+                            <Text style={styles.cumulativeText}>Kumul. </Text>
                         </View>
                         <Avatar.Icon size={50} color='#000000' icon='chevron-down' style={styles.buttonIcon}/>
                     </View>

@@ -17,10 +17,17 @@ const startDate = '2023-01';
 
 export default function Year( { navigation } ) {
 
+    var activeBudget = store.getState('budgets')['budgets']['currentBudget']
+
     // Array containing all the needed month rectangles
     const monthRectangles = [];
 
-    var cumulativeAmt = 0;
+    const [cumulativeAmt, setCumulativeAmt] = useState(0);
+
+    handleCumulativeChange = (monthSumAmt) => {
+        setCumulativeAmt(monthSumAmt);
+        console.log(monthSumAmt);
+    }
 
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
@@ -30,15 +37,15 @@ export default function Year( { navigation } ) {
 
     for (let i = 0; i < rectanglesAmt; i++) {
 
-        console.log(currentYear == year && currentMonth > month);
-
         // passed months are greyed
-        const pastTwo = i < 2;
+        const pastMonth = i < 2;
 
         monthRectangles.push(< MonthRectangle 
+            key={[year, month]}
             month={month}
             year={year} 
-            pastTwo={currentYear > year || (currentYear == year && currentMonth > month)}
+            onCalculateMonth={handleCumulativeChange}
+            pastMonth={currentYear > year || (currentYear == year && currentMonth > month)}
                 />)
 
         
@@ -61,6 +68,7 @@ export default function Year( { navigation } ) {
                 </View>           
                 <View style={styles.rectangle}>
                     <Text style={styles.budgetNameText}>Budjetin nimi</Text>
+                    {/* Get the current active month here! */}
 
                     <ScrollView>
                         {monthRectangles}
