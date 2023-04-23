@@ -5,53 +5,10 @@ import store from '../app/store';
 import { useDispatch } from 'react-redux';
 import BottomNavBar from '../components/bottomNavBar';
 import MonthRectangle from '../components/monthRectangle';
-
-// Total amount of months to render
-const rectanglesAmt = 24;
-
-// Should be pulled from the store i.e where the budgeting begins
-// m/y
-const startDate = '2023-01';
-
-export default function Year( { navigation } ) {
-
-    //var activeBudget = store.getState('budgets')['budgets']['currentBudget']
-
-    // Array containing all the needed month rectangles
-    const monthRectangles = [];
-
-    //const [cumulativeAmt, setCumulativeAmt] = useState(0);
+import PrettyNavigationButton from '../components/prettyNavigationButton';
 
 
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-
-    var [year, month] = startDate.split('-');
-
-    for (let i = 0; i < rectanglesAmt; i++) {
-
-        // passed months are greyed
-        const pastMonth = i < 2;
-
-        monthRectangles.push(< MonthRectangle 
-            key={[year, month]}
-            month={month}
-            year={year} 
-            pastMonth={currentYear > year || (currentYear == year && currentMonth > month)}
-                />)
-
-        
-        if (month === 12) {
-            year++;
-            month=1;
-        }
-        else {
-            month++;
-        }
-
-    }
-
+export default function Edit( { navigation } ) {
 
     return(
         <StoreProvider store={store}>
@@ -60,12 +17,27 @@ export default function Year( { navigation } ) {
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>           
                 <View style={styles.rectangle}>
-                    <Text style={styles.budgetNameText}>Budjetin nimi</Text>
+                    <Text style={styles.budgetNameText}>CODE CUCKOOS BUDJETTI</Text>
                     {/* Get the current active month here! */}
 
-                    <ScrollView>
-                        {monthRectangles}
-                    </ScrollView>
+                    <Text style={styles.welcomeText}>Muokkaa</Text>
+                    <View style={styles.divider} />
+                    <View style={{flexDirection: 'row', marginTop: 10}}>
+                        <Text style={styles.budgetToEdit}>CODE CUCKOOS BUDJETTI</Text>
+                        <PrettyNavigationButton 
+                                title="Muuta nimeä"
+                                disabledLeft
+                                iconRight="file-edit-outline"
+                        />
+                    </View>
+                    <PrettyNavigationButton 
+                        title="Poista budjetti"
+                        disabledLeft
+                        iconRight="file-edit-outline"
+                        
+                    />
+                    <View style={styles.divider} />
+
 
 
                 </View>
@@ -100,10 +72,32 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 25,
     },
-    budgetNameText: {
-        fontSize: 15,
-        marginLeft: 15,
+    welcomeText: {
         marginTop: 10,
+        marginLeft: 30,
+        marginRight: 0,
+        color: '#000000',
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+        fontSize: 30,
+    },
+    divider: {
+        marginTop: 4,
+        marginLeft: 25,
+        marginRight: 25,
+        borderColor: 'black',
+        borderBottomWidth: 1,
+    },
+    budgetNameText: {
+        alignSelf: 'center',
+        color: '#17B5AD',
+        fontSize: 15,
+        marginTop: 5,
+    },
+    budgetToEdit: {
+        marginLeft: 30,
+        marginTop: 15,
+        fontSize: 15,
     },
     rectangle: {
         position: 'absolute',

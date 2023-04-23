@@ -20,6 +20,7 @@ import OtherExpenses from './pages/otherexpenses.js';
 import RandomExpenses from './pages/randomexpenses.js';
 import Year from './pages/year';
 import Break from './pages/break';
+import Edit from './pages/edit'
 import BottomNavBar from './components/bottomNavBar';
 
 
@@ -132,6 +133,12 @@ export default function App() {
                 name="BottomNavBar"
                 component={BottomNavBar}
               />
+              <Stack.Screen
+                name="Edit"
+                component={Edit}
+                options={{ title: "Edit" }}
+                style={styles.container}
+                />
             </Stack.Navigator>
             <StatusBar style="auto" />
           </NavigationContainer>

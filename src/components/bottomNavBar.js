@@ -44,7 +44,7 @@ const BottomNavBar = ( props ) => {
                     icon="file-edit-outline"
                     iconColor={'#fff'}
                     size={30}
-                    onPress={() => console.log('Pressed item3')}
+                    onPress={() => navigation.navigate('Edit')}
                 />
                 <Text style={styles.text}>Muokkaa</Text>
             </View>

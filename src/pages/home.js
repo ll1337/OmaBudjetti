@@ -19,8 +19,6 @@ var activeBudget = store.getState('budgets')['budgets']['currentBudget'];
 
 export default function Home( { navigation, budgetId } ) {
 
-    console.log('alskd');
-
 
     const dispatch = useDispatch();
 
