@@ -125,7 +125,6 @@ export default function Home({ navigation, budgetId }) {
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
             </View>
-
             <BottomNavBar>
             </BottomNavBar>
         </StoreProvider>

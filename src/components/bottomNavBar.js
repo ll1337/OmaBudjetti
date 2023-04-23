@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Icon } from '@rneui/themed';
+import { useNavigation } from '@react-navigation/native';
 
-const BottomNavBar = ({ navigation }) => {
+
+const BottomNavBar = (props) => {
+    const navigation = useNavigation();
     return (
         <View style={styles.bottomNavbar}>
             <View style={{ alignItems: 'space-around', justifyContent: 'space-around' }}>
@@ -50,7 +53,7 @@ const BottomNavBar = ({ navigation }) => {
                 />
                 <Text style={styles.text}>Menu</Text>
             </View>
-        </View>
+        </View >
     );
 };
 

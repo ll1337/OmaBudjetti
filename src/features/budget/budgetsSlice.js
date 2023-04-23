@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import 'react-native-get-random-values';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
