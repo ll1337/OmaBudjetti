@@ -65,7 +65,7 @@ export default function Living({ navigation }) {
                 </View>
             </View>
             <ProgressBar check={1} />
-            <BottomNavBar />
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     );
 };

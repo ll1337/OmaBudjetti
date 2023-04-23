@@ -37,7 +37,7 @@ const BottomNavBar = ({ navigation }) => {
                     name="edit"
                     color={'#fff'}
                     size={30}
-                    onPress={() => console.log('Pressed item3')}
+                    onPress={() => navigation.navigate('Edit')}
                 />
                 <Text style={styles.text}>Muuta</Text>
             </View>

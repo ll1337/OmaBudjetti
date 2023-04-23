@@ -70,7 +70,7 @@ export default function Home({ navigation, budgetId }) {
                                             <View style={{ marginBottom: 15 }} key={index}>
                                                 <PrettyButton
                                                     key={index}
-                                                    onPress={() => console.log({ name })}
+                                                    onPress={() => console.log('Button pressed')}
                                                     title={name}
                                                     iconLeft="piggy-bank-outline"
                                                     iconRight="play"
@@ -126,8 +126,7 @@ export default function Home({ navigation, budgetId }) {
                 </View>
             </View>
 
-            <BottomNavBar>
-            </BottomNavBar>
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     );
 }

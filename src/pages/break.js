@@ -83,7 +83,7 @@ export default function Break({ route, navigation }) {
                 </View>
             </View>}
 
-            <BottomNavBar></BottomNavBar>
+            <BottomNavBar navigation={navigation}/>
 
         </StoreProvider>
     )

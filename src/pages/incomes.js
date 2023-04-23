@@ -63,7 +63,7 @@ export default function Incomes({ navigation }) {
                 </View>
             </View>
             <ProgressBar check={8} />
-            <BottomNavBar />
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     )
 }

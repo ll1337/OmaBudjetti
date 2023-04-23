@@ -65,7 +65,7 @@ export default function OtherExpenses({ navigation }) {
                 </View>
             </View>
             <ProgressBar check={6} />
-            <BottomNavBar />
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     );
 };

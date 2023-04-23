@@ -65,7 +65,7 @@ export default function Health({ navigation }) {
                 </View>
             </View>
             <ProgressBar check={4} />
-            <BottomNavBar />
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     );
 };

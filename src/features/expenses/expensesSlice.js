@@ -11,7 +11,8 @@ const defaultExpenses = _.map(defaultExpenseCategories, (category) => {
         type: category[1],
         amount: 0,
         date: null,
-        recurrenceType: recurrenceTypes.Monthly
+        recurrenceType: recurrenceTypes.Monthly,
+        recurrenceMonths: []
     }
 });
 

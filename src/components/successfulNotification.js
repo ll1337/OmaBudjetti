@@ -8,7 +8,12 @@ const SuccessfulNotification = (props) => {
     var text = "";
     if (props.saved){
         text = "Tallennus onnistui!"
+    } else if (props.edited) {
+        text = "Muokkaus onnistui!"
+    } else if (props.deleted) {
+        text = "Poisto onnistui!"
     }
+
 
     return(
         <Modal

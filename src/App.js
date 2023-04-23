@@ -21,6 +21,8 @@ import Year from './pages/year';
 import Break from './pages/break';
 import Incomes from './pages/incomes';
 import BottomNavBar from './components/bottomNavBar';
+import EditMonth from './pages/editMonth';
+import EditEvent from './pages/editEvent';
 
 export default function App() {
 
@@ -125,6 +127,18 @@ export default function App() {
                 name="Year"
                 component={Year}
                 options={{ title: "Year" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="EditEvent"
+                component={EditEvent}
+                options={{ title: "EditEvent" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="EditMonth"
+                component={EditMonth}
+                options={{ title: "EditMonth" }}
                 style={styles.container}
               />
               <Stack.Screen

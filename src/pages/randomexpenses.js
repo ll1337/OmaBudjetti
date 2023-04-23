@@ -65,7 +65,7 @@ export default function RandomExpenses({ navigation }) {
                 </View>
             </View>
             <ProgressBar check={7} />
-            <BottomNavBar />
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     )
 }

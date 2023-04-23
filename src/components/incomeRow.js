@@ -1,12 +1,17 @@
 import TrashIcon from "./trashIcon";
 import DecimalInput from "./decimalInput";
 import { View, StyleSheet } from 'react-native';
-import React from 'react';
+import {React, useState} from 'react';
 import { Text } from '@rneui/themed';
 import PrettyDatePicker from "./prettyDatePicker";
+import { useDispatch, useSelector } from 'react-redux';
+import SuccessfulNotification from './successfulNotification';
+import { deleteIncome } from "../features/incomes/incomesSlice";
 
-const ListComponent = ({ incomeId }) => {
+const IncomeRow = ({ incomeId }) => {
 
+    const [pressed, setPressed] = useState(false);
+    const [dateEdited, setDateEdited] = useState(false);
     const income = useSelector(state => state.incomes.byId[incomeId]);
     const dispatch = useDispatch();
 
@@ -26,25 +31,30 @@ const ListComponent = ({ incomeId }) => {
             date: changedDate
         };
         dispatch(editIncome(changedIncome));
+        setDateEdited(true);
+        setTimeout(() => {setDateEdited(false)}, 800);
     }
 
     const handleDeleteIncome = () => {
-        dispatch(deleteIncome(incomeId));
+        setPressed(true);
+        setTimeout(() => {dispatch(deleteIncome(expenseId))}, 500);
     }
 
     return (
         <View style={styles.listContainer}>
             <Text style={styles.listText}>{incomeType}</Text>
             <TrashIcon handlePress={handleDeleteIncome} />
+            {pressed && <SuccessfulNotification deleted={true} />}
             <Text style={styles.otherText}>/kk</Text>
-            <DecimalInput handleAmountChange={handleAmountChange} />
+            <DecimalInput handleAmountChange={handleAmountChange} id={incomeId}/>
             <PrettyDatePicker onDateConfirm={handleDateConfirm} />
+            {dateEdited && <SuccessfulNotification edited={true} />}
         </View>
 
     );
 };
 
-export default ListComponent;
+export default IncomeRow;
 
 const styles = StyleSheet.create({
     listContainer: {

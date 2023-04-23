@@ -65,7 +65,7 @@ export default function Insurance({ navigation }) {
                 </View>
             </View>
             <ProgressBar check={5} />
-            <BottomNavBar />
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     );
 };
