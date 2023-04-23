@@ -6,9 +6,21 @@ import { useDispatch } from 'react-redux';
 import BottomNavBar from '../components/bottomNavBar';
 import MonthRectangle from '../components/monthRectangle';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
+import PrettySquareButton from '../components/prettySquareButton';
+import PrettyCategoryCard from '../components/prettyCategoryCard';
 
 
 export default function Edit( { navigation } ) {
+
+
+    const activeBudget = store.getState('budgets').budgets.currentBudgetId.budgetId;
+    console.log(activeBudget);
+    var budgetName = "No budget selected";
+    if ( activeBudget != undefined ) {
+        budgetName = store.getState('budgets').budgets.byId[activeBudget].budgetName;
+
+    }
+    console.log(budgetName);
 
     return(
         <StoreProvider store={store}>
@@ -17,26 +29,26 @@ export default function Edit( { navigation } ) {
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>           
                 <View style={styles.rectangle}>
-                    <Text style={styles.budgetNameText}>CODE CUCKOOS BUDJETTI</Text>
-                    {/* Get the current active month here! */}
+                    <Text style={styles.budgetNameText}>{budgetName}</Text>
 
                     <Text style={styles.welcomeText}>Muokkaa</Text>
                     <View style={styles.divider} />
-                    <View style={{flexDirection: 'row', marginTop: 10}}>
-                        <Text style={styles.budgetToEdit}>CODE CUCKOOS BUDJETTI</Text>
-                        <PrettyNavigationButton 
+                    <View style={{flexDirection: 'row', marginTop: 10, justifyContent: 'space-between', marginBottom: 10,}}>
+                        <Text style={styles.budgetToEdit}>{budgetName}</Text>
+                        <PrettySquareButton 
                                 title="Muuta nimeä"
-                                disabledLeft
                                 iconRight="file-edit-outline"
                         />
                     </View>
-                    <PrettyNavigationButton 
-                        title="Poista budjetti"
-                        disabledLeft
-                        iconRight="file-edit-outline"
-                        
-                    />
+                    <View style={{marginRight: 200, marginBottom: 10}}>
+                        <PrettySquareButton 
+                            title="Poista budjetti"
+                            red
+                            iconRight="trash-can-outline"
+                        />
+                    </View>
                     <View style={styles.divider} />
+                    <PrettyCategoryCard title="Asuminen" iconRight="home-outline"/>
 
 
 
@@ -95,8 +107,8 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     budgetToEdit: {
+        marginTop: 10,
         marginLeft: 30,
-        marginTop: 15,
         fontSize: 15,
     },
     rectangle: {

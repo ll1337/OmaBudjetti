@@ -3,29 +3,35 @@ import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Avatar } from "react-native-paper";
 
-const PrettyNavigationButton = (props) => {
+const PrettySquareButton = (props) => {
 
     return (
         <View style={styles.container}>
-            <LinearGradient {...props}
-                colors={['rgba(23, 181, 173, 0.81)', 'rgba(77, 182, 241, 0.85)']}
-                style={styles.gradient}
-            />
+            { props.red ? (
+                <View style={styles.red}>
+                </View>
+
+            ) : (
+                <LinearGradient
+                    colors={['rgba(23, 181, 173, 0.81)', 'rgba(77, 182, 241, 0.85)']}
+                    style={styles.gradient}
+                />
+
+            )}
             <TouchableOpacity {...props} style={props.disabled ? styles.disabled : styles.button}>
-                <Avatar.Icon size={props.disabledLeft ? 15 : 40} color='#000000' icon={props.iconLeft} style={styles.buttonIcon} />
                 <Text style={styles.buttonText}>{props.title}</Text>
-                <Avatar.Icon size={props.disabledRight ? 15 : 40} color='#000000' icon={props.iconRight} style={styles.buttonIcon} />
+                <Avatar.Icon size={35} color='#000000' icon={props.iconRight} style={styles.buttonIcon} />
             </TouchableOpacity>
 
         </View>
     );
 };
 
-export default PrettyNavigationButton;
+export default PrettySquareButton;
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 60,
+        borderRadius: 10,
         overflow: 'hidden',
         marginLeft: 30,
         marginRight: 30,
@@ -41,13 +47,12 @@ const styles = StyleSheet.create({
         marginLeft: 2,
         marginRight: 2,
         borderWidth: 0,
-        borderRadius: 60,
+        borderRadius: 10,
         backgroundColor: '#F8F9F9',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         overFlow: 'hidden',
-
     },
     disabled: {
         marginTop: 2,
@@ -55,22 +60,30 @@ const styles = StyleSheet.create({
         marginLeft: 2,
         marginRight: 2,
         borderWidth: 0,
-        borderRadius: 60,
+        borderRadius: 10,
         backgroundColor: '#F8F9F9',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         overFlow: 'hidden',
         opacity: 0.1
-
     },
     gradient: {
         position: 'absolute',
-        left: -2,
-        right: -2,
-        top: -2,
-        bottom: -2,
-        borderRadius: 60,
+        left: -1,
+        right: -1,
+        top: -1,
+        bottom: -1,
+        borderRadius: 10,
+    },
+    red: {
+        position: 'absolute',
+        left: -1,
+        right: -1,
+        top: -1,
+        bottom: -1,
+        backgroundColor: '#FA4848',
+        borderRadius: 10,
     },
     buttonIcon: {
         backgroundColor: 'rgba(255,255,255,0)',
@@ -79,6 +92,7 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         fontFamily: 'Roboto',
-        fontSize: 14,
+        marginLeft: 10,
+        fontSize: 15,
     },
 });
