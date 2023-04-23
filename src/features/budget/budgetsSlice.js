@@ -27,16 +27,23 @@ export const budgetsSlice = createSlice({
             const budgetId = action.payload;
 
             if (_.includes(state.allIds, budgetId)) {
-                state.allIds = state.allIds.filter(id !== budgetId);
+                state.allIds = state.allIds.filter(id => id !== budgetId);
                 delete state.byId[budgetId]
             }
         },
         setCurrentBudget: (state, action) => {
             state['currentBudgetId'] = action.payload;
+        },
+        renameBudget: (state, action) => {
+            const { budgetId, budgetName } = action.payload;
+            const budgetToBeRenamed = state.byId[budgetId];
+            if (budgetToBeRenamed) {
+                budgetToBeRenamed.budgetName = budgetName;
+            }
         }
     }
 });
 
-export const { addBudget, deleteBudget, setCurrentBudget } = budgetsSlice.actions;
+export const { addBudget, deleteBudget, setCurrentBudget, renameBudget } = budgetsSlice.actions;
 
 export default budgetsSlice.reducer;

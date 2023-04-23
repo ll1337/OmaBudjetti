@@ -2,41 +2,32 @@ import { View, StyleSheet, Modal  } from 'react-native';
 import { useState } from 'react';
 import { Text, Icon } from '@rneui/themed';
 
-const SuccessfulNotification = (props) => {
+const BudgetRemovalModal = (props) => {
 
     const [visible, setVisible] = useState(true);
-    var text = "";
-    if (props.saved){
-        text = "Tallennus onnistui!"
-    }
-    else if (props.edited){
-        text = "Muokkaus onnistui!"
-    }
-    else if (props.deleted){
-        text = "Poisto onnistui!"
-    }
+    const [modalVisible, setModalVisible] = useState(false);
+    const text = "Haluatko varmasti poistaa budjetin?";
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setIsConfirmable(false);
+    };
 
     return(
         <Modal
         animationType='fade'
         transparent={true}
         visible={visible}
-        onShow={() => {setTimeout(() => {setVisible(!visible) 
-        }, 1000);}}>
+        onRequestClose={closeModal}
+        >
             <View style={styles.modalView}>
-                <Icon 
-                name='check-circle-outline'
-                type='material-community'
-                size={40}
-                color='#fff'
-                />
                 <Text style={styles.modalText}>{text}</Text>
             </View>
         </Modal>
     )
 }
 
-export default SuccessfulNotification;
+export default BudgetRemovalModal;
 
 const styles = StyleSheet.create ({
     modalView: {
@@ -49,15 +40,15 @@ const styles = StyleSheet.create ({
         alignSelf: 'center',
         shadowColor: '#000',
         shadowOffset: {
-          width: 0,
-          height: 2,
+            width: 0,
+            height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-      },
+    },
     modalText: {
-        color: '#fff',
+        color: '#000',
         fontFamily: 'Roboto',
         fontSize: 25,
     },
