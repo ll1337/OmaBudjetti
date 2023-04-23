@@ -1,189 +1,89 @@
-import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, StatusBar, Image, Modal } from 'react-native';
-import { IconButton, Avatar } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
-import { Text, Icon } from '@rneui/themed';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Text } from '@rneui/themed';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
+import BottomNavBar from '../components/bottomNavBar';
+import ProgressBar from '../components/progressBar';
+import SuccessfulNotification from '../components/successfulNotification';
 
-export default function Break( { route, navigation } ) {
+export default function Break({ route, navigation }) {
 
-    const [visible, setVisible] = useState(true);
     const previousScreen = route.params;
-    
-    return(
+
+    return (
         <StoreProvider store={store}>
-            <View style={styles.container}>   
-                
+            <View style={styles.container}>
+
                 <View style={styles.header}>
                     <Text style={styles.headerText}> Eva - OmaBudjetti </Text>
-                </View>        
+                </View>
                 <View style={styles.rectangle}>
 
-                <Modal
-                    animationType='fade'
-                    transparent={true}
-                    visible={visible}
-                    onShow={() => {setTimeout(() => {setVisible(!visible) 
-                    }, 1000);}}>
-                        <View style={styles.modalView}>
-                            <Icon 
-                            name='check-circle-outline'
-                            type='material-community'
-                            size={40}
-                            color='#fff'
-                            />
-                            <Text style={styles.modalText}>Tallennus onnistui!</Text>
-                        </View>
-                </Modal>
+                    {previousScreen == "RandomExpenses" && <View>
+                        <Text style={styles.topText}>Menosi on nyt lisätty...</Text>
+                        <View style={styles.divider} />
+                        <Image
+                            style={styles.img}
+                            source={require('../assets/Icon_budgetpig_3.png')}
+                        />
+                        <View style={styles.divider} />
+                        <Text style={styles.bottomText}> ... seuraavaksi{'\n'}lisäämme tulosi!</Text>
+                    </View>}
 
-                {previousScreen == "RandomExpenses" && <View>
-                    <Text style={styles.topText}>Menosi on nyt lisätty...</Text>
-                    <View style={styles.divider} />
-                    <Image
-                    style={styles.img}
-                    source={require('../assets/Icon_budgetpig2.png')}
-                    />
-                    <View style={styles.divider} />
-                    <Text style={styles.bottomText}> ... seuraavaksi{'\n'}lisäämme tulosi!</Text>
-                </View> }
+                    {previousScreen == "Home" && <View>
 
-                {previousScreen == "Home" && <View>
+                        <SuccessfulNotification saved={true} />
 
-                    <Text style={styles.topText}></Text>
-                    <Image
-                    style={styles.img}
-                    source={require('../assets/Icon_budgetpig2.png')}
-                    />
-                    <View style={styles.divider} />
-                    <Text style={styles.bottomText}>Seuraavaksi lisäämme </Text>
-                    <Text style={styles.bottomText}>menosi!</Text>
-                    
-                </View> }
-                
+                        <Text style={styles.topText}></Text>
+                        <Image
+                            style={styles.img}
+                            source={require('../assets/Icon_budgetpig_3.png')}
+                        />
+                        <View style={styles.divider} />
+                        <Text style={styles.bottomText}>Seuraavaksi lisäämme </Text>
+                        <Text style={styles.bottomText}>menosi!</Text>
+
+                    </View>}
+
                 </View>
-            
-            </View>   
+
+            </View>
 
             {previousScreen == "RandomExpenses" && <View style={styles.buttonView}>
-                        <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('RandomExpenses')} 
-                                title="Edellinen"
-                                disabledRight
-                                iconLeft="chevron-left"
-                                iconRight=""
-                                />
-                        </View>
-                        <View style={styles.buttonRight}>
-                                <PrettyNavigationButton  onPress={() => console.log('Pressed button')} 
-                                title="Seuraava"
-                                disabledLeft
-                                iconRight="chevron-right" />
-                        </View>
-                </View>}
+                <View style={styles.buttonLeft}>
+                    <PrettyNavigationButton onPress={() => navigation.navigate('RandomExpenses')}
+                        title="Edellinen"
+                        disabledRight
+                        iconLeft="chevron-left"
+                        iconRight=""
+                    />
+                </View>
+                <View style={styles.buttonRight}>
+                    <PrettyNavigationButton onPress={() => navigation.navigate('Incomes')}
+                        title="Seuraava"
+                        disabledLeft
+                        iconRight="chevron-right" />
+                </View>
+            </View>}
             {previousScreen == "Home" && <View style={styles.buttonView}>
-                        <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('Home')} 
-                                title="Edellinen"
-                                disabledRight
-                                iconLeft="chevron-left"
-                                iconRight=""
-                                />
-                        </View>
-                        <View style={styles.buttonRight}>
-                                <PrettyNavigationButton  onPress={() => navigation.navigate('Living')} 
-                                title="Seuraava"
-                                disabledLeft
-                                iconRight="chevron-right" />
-                        </View>
-                </View>}
+                <View style={styles.buttonLeft}>
+                    <PrettyNavigationButton onPress={() => navigation.navigate('Home')}
+                        title="Edellinen"
+                        disabledRight
+                        iconLeft="chevron-left"
+                        iconRight=""
+                    />
+                </View>
+                <View style={styles.buttonRight}>
+                    <PrettyNavigationButton onPress={() => navigation.navigate('Living')}
+                        title="Seuraava"
+                        disabledLeft
+                        iconRight="chevron-right" />
+                </View>
+            </View>}
 
-                {previousScreen == "RandomExpenses" && <View style={styles.progress}>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#696969'/>
-                    </View>
-                </View>}
-            
-            
-            <View style={styles.bottomNavbar}>
-                <IconButton
-                        icon="home"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => navigation.navigate('Home')
-                    }
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item1')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item2')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item3')}
-                />
-                <IconButton
-                        icon="format-list-bulleted"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed menu')}
-                />
-            </View>
+            <BottomNavBar></BottomNavBar>
 
         </StoreProvider>
     )
@@ -251,13 +151,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         shadowColor: '#000',
         shadowOffset: {
-          width: 0,
-          height: 2,
+            width: 0,
+            height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-      },
+    },
     img: {
         width: 230,
         height: 250,
@@ -281,11 +181,11 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontFamily: 'Roboto',
         fontSize: 16,
-    }, 
+    },
     buttonView: {
         alignSelf: 'center',
         position: 'absolute',
-        top: '80%',
+        top: '78%',
         flexDirection: 'row',
 
     },
@@ -325,6 +225,6 @@ const styles = StyleSheet.create({
         height: 800,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,        
+        borderTopRightRadius: 20,
     },
 });

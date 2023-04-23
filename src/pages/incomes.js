@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
 import { Provider as StoreProvider, useSelector } from 'react-redux';
 import { Text } from '@rneui/themed';
@@ -7,33 +6,32 @@ import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
 import BottomNavBar from '../components/bottomNavBar';
-import ExpenseRow from '../components/expenseRow';
+import IncomeRow from '../components/incomeRow';
 import ProgressBar from '../components/progressBar';
-import expenseCategories from '../constants/expenseCategories.json';
-import { getExpenseIdsByCategory } from '../features/expenses/expenseFilters';
 
-export default function Insurance({ navigation }) {
+export default function Incomes({ navigation }) {
 
-    const expenses = useSelector(state => state.expenses.byId);
-    const insuranceExpenseIds = getExpenseIdsByCategory(expenses, expenseCategories.VAKUUTUKSET);
+    const incomeIds = useSelector(state => state.incomes.allIds);
 
     return (
         <StoreProvider store={store}>
             <View style={styles.container}>
+
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>
+
                 <View style={styles.rectangle}>
-                    <Text style={styles.welcomeText}>Vakuutukset</Text>
+                    <Text style={styles.welcomeText}>Tulot</Text>
                     <View style={styles.divider} />
                     <Text style={styles.infoText}>
-                        Lisää tähän kaikki vakuutusmaksusi{'\n'}
+                        Lisää tähän kaikki tulosi{'\n'}
                     </Text>
                     <View style={styles.rowContainer}>
                         <ScrollView>
                             {
-                                _.map(insuranceExpenseIds, id => {
-                                    return <ExpenseRow expenseId={id} key={id} />
+                                _.map(incomeIds, id => {
+                                    return <IncomeRow incomeId={id} key={id} />
                                 })
                             }
                             <View style={styles.dropdown}>
@@ -49,7 +47,7 @@ export default function Insurance({ navigation }) {
                 </View>
                 <View style={styles.buttonView}>
                     <View style={styles.buttonLeft}>
-                        <PrettyNavigationButton onPress={() => navigation.navigate('Health')}
+                        <PrettyNavigationButton onPress={() => navigation.navigate('Break', 'RandomExpenses')}
                             title="Edellinen"
                             disabledRight
                             iconLeft="chevron-left"
@@ -57,18 +55,18 @@ export default function Insurance({ navigation }) {
                         />
                     </View>
                     <View style={styles.buttonRight}>
-                        <PrettyNavigationButton onPress={() => navigation.navigate('OtherExpenses')}
+                        <PrettyNavigationButton onPress={() => navigation.navigate('Home')}
                             title="Seuraava"
                             disabledLeft
                             iconRight="chevron-right" />
                     </View>
                 </View>
             </View>
-            <ProgressBar check={5} />
+            <ProgressBar check={8} />
             <BottomNavBar />
         </StoreProvider>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -105,6 +103,15 @@ const styles = StyleSheet.create({
         marginRight: 25,
         borderColor: 'black',
         borderBottomWidth: 1,
+    },
+    newText: {
+        marginTop: 40,
+        marginLeft: 30,
+        marginRight: 0,
+        color: '#000000',
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+        fontSize: 25,
     },
     infoText: {
         marginTop: 5,

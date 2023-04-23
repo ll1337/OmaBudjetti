@@ -1,159 +1,71 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
-import { IconButton, Avatar } from "react-native-paper";
-import { Provider as StoreProvider } from 'react-redux';
-import { Text, Dialog, Icon } from '@rneui/themed';
-import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { StyleSheet, View, ScrollView, StatusBar } from 'react-native';
+import { Provider as StoreProvider, useSelector } from 'react-redux';
+import { Text } from '@rneui/themed';
+import _ from 'lodash';
 import store from '../app/store';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettyDropdownButton from '../components/prettyDropdownButton';
-import PrettyDate from '../components/prettyDate';
+import BottomNavBar from '../components/bottomNavBar';
+import ExpenseRow from '../components/expenseRow';
+import ProgressBar from '../components/progressBar';
+import expenseCategories from '../constants/expenseCategories.json';
+import { getExpenseIdsByCategory } from '../features/expenses/expenseFilters';
 
-export default function RandomExpenses( { navigation } ) {
-    const [visible, setVisible] = useState(false);
+export default function RandomExpenses({ navigation }) {
 
-    const [confirmedDate, setConfirmedDate] = useState(null);
+    const expenses = useSelector(state => state.expenses.byId);
+    const randomExpenseIds = getExpenseIdsByCategory(expenses, expenseCategories.SATUNNAISET);
 
-    const handleDateConfirm = (date) => {
-        console.log(confirmedDate);
-        setConfirmedDate(date);
-    };
-
-    return(
+    return (
         <StoreProvider store={store}>
-            <View style={styles.container}>   
-
+            <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
-                </View>        
-
+                </View>
                 <View style={styles.rectangle}>
                     <Text style={styles.welcomeText}>Satunnaiset kulut</Text>
                     <View style={styles.divider} />
                     <Text style={styles.infoText}>
-                        Lisää tähän satunnaisia kuluja{'\n'} 
+                        Lisää tähän satunnaisia kuluja{'\n'}
                     </Text>
-
-                <View>
-                    
-
-                    <View style={styles.dropdown}>
-                    <PrettyDropdownButton  onPress={() => console.log('Pressed dropdown')} 
-                            title="Lisää kulu"
-                            disabledLeft
-                            iconLeft=""
-                            iconRight="chevron-down"
-                            />
+                    <View style={styles.rowContainer}>
+                        <ScrollView>
+                            {
+                                _.map(randomExpenseIds, id => {
+                                    return <ExpenseRow expenseId={id} key={id} />
+                                })
+                            }
+                            <View style={styles.dropdown}>
+                                <PrettyDropdownButton onPress={() => console.log('Pressed dropdown')}
+                                    title="Lisää kulu"
+                                    disabledLeft
+                                    iconLeft=""
+                                    iconRight="chevron-down"
+                                />
+                            </View>
+                        </ScrollView>
                     </View>
-
                 </View>
-
-            </View>
-
-            <View style={styles.buttonView}>
-                        <View style={styles.buttonLeft}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('OtherExpenses')} 
+                <View style={styles.buttonView}>
+                    <View style={styles.buttonLeft}>
+                        <PrettyNavigationButton onPress={() => navigation.navigate('OtherExpenses')}
                             title="Edellinen"
                             disabledRight
                             iconLeft="chevron-left"
                             iconRight=""
-                            />
-                        </View>
-                        <View style={styles.buttonRight}>
-                            <PrettyNavigationButton  onPress={() => navigation.navigate('Break', 'RandomExpenses')} 
+                        />
+                    </View>
+                    <View style={styles.buttonRight}>
+                        <PrettyNavigationButton onPress={() => navigation.navigate('Break', 'RandomExpenses')}
                             title="Seuraava"
                             disabledLeft
                             iconRight="chevron-right" />
-                        </View>
-                    </View>
-
-                </View>   
-
-                <View style={styles.progress}>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#17B5AD'/>
-                    </View>
-                    <View style={styles.progressBlock}>
-                        <Icon size={30}
-                            name="card"
-                            type="material-community"
-                            color='#696969'/>
                     </View>
                 </View>
-
-            <View style={styles.bottomNavbar}>
-                <IconButton
-                        icon="home"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => navigation.navigate('Home')
-                    }
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item1')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item2')}
-                />
-                <IconButton
-                        icon="image-frame"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed item3')}
-                />
-                <IconButton
-                        icon="format-list-bulleted"
-                        iconColor={'#fff'}
-                        size={30}
-                        onPress={() => console.log('Pressed menu')}
-                />
             </View>
-
+            <ProgressBar check={7} />
+            <BottomNavBar />
         </StoreProvider>
     )
 }
@@ -194,15 +106,6 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderBottomWidth: 1,
     },
-    newText: {
-        marginTop: 40,
-        marginLeft: 30,
-        marginRight: 0,
-        color: '#000000',
-        fontWeight: 'bold',
-        fontFamily: 'Roboto',
-        fontSize: 25,
-    },
     infoText: {
         marginTop: 5,
         marginLeft: 30,
@@ -215,43 +118,9 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: 175
     },
-    listElem: {
-        marginRight: 23,
-    },
-    listText: {
-        marginTop: 15,
-        marginLeft: 30,
-        marginRight: 10,
-        color: '#000000',
-        fontFamily: 'Roboto',
-        fontWeight: 'bold',
-        fontSize: 16,
-    },
-    otherText: {
-        marginTop: 15,
-        marginRight: 10,
-        color: '#000000',
-        fontFamily: 'Roboto',
-        fontSize: 16,
-    },
-    input: {
-        textAlign: 'center',
-        borderWidth: 1, 
-        width: 60,
-        opacity: 0.5,
-        marginLeft: 10,
-        marginRight: 10,
-        borderStyle: 'dashed',
-    },
-    listContainer: {
-        marginTop: -32,
-        flexDirection: 'row-reverse',
-        alignItems: 'flex-end',
-        
-    }, 
     buttonView: {
         position: 'absolute',
-        top: '83%',
+        top: '89%',
         flexDirection: 'row',
 
     },
@@ -264,25 +133,6 @@ const styles = StyleSheet.create({
         width: 175,
         alignContent: 'flex-end',
     },
-    progress: {
-        position: 'absolute',
-        flexDirection: 'row',
-        alignSelf: 'center',
-        top: '88%'
-    },
-    progressBlock: {
-        marginLeft: '2.25%',
-        marginRight: '2.25%'
-    },
-    bottomNavbar: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        backgroundColor: '#17B5AD',
-    },
     rectangle: {
         position: 'absolute',
         marginTop: 60,
@@ -291,6 +141,9 @@ const styles = StyleSheet.create({
         height: 800,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,        
+        borderTopRightRadius: 20,
+    },
+    rowContainer: {
+        maxHeight: '34%'
     },
 });

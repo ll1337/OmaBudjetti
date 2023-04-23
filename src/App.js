@@ -10,7 +10,6 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import Home from './pages/home.js'
 import Landing from './pages/landing.js'
 import Welcome from './pages/welcome'
-import DateTest from './pages/dateTest';
 import Living from './pages/living.js';
 import Travel from './pages/travel.js';
 import Loans from './pages/loans.js';
@@ -20,9 +19,9 @@ import OtherExpenses from './pages/otherexpenses.js';
 import RandomExpenses from './pages/randomexpenses.js';
 import Year from './pages/year';
 import Break from './pages/break';
+import Incomes from './pages/incomes';
 import Edit from './pages/edit'
 import BottomNavBar from './components/bottomNavBar';
-
 
 export default function App() {
 
@@ -67,12 +66,6 @@ export default function App() {
                 name="Welcome"
                 component={Welcome}
                 options={{ title: "Welcome" }}
-                style={styles.container}
-              />
-              <Stack.Screen
-                name="DateTest"
-                component={DateTest}
-                options={{ title: "Datepicker Test Area" }}
                 style={styles.container}
               />
               <Stack.Screen
@@ -124,6 +117,12 @@ export default function App() {
                 style={styles.container}
               />
               <Stack.Screen
+                name="Incomes"
+                component={Incomes}
+                options={{ title: "Incomes" }}
+                style={styles.container}
+              />
+              <Stack.Screen
                 name="Year"
                 component={Year}
                 options={{ title: "Year" }}
@@ -133,18 +132,18 @@ export default function App() {
                 name="BottomNavBar"
                 component={BottomNavBar}
               />
-              <Stack.Screen
-                name="Edit"
-                component={Edit}
-                options={{ title: "Edit" }}
-                style={styles.container}
-                />
-            </Stack.Navigator>
-            <StatusBar style="auto" />
-          </NavigationContainer>
-        </PaperProvider>
-      </StoreProvider>
-    </StrictMode>
+  <Stack.Screen
+    name="Edit"
+    component={Edit}
+    options={{ title: "Edit" }}
+    style={styles.container}
+  />
+            </Stack.Navigator >
+    <StatusBar style="auto" />
+          </NavigationContainer >
+        </PaperProvider >
+      </StoreProvider >
+    </StrictMode >
   );
 }
 
