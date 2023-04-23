@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         right: -1,
         top: -1,
         bottom: -1,
-        borderRadius: 10,
+        borderRadius: 16,
     },
     red: {
         position: 'absolute',

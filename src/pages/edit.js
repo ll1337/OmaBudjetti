@@ -8,9 +8,12 @@ import MonthRectangle from '../components/monthRectangle';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettySquareButton from '../components/prettySquareButton';
 import PrettyCategoryCard from '../components/prettyCategoryCard';
+import expenseCategories from '../constants/expenseCategories.json';
 
 
 export default function Edit( { navigation } ) {
+
+    const [editingBudgetName, setEditingBudgetName] = useState(true);
 
 
     const activeBudget = store.getState('budgets').budgets.currentBudgetId.budgetId;
@@ -40,7 +43,7 @@ export default function Edit( { navigation } ) {
                                 iconRight="file-edit-outline"
                         />
                     </View>
-                    <View style={{marginRight: 200, marginBottom: 10}}>
+                    <View style={{width: 200, marginBottom: 10}}>
                         <PrettySquareButton 
                             title="Poista budjetti"
                             red
@@ -48,8 +51,24 @@ export default function Edit( { navigation } ) {
                         />
                     </View>
                     <View style={styles.divider} />
-                    <PrettyCategoryCard title="Asuminen" iconRight="home-outline"/>
+                    <Text style={styles.subtitle} >Menot</Text>
+                    <View style={styles.expenseCards}>
+                        <PrettyCategoryCard title={expenseCategories.ASUMINEN} iconRight="home-outline"/>
+                        <PrettyCategoryCard title={expenseCategories.KULKEMINEN} iconRight="truck-outline"/>
+                        <PrettyCategoryCard title={expenseCategories.LAINAT} iconRight="credit-card-outline"/>
+                        <PrettyCategoryCard title={expenseCategories.TERVEYS} iconRight="hospital-box-outline"/>
+                        <PrettyCategoryCard title={expenseCategories.VAKUUTUKSET} iconRight="file-document-outline"/>
+                        <PrettyCategoryCard title="muut / kk" iconRight="package-variant"/>
+                        <PrettyCategoryCard title="satunnaiset" iconRight="gift-outline"/>
 
+                    </View>
+                    
+                    <View style={styles.divider}/>
+                    <Text style={styles.subtitle} >Tulot</Text>
+
+                    <View style={styles.expenseCards}>
+                        <PrettyCategoryCard title="tulot" iconRight="currency-usd"/>
+                    </View>
 
 
                 </View>
@@ -110,6 +129,21 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 30,
         fontSize: 15,
+    },
+    subtitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginLeft: 30,
+        marginTop: 5,
+        marginBottom: 3,
+    },
+    expenseCards: {
+        flexDirection: 'row',
+        alignContent: 'flex-start',
+        flexWrap: 'wrap',
+        marginLeft: 25,
+        marginRight: 25,
+        marginBottom: 5,
     },
     rectangle: {
         position: 'absolute',

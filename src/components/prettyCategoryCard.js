@@ -24,15 +24,17 @@ export default PrettyCategoryCard;
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 10,
+        borderRadius: 5,
         overflow: 'hidden',
-        marginVertical: 10,
-        marginHorizontal: 10,
+        marginVertical: 5,
+        marginHorizontal: 5,
         shadowColor: 'rgba(0, 0, 0, 1)',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 1,
         shadowRadius: 4,
         elevation: 4,
+        width: 80,
+        height: 80,
     },
     button: {
         marginTop: 2,
@@ -40,24 +42,12 @@ const styles = StyleSheet.create({
         marginLeft: 2,
         marginRight: 2,
         borderWidth: 0,
-        borderRadius: 10,
+        borderRadius: 5,
+        padding: 5,
         backgroundColor: '#F8F9F9',
         flexDirection: 'column',
         alignItems: 'center',
-    },
-    disabled: {
-        marginTop: 2,
-        marginBottom: 2,
-        marginLeft: 2,
-        marginRight: 2,
-        borderWidth: 0,
-        borderRadius: 10,
-        backgroundColor: '#F8F9F9',
-        flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
-        overFlow: 'hidden',
-        opacity: 0.1
     },
     gradient: {
         position: 'absolute',
@@ -74,7 +64,7 @@ const styles = StyleSheet.create({
         top: -1,
         bottom: -1,
         backgroundColor: '#FA4848',
-        borderRadius: 10,
+        borderRadius: 5,
     },
     buttonIcon: {
         backgroundColor: 'rgba(255,255,255,0)',
@@ -83,6 +73,9 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         fontFamily: 'Roboto',
-        fontSize: 18,
+        marginTop: -7,
+        marginVertical: -1,
+        marginHorizontal: -3,
+        fontSize: 13,
     },
 });
