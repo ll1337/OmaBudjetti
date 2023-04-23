@@ -17,8 +17,8 @@ const MAX_LENGTH = 25;
 export default function Edit( { navigation } ) {
 
     // Display the renaming or deleting views or not
-    const [editingBudgetName, setEditingBudgetName] = useState(false);
-    const [deletingBudget, setDeletingBudget] = useState(false);
+    const [showBudgetRenaming, setShowBudgetRenaming] = useState(false);
+    const [showBudgetDeletion, setShowBudgetDeletion] = useState(false);
     const [newName, setNewName] = useState('');
     // Show modal noting great success
     const [showSuccess, setShowSuccess] = useState(false);
@@ -33,22 +33,23 @@ export default function Edit( { navigation } ) {
     }
 
     const onPressHandler = () => {
-        setEditingBudgetName(true);
+        setShowBudgetRenaming(true);
     };
 
     const toggleShowDeletion = () => {
-        setDeletingBudget(prevState => !prevState);
+        setShowBudgetDeletion(prevState => !prevState);
     };
 
     const handleConfirmName = () => {
         dispatch(renameBudget({ budgetId: activeBudget, budgetName: newName }));
-        setEditingBudgetName(false);
+        setShowBudgetRenaming(false);
         setShowSuccess(true);
     };
 
     const handleDeleteBudget = () => {
-        dispatch(deleteBudget({ budgetId: activeBudget }))
-        setDeletingBudget(false);
+        dispatch(deleteBudget({ budgetId: activeBudget }));
+        console.log(store.getState('budgets').budgets);
+        setShowBudgetDeletion(false);
         navigation.navigate('Home');
     };
 
@@ -64,7 +65,7 @@ export default function Edit( { navigation } ) {
                     <Text style={styles.welcomeText}>Muokkaa</Text>
                     <View style={styles.divider} />
                     { showSuccess && <SuccessfulNotification edited/>}
-                    { editingBudgetName ? (
+                    { showBudgetRenaming ? (
                         <View style={styles.nameRow}>
                             <View style={styles.inputBox}>
                                 <TextInput
@@ -89,13 +90,13 @@ export default function Edit( { navigation } ) {
                             <PrettySquareButton 
                                     title="Muuta nimeä"
                                     iconRight="file-edit-outline"
-                                    disabled={deletingBudget}
+                                    disabled={showBudgetDeletion}
                                     onPress={onPressHandler}
                             />
                         </View>
                     )}
 
-                    { deletingBudget ? ( 
+                    { showBudgetDeletion ? ( 
                         <View style={styles.removalContainer}>
                             <Text style={styles.removalText}>Haluatko varmasti poistaa budjetin?</Text>
                             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -117,7 +118,7 @@ export default function Edit( { navigation } ) {
                             title="Poista budjetti"
                             red
                             iconRight="trash-can-outline"
-                            disabled={editingBudgetName}
+                            disabled={showBudgetRenaming}
                             onPress={toggleShowDeletion}
                         />
                         </View>
