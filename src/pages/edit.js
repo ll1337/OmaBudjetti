@@ -1,29 +1,56 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, StatusBar, Text, TextInput } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
 import { useDispatch } from 'react-redux';
 import BottomNavBar from '../components/bottomNavBar';
-import MonthRectangle from '../components/monthRectangle';
 import PrettyNavigationButton from '../components/prettyNavigationButton';
 import PrettySquareButton from '../components/prettySquareButton';
 import PrettyCategoryCard from '../components/prettyCategoryCard';
 import expenseCategories from '../constants/expenseCategories.json';
+import { renameBudget, deleteBudget } from '../features/budget/budgetsSlice';
+import SuccessfulNotification from '../components/successfulNotification';
 
+// max length of the budget name (when renaming)
+const MAX_LENGTH = 25;
 
 export default function Edit( { navigation } ) {
 
-    const [editingBudgetName, setEditingBudgetName] = useState(true);
+    // Display the renaming or deleting views or not
+    const [editingBudgetName, setEditingBudgetName] = useState(false);
+    const [deletingBudget, setDeletingBudget] = useState(false);
+    const [newName, setNewName] = useState('');
+    // Show modal noting great success
+    const [showSuccess, setShowSuccess] = useState(false);
 
+    const dispatch = useDispatch();
 
+    // Grab the UUID of current active budget, check if such exists.
     const activeBudget = store.getState('budgets').budgets.currentBudgetId.budgetId;
-    console.log(activeBudget);
     var budgetName = "No budget selected";
-    if ( activeBudget != undefined ) {
+    if ( activeBudget !== undefined ) {
         budgetName = store.getState('budgets').budgets.byId[activeBudget].budgetName;
-
     }
-    console.log(budgetName);
+
+    const onPressHandler = () => {
+        setEditingBudgetName(true);
+    };
+
+    const toggleShowDeletion = () => {
+        setDeletingBudget(prevState => !prevState);
+    };
+
+    const handleConfirmName = () => {
+        dispatch(renameBudget({ budgetId: activeBudget, budgetName: newName }));
+        setEditingBudgetName(false);
+        setShowSuccess(true);
+    };
+
+    const handleDeleteBudget = () => {
+        dispatch(deleteBudget({ budgetId: activeBudget }))
+        setDeletingBudget(false);
+        navigation.navigate('Home');
+    };
 
     return(
         <StoreProvider store={store}>
@@ -36,20 +63,66 @@ export default function Edit( { navigation } ) {
 
                     <Text style={styles.welcomeText}>Muokkaa</Text>
                     <View style={styles.divider} />
-                    <View style={{flexDirection: 'row', marginTop: 10, justifyContent: 'space-between', marginBottom: 10,}}>
-                        <Text style={styles.budgetToEdit}>{budgetName}</Text>
-                        <PrettySquareButton 
-                                title="Muuta nimeä"
-                                iconRight="file-edit-outline"
-                        />
-                    </View>
-                    <View style={{width: 200, marginBottom: 10}}>
+                    { showSuccess && <SuccessfulNotification edited/>}
+                    { editingBudgetName ? (
+                        <View style={styles.nameRow}>
+                            <View style={styles.inputBox}>
+                                <TextInput
+                                    value={newName}
+                                    onChangeText={setNewName}
+                                    maxLength={MAX_LENGTH}
+                                    style={styles.input}
+                                />
+                            </View>
+                            <View style={{ alignSelf: 'flex-end' }}>
+                                <PrettyNavigationButton
+                                    onPress={handleConfirmName} // let's dispatch this bad boy
+                                    title="Valmis"
+                                    disabledLeft
+                                    disabledRight
+                                    disabled={budgetName == ''} />
+                            </View>
+                        </View>
+                    ) : (
+                        <View style={styles.nameRow}>
+                            <Text style={styles.budgetToEdit}>{budgetName}</Text>
+                            <PrettySquareButton 
+                                    title="Muuta nimeä"
+                                    iconRight="file-edit-outline"
+                                    disabled={deletingBudget}
+                                    onPress={onPressHandler}
+                            />
+                        </View>
+                    )}
+
+                    { deletingBudget ? ( 
+                        <View style={styles.removalContainer}>
+                            <Text style={styles.removalText}>Haluatko varmasti poistaa budjetin?</Text>
+                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                <PrettySquareButton
+                                    title="EI"
+                                    red
+                                    onPress={toggleShowDeletion}
+                                    />
+
+                                <PrettySquareButton
+                                    title="KYLLÄ"
+                                    onPress={handleDeleteBudget}
+                                    />
+                            </View>
+                        </View>
+                    ) : (
+                        <View style={{width: 200, marginBottom: 10}}>
                         <PrettySquareButton 
                             title="Poista budjetti"
                             red
                             iconRight="trash-can-outline"
+                            disabled={editingBudgetName}
+                            onPress={toggleShowDeletion}
                         />
-                    </View>
+                        </View>
+                    )}
+
                     <View style={styles.divider} />
                     <Text style={styles.subtitle} >Menot</Text>
                     <View style={styles.expenseCards}>
@@ -60,7 +133,6 @@ export default function Edit( { navigation } ) {
                         <PrettyCategoryCard title={expenseCategories.VAKUUTUKSET} iconRight="file-document-outline"/>
                         <PrettyCategoryCard title="muut / kk" iconRight="package-variant"/>
                         <PrettyCategoryCard title="satunnaiset" iconRight="gift-outline"/>
-
                     </View>
                     
                     <View style={styles.divider}/>
@@ -69,16 +141,9 @@ export default function Edit( { navigation } ) {
                     <View style={styles.expenseCards}>
                         <PrettyCategoryCard title="tulot" iconRight="currency-usd"/>
                     </View>
-
-
                 </View>
-
             </View>
-
-            <BottomNavBar>
-
-            </BottomNavBar>
-
+            <BottomNavBar/>
         </StoreProvider>
     );
 }
@@ -125,10 +190,40 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginTop: 5,
     },
+    nameRow: {
+        flexDirection: 'row', 
+        marginTop: 10, 
+        justifyContent: 'space-between',
+        marginBottom: 10,
+    },
     budgetToEdit: {
         marginTop: 10,
         marginLeft: 30,
         fontSize: 15,
+    },
+    inputBox: {
+        flexDirection: 'row',
+        marginLeft: 30,
+        marginRight: 30,
+        backgroundColor: '#F8F9F9',
+        borderStyle: 'dashed',
+        borderWidth: 2,
+        borderColor: '#17B5AD',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        marginBottom: 5,
+        width: 180,
+    },
+    input: {
+        flex: 1,
+    },
+    removalContainer: {
+        flexDirection: 'column',
+    },
+    removalText: {
+        marginLeft: 30,
+        marginBottom: 10,
+        fontWeight: 'bold',
     },
     subtitle: {
         fontSize: 22,

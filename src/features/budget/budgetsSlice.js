@@ -33,10 +33,17 @@ export const budgetsSlice = createSlice({
         },
         setCurrentBudget: (state, action) => {
             state['currentBudgetId'] = action.payload;
+        },
+        renameBudget: (state, action) => {
+            const { budgetId, budgetName } = action.payload;
+            const budgetToBeRenamed = state.byId[budgetId];
+            if (budgetToBeRenamed) {
+                budgetToBeRenamed.budgetName = budgetName;
+            }
         }
     }
 });
 
-export const { addBudget, deleteBudget, setCurrentBudget } = budgetsSlice.actions;
+export const { addBudget, deleteBudget, setCurrentBudget, renameBudget } = budgetsSlice.actions;
 
 export default budgetsSlice.reducer;
