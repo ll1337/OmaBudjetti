@@ -27,7 +27,7 @@ export const budgetsSlice = createSlice({
             const budgetId = action.payload;
 
             if (_.includes(state.allIds, budgetId)) {
-                state.allIds = state.allIds.filter(id !== budgetId);
+                state.allIds = state.allIds.filter(id => id !== budgetId);
                 delete state.byId[budgetId]
             }
         },

@@ -27,7 +27,7 @@ export default function Edit( { navigation } ) {
 
     // Grab the UUID of current active budget, check if such exists.
     const activeBudget = store.getState('budgets').budgets.currentBudgetId.budgetId;
-    var budgetName = "No budget selected";
+    let budgetName = "No budget selected";
     if ( activeBudget !== undefined ) {
         budgetName = store.getState('budgets').budgets.byId[activeBudget].budgetName;
     }
@@ -47,7 +47,7 @@ export default function Edit( { navigation } ) {
     };
 
     const handleDeleteBudget = () => {
-        dispatch(deleteBudget({ budgetId: activeBudget }));
+        dispatch(deleteBudget(activeBudget));
         console.log(store.getState('budgets').budgets);
         setShowBudgetDeletion(false);
         navigation.navigate('Home');
@@ -105,7 +105,6 @@ export default function Edit( { navigation } ) {
                                     red
                                     onPress={toggleShowDeletion}
                                     />
-
                                 <PrettySquareButton
                                     title="KYLLÄ"
                                     onPress={handleDeleteBudget}
