@@ -16,6 +16,12 @@ const startDate = '2023-01';
 export default function Year( { navigation } ) {
 
     //var activeBudget = store.getState('budgets')['budgets']['currentBudget']
+    // Grab the UUID of current active budget, check if such exists.
+    const activeBudget = store.getState('budgets').budgets.currentBudgetId.budgetId;
+    let budgetName = "No budget selected";
+    if ( activeBudget !== undefined ) {
+        budgetName = store.getState('budgets').budgets.byId[activeBudget].budgetName;
+    }
 
     // Array containing all the needed month rectangles
     const monthRectangles = [];
@@ -60,7 +66,7 @@ export default function Year( { navigation } ) {
                     <Text style={styles.headerText}>Eva - OmaBudjetti</Text>
                 </View>           
                 <View style={styles.rectangle}>
-                    <Text style={styles.budgetNameText}>Budjetin nimi</Text>
+                    <Text style={styles.budgetNameText}>{budgetName}</Text>
                     {/* Get the current active month here! */}
 
                     <ScrollView>
