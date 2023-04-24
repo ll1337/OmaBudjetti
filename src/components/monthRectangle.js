@@ -78,7 +78,7 @@ const MonthRectangle = ( { month, year, pastMonth, noCumulative, monthView, navi
                             </View>
                             {monthView && <View style={styles.editButton}>
                             <PrettyNavigationButton title="Tulot" onPress={() => navigation.navigate('EditMonth', {type: false, monthStr: monthsInFinnish[month - 1], month: month, year: year})} />
-                                <PrettyNavigationButton title="Kulut" onPress={() => navigation.navigate('EditMonth', {type: true, monthStr: monthsInFinnish[month - 1], month: month, year: year})} />
+                                <PrettyNavigationButton title="Menot" onPress={() => navigation.navigate('EditMonth', {type: true, monthStr: monthsInFinnish[month - 1], month: month, year: year})} />
                             </View>}
 
                     </View>
