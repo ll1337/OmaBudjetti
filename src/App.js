@@ -20,6 +20,7 @@ import RandomExpenses from './pages/randomexpenses.js';
 import Year from './pages/year';
 import Break from './pages/break';
 import Incomes from './pages/incomes';
+import Edit from './pages/edit'
 import BottomNavBar from './components/bottomNavBar';
 import EditMonth from './pages/editMonth';
 import EditEvent from './pages/editEvent';
@@ -145,12 +146,18 @@ export default function App() {
                 name="BottomNavBar"
                 component={BottomNavBar}
               />
-            </Stack.Navigator>
-            <StatusBar style="auto" />
-          </NavigationContainer>
-        </PaperProvider>
-      </StoreProvider>
-    </StrictMode>
+  <Stack.Screen
+    name="Edit"
+    component={Edit}
+    options={{ title: "Edit" }}
+    style={styles.container}
+  />
+            </Stack.Navigator >
+    <StatusBar style="auto" />
+          </NavigationContainer >
+        </PaperProvider >
+      </StoreProvider >
+    </StrictMode >
   );
 }
 

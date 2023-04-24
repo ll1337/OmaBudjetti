@@ -4,7 +4,7 @@ import { StyleSheet, View, StatusBar, TextInput } from 'react-native';
 import { Text } from "react-native-paper";
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../app/store';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addBudget, setCurrentBudget } from '../features/budget/budgetsSlice';
 import { v4 as uuidv4 } from 'uuid';
 import PrettyButton from '../components/prettyButton';
@@ -19,13 +19,15 @@ let activeBudget = store.getState('budgets')['budgets']['currentBudgetId'];
 
 export default function Home({ navigation, budgetId }) {
 
+    const budgets = useSelector(state => state.budgets.byId);
+    
+
 
     const dispatch = useDispatch();
 
     const [hasBudget, setHasBudget] = useState(false);
     const [showBudgetCreation, setShowBudgetCreation] = useState(false);
 
-    const [budgetNames, setBudgetNames] = useState([]);
     const [budgetName, setBudgetName] = useState('');
 
     // user wants to create a budget: show components related to budget creation, hide others.
@@ -40,7 +42,6 @@ export default function Home({ navigation, budgetId }) {
     };
 
     const handleConfirmName = () => {
-        setBudgetNames([...budgetNames, budgetName]);
 
         let budgetId = uuidv4();
         dispatch(addBudget({ budgetId, budgetName }));
@@ -66,12 +67,13 @@ export default function Home({ navigation, budgetId }) {
                                 <View>
                                     <View style={{ marginBottom: 30 }} />
                                     <View>
-                                        {budgetNames.map((name, index) => (
-                                            <View style={{ marginBottom: 15 }} key={index}>
+
+                                        {Object.keys(budgets).map(budgetId => (
+                                            <View style={{ marginBottom: 15 }} key={budgetId}>
                                                 <PrettyButton
-                                                    key={index}
-                                                    onPress={() => console.log('Button pressed')}
-                                                    title={name}
+                                                    key={budgetId}
+                                                    onPress={() => console.log( budgetId )}
+                                                    title={budgets[budgetId].budgetName}
                                                     iconLeft="piggy-bank-outline"
                                                     iconRight="play"
                                                     style={{ marginBottom: 20 }}
