@@ -20,10 +20,11 @@ import RandomExpenses from './pages/randomexpenses.js';
 import Year from './pages/year';
 import Break from './pages/break';
 import Incomes from './pages/incomes';
-import Edit from './pages/edit'
+import Edit from './pages/edit';
 import BottomNavBar from './components/bottomNavBar';
 import EditMonth from './pages/editMonth';
 import EditEvent from './pages/editEvent';
+import Month from './pages/month';
 
 export default function App() {
 
@@ -140,6 +141,12 @@ export default function App() {
                 name="EditMonth"
                 component={EditMonth}
                 options={{ title: "EditMonth" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Month"
+                component={Month}
+                options={{ title: "Month" }}
                 style={styles.container}
               />
               <Stack.Screen
