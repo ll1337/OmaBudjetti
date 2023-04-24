@@ -37,13 +37,11 @@ export default function Month( { navigation } ) {
 
     for (let i = 0; i < rectanglesAmt; i++) {
 
-        // passed months are greyed
-        const pastMonth = i < 2;
-
         monthRectangles.push(< MonthRectangle 
             key={[year, month]}
             month={month}
             year={year} 
+            coCumulative={true}
             pastMonth={currentYear > year || (currentYear == year && currentMonth > month)}
                 />)
 
