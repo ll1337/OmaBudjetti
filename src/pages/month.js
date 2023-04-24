@@ -13,7 +13,7 @@ const rectanglesAmt = 24;
 // m/y
 const startDate = '2023-01';
 
-export default function Year( { navigation } ) {
+export default function Month( { navigation } ) {
 
     //var activeBudget = store.getState('budgets')['budgets']['currentBudget']
     // Grab the UUID of current active budget, check if such exists.
@@ -41,6 +41,7 @@ export default function Year( { navigation } ) {
             key={[year, month]}
             month={month}
             year={year} 
+            coCumulative={true}
             pastMonth={currentYear > year || (currentYear == year && currentMonth > month)}
                 />)
 

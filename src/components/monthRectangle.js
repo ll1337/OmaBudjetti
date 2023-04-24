@@ -19,7 +19,7 @@ const monthsInFinnish = [
     "Joulukuu"
 ];
 
-const MonthRectangle = ( { month, year, pastMonth } ) => {
+const MonthRectangle = ( { month, year, pastMonth, noCumulative } ) => {
     
 
     const [monthExpanded, setMonthExpanded] = useState(false);
@@ -34,6 +34,9 @@ const MonthRectangle = ( { month, year, pastMonth } ) => {
     const monthTotal = 2; // placeholder
 
     const icon = monthTotal > 0 ? 'euro-sign' : 'exclamation-triangle';
+
+    // Cumulative View has chevron to the right, monthly to down and no dropdown functionality
+    const iconRight = noCumulative ? 'chevron-right' : 'chevron-down';
 
     return(
         <View style={[styles.container, pastMonth && {opacity: 0.5}]}>
