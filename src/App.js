@@ -20,8 +20,9 @@ import RandomExpenses from './pages/randomexpenses.js';
 import Year from './pages/year';
 import Break from './pages/break';
 import Incomes from './pages/incomes';
-import Edit from './pages/edit'
+import Edit from './pages/edit';
 import BottomNavBar from './components/bottomNavBar';
+import Month from './pages/month';
 
 export default function App() {
 
@@ -126,6 +127,12 @@ export default function App() {
                 name="Year"
                 component={Year}
                 options={{ title: "Year" }}
+                style={styles.container}
+              />
+              <Stack.Screen
+                name="Month"
+                component={Month}
+                options={{ title: "Month" }}
                 style={styles.container}
               />
               <Stack.Screen

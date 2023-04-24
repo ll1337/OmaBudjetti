@@ -31,7 +31,7 @@ const BottomNavBar = (props) => {
                     name="calendar-today"
                     color={'#fff'}
                     size={30}
-                    onPress={() => console.log('Pressed item2')}
+                    onPress={() => navigation.navigate('Month')}
                 />
                 <Text style={styles.text}>kk</Text>
             </View>
