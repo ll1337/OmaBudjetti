@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { StyleSheet, View, StatusBar, ScrollView, FlatList } from 'react-native';
 import { Provider as StoreProvider, useSelector } from 'react-redux';
 import { Text } from '@rneui/themed';
@@ -12,20 +11,18 @@ import expenseCategories from '../constants/expenseCategories.json';
 import CategoryTitles from '../constants/CategoryTitles.json'
 import PrettyDropdownButton from '../components/prettyDropdownButton';
 
-export default function EditEvent({ route, navigation }) {
-    const [isExpense, setIsExpense] = useState(true);
-
-    // lisää routen luku
-    // bool type, true jos expense
-    //const {type, category} = route.params;
-    //setIsExpense(type);
+export default function EditEvent({ navigation, route }) {
+    
+    const isExpense = route.params.type;
+    const category = route.params.category;
+    const title = route.params.title;
 
     let activeBudgetId = store.getState('budgets')['budgets']['currentBudgetId'].budgetId;
     const budget = useSelector(state => state.budgets.byId[activeBudgetId]);
 
     const expenses = useSelector(state => state.expenses.byId);
 
-    const expenseIds = getExpenseIdsByCategory(expenses, expenseCategories.ASUMINEN);
+    const expenseIds = getExpenseIdsByCategory(expenses, category);
 
     const incomeIds = useSelector(state => state.incomes.allIds);
 
@@ -34,7 +31,7 @@ export default function EditEvent({ route, navigation }) {
         return(
             <>
                 <Text style={styles.name}>{budget.budgetName}</Text>
-                <Text style={styles.welcomeText}>{CategoryTitles.ASUMINEN}</Text>
+                <Text style={styles.welcomeText}>{title}</Text>
                 <FlatList style={styles.flatListContainer}
                     data={isExpense ? expenseIds : incomeIds}
                     renderItem={isExpense ? renderExpense : renderIncome}/>
@@ -52,7 +49,6 @@ export default function EditEvent({ route, navigation }) {
     }
 
     // renders expenseRows for each category
-    // if lause varmistaa, että vain aktiivisen budjetin id:t luetaan
     const renderExpense = ({item}) => {
         if (budget.expenseIds.includes(item)) {
             return(
@@ -62,7 +58,6 @@ export default function EditEvent({ route, navigation }) {
     };
 
     // renders incomeRows for each category
-    // if lause varmistaa, että vain aktiivisen budjetin id:t luetaan
     const renderIncome = ({item}) => {
         if (budget.expenseIds.includes(item)) {
             return(

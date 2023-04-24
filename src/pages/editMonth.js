@@ -12,14 +12,22 @@ import expenseCategories from '../constants/expenseCategories.json';
 import CategoryTitles from '../constants/CategoryTitles.json'
 
 export default function EditMonth({ route, navigation }) {
-    const [isExpense, setIsExpense] = useState(true);
 
-    // lisää routen luku
-    //const {type, month, date} = route.params;
-    //setIsExpense(type);
+    //placeholder
+    const isExpense = true;
+    //const isExpense = route.params.type;
+    
+    //const category = route.params.category;
+    //const title = route.params.title;
 
+    //placeholder
     const month = "Huhtikuu"
+    //const month = route.params.month;
+
+    //placeholder
     const date = "2023-04";
+    //const date = route.params.date;
+
     let activeBudgetId = store.getState('budgets')['budgets']['currentBudgetId'].budgetId;
     const budget = useSelector(state => state.budgets.byId[activeBudgetId]);
 

@@ -7,7 +7,6 @@ import months from '../constants/months';
 
 const RecurrenceModal = ({ recurrence, handleMonthEdit, handleExit }) => {
 
-    // pitäisi mahdollisesti korvata mapilla
     const data = [[<PrettyNumberButton title="1" selected={recurrence.includes(months.Jan)} onPress={handleMonthEdit}/>, 
                    <PrettyNumberButton title="2" selected={recurrence.includes(months.Feb)} onPress={handleMonthEdit}/>, 
                    <PrettyNumberButton title="3" selected={recurrence.includes(months.Mar)} onPress={handleMonthEdit}/>, 

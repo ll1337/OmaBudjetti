@@ -10,6 +10,8 @@ import PrettyCategoryCard from '../components/prettyCategoryCard';
 import expenseCategories from '../constants/expenseCategories.json';
 import { renameBudget, deleteBudget } from '../features/budget/budgetsSlice';
 import SuccessfulNotification from '../components/successfulNotification';
+import CategoryTitles from '../constants/CategoryTitles.json'
+import ShortCategoryTitles from '../constants/ShortCategoryTitles.json'
 
 // max length of the budget name (when renaming)
 const MAX_LENGTH = 25;
@@ -126,20 +128,28 @@ export default function Edit( { navigation } ) {
                     <View style={styles.divider} />
                     <Text style={styles.subtitle} >Menot</Text>
                     <View style={styles.expenseCards}>
-                        <PrettyCategoryCard title={expenseCategories.ASUMINEN} iconRight="home-outline"/>
-                        <PrettyCategoryCard title={expenseCategories.KULKEMINEN} iconRight="truck-outline"/>
-                        <PrettyCategoryCard title={expenseCategories.LAINAT} iconRight="credit-card-outline"/>
-                        <PrettyCategoryCard title={expenseCategories.TERVEYS} iconRight="hospital-box-outline"/>
-                        <PrettyCategoryCard title={expenseCategories.VAKUUTUKSET} iconRight="file-document-outline"/>
-                        <PrettyCategoryCard title="muut / kk" iconRight="package-variant"/>
-                        <PrettyCategoryCard title="satunnaiset" iconRight="gift-outline"/>
+                        <PrettyCategoryCard title={ShortCategoryTitles.ASUMINEN} iconRight="home-outline" 
+                        onPress={() => navigation.navigate('EditEvent', {type: true, category: expenseCategories.ASUMINEN, title: CategoryTitles.ASUMINEN})}/>
+                        <PrettyCategoryCard title={ShortCategoryTitles.KULKEMINEN} iconRight="truck-outline" 
+                        onPress={() => navigation.navigate('EditEvent', {type: true, category: expenseCategories.KULKEMINEN, title: CategoryTitles.KULKEMINEN})}/>
+                        <PrettyCategoryCard title={ShortCategoryTitles.LAINAT} iconRight="credit-card-outline" 
+                        onPress={() => navigation.navigate('EditEvent', {type: true, category: expenseCategories.LAINAT, title: CategoryTitles.LAINAT})}/>
+                        <PrettyCategoryCard title={ShortCategoryTitles.TERVEYS} iconRight="hospital-box-outline" 
+                        onPress={() => navigation.navigate('EditEvent', {type: true, category: expenseCategories.TERVEYS, title: CategoryTitles.TERVEYS})}/>
+                        <PrettyCategoryCard title={ShortCategoryTitles.VAKUUTUKSET} iconRight="file-document-outline" 
+                        onPress={() => navigation.navigate('EditEvent', {type: true, category: expenseCategories.VAKUUTUKSET, title: CategoryTitles.VAKUUTUKSET})}/>
+                        <PrettyCategoryCard title={ShortCategoryTitles.TOISTUVAT} iconRight="package-variant" 
+                        onPress={() => navigation.navigate('EditEvent', {type: true, category: expenseCategories.TOISTUVAT, title: CategoryTitles.TOISTUVAT})}/>
+                        <PrettyCategoryCard title={ShortCategoryTitles.SATUNNAISET} iconRight="gift-outline" 
+                        onPress={() => navigation.navigate('EditEvent', {type: true, category: expenseCategories.SATUNNAISET, title: CategoryTitles.SATUNNAISET})}/>
                     </View>
                     
                     <View style={styles.divider}/>
                     <Text style={styles.subtitle} >Tulot</Text>
 
                     <View style={styles.expenseCards}>
-                        <PrettyCategoryCard title="tulot" iconRight="currency-usd"/>
+                        <PrettyCategoryCard title={ShortCategoryTitles.TULOT} iconRight="currency-usd"
+                        onPress={() => navigation.navigate('EditEvent', {type: false, category: "tulot", title: CategoryTitles.TULOT})}/>
                     </View>
                 </View>
             </View>

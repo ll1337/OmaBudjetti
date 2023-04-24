@@ -52,9 +52,7 @@ const ExpenseRow = ({ expenseId }) => {
     }
 
     const handleMonthEdit = () => {
-        // jotenkin maagisesti jos tälle funktiolla antaa parametreja, jostain syystä
-        // CustomRecurrenceIcon inherittaa tämän funktion ???
-        console.log("pitäisi toteuttaa, ei toimi")
+        console.log("Button pressed")
     }
 
     return (

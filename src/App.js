@@ -146,12 +146,12 @@ export default function App() {
                 name="BottomNavBar"
                 component={BottomNavBar}
               />
-  <Stack.Screen
-    name="Edit"
-    component={Edit}
-    options={{ title: "Edit" }}
-    style={styles.container}
-  />
+              <Stack.Screen
+                name="Edit"
+                component={Edit}
+                options={{ title: "Edit" }}
+                style={styles.container}
+              />
             </Stack.Navigator >
     <StatusBar style="auto" />
           </NavigationContainer >
