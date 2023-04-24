@@ -10,23 +10,18 @@ import _ from 'lodash';
 import { getExpenseIdsByCategory } from '../features/expenses/expenseFilters';
 import expenseCategories from '../constants/expenseCategories.json';
 import CategoryTitles from '../constants/CategoryTitles.json'
+import months from '../constants/months';
 
 export default function EditMonth({ route, navigation }) {
 
-    //placeholder
-    const isExpense = true;
-    //const isExpense = route.params.type;
-    
-    //const category = route.params.category;
-    //const title = route.params.title;
-
-    //placeholder
-    const month = "Huhtikuu"
-    //const month = route.params.month;
-
-    //placeholder
-    const date = "2023-04";
-    //const date = route.params.date;
+    const isExpense = route.params.type;
+    const monthStr = route.params.monthStr;
+    var month = route.params.month;
+    if (month < 10) {
+        month = "0" + month;
+    }
+    const year = route.params.year;
+    const date = year.concat('-', month);
 
     let activeBudgetId = store.getState('budgets')['budgets']['currentBudgetId'].budgetId;
     const budget = useSelector(state => state.budgets.byId[activeBudgetId]);
@@ -48,7 +43,7 @@ export default function EditMonth({ route, navigation }) {
         return(
             <>
                 <Text style={styles.name}>{budget.budgetName}</Text>
-                <Text style={styles.welcomeText}>{month} {date.substr(0,4)}</Text>
+                <Text style={styles.welcomeText}>{monthStr} {year}</Text>
                 <FlatList style={styles.flatListContainer}
                     data={isExpense ? categories : incomeCategory}
                     renderItem={renderList}/>

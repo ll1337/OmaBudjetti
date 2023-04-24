@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import { Avatar } from "react-native-paper";
 import store from '../app/store';
 import { Icon } from "@rneui/themed";
+import PrettyNavigationButton from './prettyNavigationButton';
 
 const monthsInFinnish = [
     "Tammikuu",
@@ -19,7 +20,7 @@ const monthsInFinnish = [
     "Joulukuu"
 ];
 
-const MonthRectangle = ( { month, year, pastMonth, noCumulative } ) => {
+const MonthRectangle = ( { month, year, pastMonth, noCumulative, monthView, navigation } ) => {
     
 
     const [monthExpanded, setMonthExpanded] = useState(false);
@@ -75,6 +76,10 @@ const MonthRectangle = ( { month, year, pastMonth, noCumulative } ) => {
                                 <Text style={styles.amountText}>{totalIncomes}</Text>
                                 <Text style={styles.amountText}>{totalExpenses}</Text>
                             </View>
+                            {monthView && <View style={styles.editButton}>
+                            <PrettyNavigationButton title="Tulot" onPress={() => navigation.navigate('EditMonth', {type: false, monthStr: monthsInFinnish[month - 1], month: month, year: year})} />
+                                <PrettyNavigationButton title="Kulut" onPress={() => navigation.navigate('EditMonth', {type: true, monthStr: monthsInFinnish[month - 1], month: month, year: year})} />
+                            </View>}
 
                     </View>
                     </View>
@@ -182,5 +187,8 @@ const styles = StyleSheet.create({
     },
     expandedTextContainerRight: {
         alignItems: 'center',
+    },
+    editButton: {
+        alignSelf: 'center',
     },
 });
