@@ -43,7 +43,9 @@ export default function Month( { navigation } ) {
             year={year} 
             coCumulative={true}
             pastMonth={currentYear > year || (currentYear == year && currentMonth > month)}
-                />)
+            monthView={true}
+            navigation={navigation}
+            />)
 
         
         if (month === 12) {

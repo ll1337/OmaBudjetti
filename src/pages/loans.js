@@ -65,7 +65,7 @@ export default function Loans({ navigation }) {
                 </View>
             </View>
             <ProgressBar check={3} />
-            <BottomNavBar />
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     );
 };

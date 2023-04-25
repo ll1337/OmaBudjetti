@@ -2,14 +2,30 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TouchableWithoutFeedback } from 'react-native';
 import { StyleSheet, Text, View, TextInput, Modal, TouchableOpacity } from 'react-native';
+import SuccessfulNotification from './successfulNotification';
 
 
-
-const DecimalInput = ({ handleAmountChange, expenseId }) => {
+const DecimalInput = ({ handleAmountChange, id }) => {
     const [valid, setValid] = useState(true);
     const [visible, setVisible] = useState(false)
+    const [valueEdited, setValueEdited] = useState(false);
 
-    const expense = useSelector(state => state.expenses.byId[expenseId]);
+    const handleOnEndEditing = () => {
+        //setVisible(!valid)
+        if (valid) {
+            setValueEdited(true)
+            setTimeout(() => {setValueEdited(false)}, 600);
+        }
+    }
+
+    const expenses = useSelector(state => state.expenses.allIds);
+    var object = {};
+
+    if (expenses.includes(id)) {
+        object = useSelector(state => state.expenses.byId[id]);
+    } else {
+        object = useSelector(state => state.incomes.byId[id]);
+    }
 
     const validateInput = (input) => {
         var re = new RegExp(/^\d{0,5}\.?\d{0,2}$/);
@@ -18,49 +34,64 @@ const DecimalInput = ({ handleAmountChange, expenseId }) => {
 
     const handleChangeText = (changedAmount) => {
         const inputIsValid = validateInput(changedAmount);
-        setValid(inputIsValid);
+        //setValid(inputIsValid);
         if (inputIsValid) {
-            handleAmountChange(changedAmount);
+            if (changedAmount.length > 0) {
+                handleAmountChange(parseFloat(changedAmount));
+            } else {
+                handleAmountChange(0);
+            }
         }
     };
 
+    const setValue = () => {
+        if (object.amount.toString() == 0) {
+            return "";
+        } else {
+            return object.amount.toString();
+        }
+    }
+
     return (
         <View style={styles.container}>
-            <Modal
-                visible={visible}
-                transparent={true}
-                onRequestClose={() => { setVisible(false) }}
-            >
-                <TouchableOpacity
-                    style={styles.modalContainer}
-                    onPress={() => { setVisible(false) }}>
-                    <TouchableWithoutFeedback
-                        onPress={() => { setVisible(false) }}>
-                        <View style={styles.modal}>
-                            <Text style={styles.modalText}>Voit syöttää vain positiivisia numeroita</Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                    <View style={styles.triangleContainer}>
-                        <View style={styles.triangle} />
-                        <View style={styles.triangle2} />
-                    </View>
-                </TouchableOpacity>
-            </Modal>
 
             <TextInput
                 style={valid ? styles.input : styles.inputfalse}
                 keyboardType="phone-pad"
                 placeholder='000.00'
-                value={expense.amount}
+                value={setValue()}
                 maxLength={7}
                 onChangeText={changedAmount => handleChangeText(changedAmount)}
-                onEndEditing={() => { setVisible(!valid) }}
+                onEndEditing={() => { handleOnEndEditing() }}
             />
+
+            {valueEdited && <SuccessfulNotification edited={true} />}
         </View>
     );
 };
 
 export default DecimalInput;
+
+//<Modal
+//visible={visible}
+//transparent={true}
+//onRequestClose={() => { setVisible(false) }}
+//>
+//<TouchableOpacity
+//    style={styles.modalContainer}
+//    onPress={() => { setVisible(false) }}>
+//    <TouchableWithoutFeedback
+//        onPress={() => { setVisible(false) }}>
+//        <View style={styles.modal}>
+//            <Text style={styles.modalText}>Voit syöttää vain positiivisia numeroita</Text>
+//        </View>
+//    </TouchableWithoutFeedback>
+//    <View style={styles.triangleContainer}>
+//        <View style={styles.triangle} />
+//        <View style={styles.triangle2} />
+//    </View>
+//</TouchableOpacity>
+//</Modal>
 
 const styles = StyleSheet.create({
     input: {
@@ -69,7 +100,7 @@ const styles = StyleSheet.create({
         width: 60,
         opacity: 0.5,
         marginLeft: 10,
-        marginRight: 10,
+        marginRight: 5,
         borderStyle: 'dashed',
     },
     inputfalse: {
@@ -78,7 +109,7 @@ const styles = StyleSheet.create({
         borderColor: '#FF7575',
         width: 60,
         marginLeft: 10,
-        marginRight: 10,
+        marginRight: 5,
         borderStyle: 'dashed',
 
     },

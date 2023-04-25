@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import TrashIcon from './trashIcon';
@@ -7,8 +7,17 @@ import { Text } from '@rneui/themed';
 import PrettyDatePicker from './prettyDatePicker';
 import eventNamesByType from '../constants/eventScreenNamesByType.json';
 import { deleteExpense, editExpense } from '../features/expenses/expensesSlice';
+import SuccessfulNotification from './successfulNotification';
+import recurrenceTypes from '../constants/recurrenceTypes';
+import CustomRecurrenceIcon from './customRecurrenceIcon';
+import RecurrenceModal from './recurrenceModal';
 
 const ExpenseRow = ({ expenseId }) => {
+
+    const [dateEdited, setDateEdited] = useState(false);
+    const [deletePressed, setDeletePressed] = useState(false);
+    const [recurrencePressed, setRecurrencePressed] = useState(false);
+    
 
     const expense = useSelector(state => state.expenses.byId[expenseId]);
     const dispatch = useDispatch();
@@ -29,10 +38,21 @@ const ExpenseRow = ({ expenseId }) => {
             date: changedDate
         };
         dispatch(editExpense(changedExpense));
+        setDateEdited(true);
+        setTimeout(() => {setDateEdited(false)}, 800);
     }
 
     const handleDeleteExpense = () => {
-        dispatch(deleteExpense(expenseId));
+        setDeletePressed(true);
+        setTimeout(() => {dispatch(deleteExpense(expenseId))}, 500);
+    }
+
+    const handleToggleRecurrence = () => {
+        setRecurrencePressed(!recurrencePressed)
+    }
+
+    const handleMonthEdit = () => {
+        console.log("Button pressed")
     }
 
     return (
@@ -40,9 +60,13 @@ const ExpenseRow = ({ expenseId }) => {
             <Text style={styles.listText}>{expenseType}</Text>
             <View style={styles.listContainer}>
                 <PrettyDatePicker onDateConfirm={handleDateConfirm} date={expense.date} />
-                <DecimalInput handleAmountChange={handleAmountChange} expenseId={expenseId} />
-                <Text style={styles.otherText}>/kk</Text>
+                {dateEdited && <SuccessfulNotification edited={true} />}
+                <DecimalInput handleAmountChange={handleAmountChange} id={expenseId} />
+                {expense.recurrenceType == recurrenceTypes.Monthly && <Text style={styles.otherText}>/kk</Text>}
+                {expense.recurrenceType != recurrenceTypes.Monthly && <CustomRecurrenceIcon handlePress={handleToggleRecurrence}/> }
+                {recurrencePressed && <RecurrenceModal handleExit={handleToggleRecurrence} handleMonthEdit={handleMonthEdit} recurrence={expense.recurrenceMonths}/>}
                 <TrashIcon handlePress={handleDeleteExpense} />
+                {deletePressed && <SuccessfulNotification deleted={true} />}
             </View>
         </View>
 
@@ -65,6 +89,7 @@ const styles = StyleSheet.create({
     otherText: {
         height: 25,
         marginTop: 15,
+        marginLeft: 10,
         marginRight: 10,
         color: '#000000',
         fontFamily: 'Roboto',

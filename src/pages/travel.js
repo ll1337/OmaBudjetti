@@ -65,7 +65,7 @@ export default function Travel({ navigation }) {
                 </View>
             </View>
             <ProgressBar check={2} />
-            <BottomNavBar />
+            <BottomNavBar navigation={navigation}/>
         </StoreProvider>
     );
 };
