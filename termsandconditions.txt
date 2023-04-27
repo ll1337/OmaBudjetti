@@ -1,0 +1,48 @@
+------------ DRAFT not accepted by the customer ---------------
+
+Eva - OmaBudjetti -mobiilisovelluksen käyttöehdot
+ 
+1. Käyttöehtojen hyväksyminen
+
+Nämä käyttöehdot muodostavat sopimuksen sovelluksen käyttäjän (myös ”asiakas”) ja Pirkanmaan oikeusaputoimiston välillä, ja määrittelevät käyttäjän ja Pirkanmaan oikeusaputoimiston Eva - OmaBudjetti -mobiilisovellusta koskevat oikeudet ja velvollisuudet. 
+Sovelluksen lataaminen tai sen käyttäminen on osoitus siitä, että asiakas hyväksyy kulloinkin voimassa olevat käyttöehdot ja sitoutuu noudattamaan niitä sekä sovelluksessa erikseen annettavia ehtoja ja ohjeita.
+
+Pirkanmaan oikeusaputoimisto voi muuttaa näitä käyttöehtoja, milloin tahansa harkintansa mukaan. Käyttöehtojen muutokset tulevat voimaan, kun niistä on ilmoitettu sovelluksessa. Käyttäjän katsotaan hyväksyneen muutetut käyttöehdot, mikäli hän jatkaa sovelluksen käyttöä muutosilmoituksen jälkeen.
+
+2. Eva - OmaBudjetti -mobiilisovellus
+Eva – OmaBudjetti sovellus on kaikille avoin budjetointisovellus, joka ei tallenna tietoja palvelimille, vain paikallisesti käyttäjän käyttämälle laitteelle.
+
+Sovellus ei käytä mobiililaitteen kameraa, mikrofonia, tai paikannustietoja. Sovellus ei myöskään kerää tai lähetä tietoja tai kommunikoi ulkoisten lähteiden kanssa toimiakseen. Sovellus ei sisällä mainoksia. 
+
+Sovelluksen käyttöönotto ei vaadi erillistä kirjatumista eikä tällaista mahdollisuutta ole sovelluksen käytön myöhemmissäkään vaiheissa.
+ 
+3. Eva - OmaBudjetti -mobiilisovelluksen käyttäminen
+Pirkanmaan oikeusaputoimisto myöntää asiakkaalle näissä käyttöehdoissa määritellyn rajoitetun, peruutettavissa olevan, ei-yksinomaisen ja henkilökohtaisen oikeuden käyttää sovellusta ja sen sisältöä ainoastaan näiden käyttöehtojen ja sovelluksessa mahdollisesti erikseen annettavien ehtojen ja ohjeiden mukaisesti. 
+
+Asiakas tunnustaa ja hyväksyy, että Eva - OmaBudjetti perustuu avoimeen lähdekoodiin.
+Asiakas ei saa käyttää sovellusta näiden käyttöehtojen, lain tai hyvän tavan vastaisesti.
+ 
+4. Palveluntarjoajan vastuunrajoitukset
+Pirkanmaan oikeusaputoimisto pidättää oikeuden muokata tai muuttaa sovellusta sekä lopettaa tai sulkea sen, milloin tahansa osittain tai kokonaan ilman erillistä ilmoitusta käyttäjille.
+
+Eva - OmaBudjetti sisältöineen tarjotaan asiakkaalle ”sellaisena kuin se on”. Pirkanmaan oikeusaputoimisto ei vastaa sovelluksessa välitettävien tietojen tai sisällön oikeellisuudesta, luotettavuudesta, virheistä, puutteista, epätarkkuuksista tai muista vioista.
+
+Sovellus ei välttämättä ole saatavilla kaikissa maissa ja se voi olla saatavilla vain tietyillä kielillä. Sovellus, sen toiminta tai jotkut ominaisuudet voivat olla riippuvaisia käytettävien laitteiden yhteensopivuudesta, verkkoyhteyksistä, ja sisällön formaateista.
+ 
+5. Henkilötietojen käsittely
+Eva – OmaBudjetti ei käsittele henkilötietoja. Sovellus ei kerää käyttäjältään henkilökohtaisia tai arkaluontoisia tietoja. 
+ 
+6. Evästeet ja paikkatiedot
+Eva – OmaBudjetti ei käytä evästeitä tai paikkatietoja.
+ 
+7. Immateriaalioikeudet
+Kaikki Eva – OmaBudjetissa esitetyt kuva- ja tekstimateriaalit ovat vapaasti internetistä löytyviä ja käytettäviä olevia tiedostoja (tuotekuvat, tekstit, videot, logot, fontit), joita ei ole suojattu tekijänoikeuksilla. Kaikki sovelluksessa perustuu avoimeen lähdekoodiin.
+
+8. Palveluntarjoaja
+Pirkanmaan oikeusaputoimisto
+-yhteystiedot-
+
+8. Oikeuspaikka ja sovellettava laki
+Tätä sopimusta säätelevät Suomen lait ja sitä tulkitaan niiden mukaisesti. 
+
+Osapuolet pyrkivät ratkaisemaan erimielisyydet ensisijaisesti neuvotteluteitse. Mikäli sovintoratkaisuun ei päästä, erimielisyydet ratkaistaan Suomessa asiaankuuluvassa tuomioistuimessa (käräjäoikeus tai kuluttajariitalautakunnan). 
