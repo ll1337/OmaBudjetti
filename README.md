@@ -92,18 +92,7 @@ Kalle Karttunen
 If someone completes this project one day, a mention of us in an info section would be really cool! :)
 
 ## Project customer
-Pirkanmaan oikeusaputoimisto, talous- ja velkaneuvonta  
-Länsi- ja Sisä-Suomen oikeusapu ja edunvalvontapiiri 
+Projektin alkuperäinen tilaaja: Pirkanmaan Oikeusaputoimisto
 
-Pirkanmaa Legal Aid Office, financial and debt counselling  
-Legal Aid and Public Guardianship District of Western and Inland Finland 
-
-Saana Virtanen  
-Talous- ja velkaneuvoja  
-Tel. 029 5660 758  
-saana.virtanen@oikeus.fi 
-
-Maija Nykänen  
-Talous- ja velkaneuvoja  
-Tel. 029 5660 754  
-maija.nykanen@oikeus.fi 
+Saana Virtanen (saana.virtanen@live.fi)
+Maija Nykänen (mhny11@outlook.com)
